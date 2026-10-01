@@ -306,24 +306,30 @@ When the config has an array of `webServer` entries, Playwright stops inferring
 Defined once in [src/app.css](src/app.css). Components reference semantic names
 (`bg-surface`, `text-muted-foreground`), never raw colours.
 
-Colours are **OKLCH**, unlike the React app's HSL. OKLCH lightness is
-perceptual, so `0.55` reads as the same brightness at every hue — contrast
-becomes predictable and hover/muted states are derived by nudging L rather than
-picking a new hex by eye.
+Colours are the **Open Wearables design system's palette**
+(open-wearables-website.vercel.app/design-system/foundations/colors), as hex,
+each token commented with the design token it comes from (`surface-2`,
+`ink-2`, …). The design is the marketing site's, so it leaves gaps a dashboard
+needs: red, a readable orange on white, dark-theme greens, a dark focus ring.
+Those carry a "Not in the design" comment and a stand-in that sits in the
+palette and passes WCAG AA; replace them when the designer supplies their own.
+
+Two choices follow the design rather than the old dashboard: the primary
+button is the inverted surface (black in light, near-white in dark), and blue
+is the accent only — links, the current tab, switches, bars.
 
 Structure:
 
-1. `:root` — light values on `--ow-*` variables.
-2. `@media (prefers-color-scheme: dark) :root:not(.light)` — dark overrides.
-3. `.dark` — same overrides again, so an explicit class beats the OS setting.
-   This is the hook a manual theme toggle will use.
-4. `@theme inline` — maps `--ow-*` onto Tailwind's `--color-*` so utilities are
+1. `:root` — every token once, as a `light-dark(light, dark)` pair. It resolves
+   against `color-scheme`, which follows the OS, or the `light`/`dark` class
+   the theme cookie puts on `<html>`.
+2. `@theme inline` — maps `--ow-*` onto Tailwind's `--color-*` so utilities are
    generated. `inline` matters: it keeps utilities pointing at the variable
    rather than baking in the resolved value.
 
-**The set is deliberately small.** The React app has ~60 colour variables with
-`-glow`/`-muted`/`-hover` variants, many unused. Add a token when a component
-needs it, and add it to all three theme blocks.
+**The set is deliberately small.** Add a token when a component needs it. Text
+comes in three steps — `foreground` (ink-1), `secondary-foreground` (ink-2) and
+`muted-foreground` (ink-3) — so use those, not `text-foreground/80`.
 
 ## Docker
 

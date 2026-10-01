@@ -13,7 +13,7 @@
 	{#if Icon}
 		<Icon size={22} aria-hidden="true" class="text-muted-foreground/50" />
 	{/if}
-	<p class="text-sm font-medium text-foreground/80">{title}</p>
+	<p class="text-sm font-medium text-secondary-foreground">{title}</p>
 	{#if description}
 		<p class="max-w-sm text-xs text-muted-foreground">{description}</p>
 	{/if}

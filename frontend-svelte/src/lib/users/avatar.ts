@@ -9,7 +9,7 @@ export const AVATAR_TONES = [
 	'bg-success/15 text-success',
 	'bg-warning/15 text-warning',
 	'bg-danger/15 text-danger',
-	'bg-surface-muted text-foreground/70',
+	'bg-surface-muted text-secondary-foreground',
 	'bg-primary/10 text-primary/80'
 ] as const;
 

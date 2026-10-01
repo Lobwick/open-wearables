@@ -34,7 +34,7 @@
 
 		<!-- The whole request read back in one sentence, so nothing a collapsed
 		     section holds comes as a surprise. -->
-		<p class="text-sm text-foreground/90">
+		<p class="text-sm text-secondary-foreground">
 			<strong class="font-medium text-foreground">{summary.who}</strong>, each with {summary.what},
 			over the {summary.when}.
 		</p>
@@ -49,7 +49,7 @@
 			<div
 				class="flex flex-wrap items-center gap-x-3 gap-y-2 rounded-lg border border-success/30 bg-success/5 px-3 py-2.5 text-sm"
 			>
-				<span class="text-foreground/90">
+				<span class="text-secondary-foreground">
 					Queued {queued.users === 1 ? 'one user' : `${queued.users} users`}.
 				</span>
 				{#if queued.seed !== null}

@@ -10,7 +10,7 @@
 
 	{#if groups.length === 0}
 		<!-- An empty filter is a choice: it includes events the catalogue adds later. -->
-		<p class="text-sm text-foreground/90">
+		<p class="text-sm text-secondary-foreground">
 			Every event, including ones added after this was created.
 		</p>
 	{:else}
@@ -20,7 +20,7 @@
 				<dd
 					class="flex min-w-0 flex-wrap gap-x-2 gap-y-0.5 {group.stray
 						? 'text-warning'
-						: 'text-foreground/90'}"
+						: 'text-secondary-foreground'}"
 				>
 					{#if group.groupEvent}
 						<!-- One event for the lot, not one per series: it says so. -->

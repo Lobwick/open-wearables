@@ -43,7 +43,7 @@
 		{#if FromIcon}
 			<FromIcon size={12} aria-hidden="true" class="text-muted-foreground/60" />
 		{/if}
-		<span class="text-foreground/80 tabular-nums">
+		<span class="text-secondary-foreground tabular-nums">
 			{#if marked === 'from'}<span class="text-muted-foreground">{range.fromDay}</span>{/if}
 			{range.from}
 		</span>
@@ -55,7 +55,7 @@
 		{#if ToIcon}
 			<ToIcon size={12} aria-hidden="true" class="text-muted-foreground/60" />
 		{/if}
-		<span class="text-foreground/80 tabular-nums">
+		<span class="text-secondary-foreground tabular-nums">
 			{#if marked === 'to'}<span class="text-muted-foreground">{range.toDay}</span>{/if}
 			{range.to}
 		</span>

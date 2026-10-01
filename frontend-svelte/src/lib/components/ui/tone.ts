@@ -11,7 +11,7 @@ export const TONE: Record<Tone, string> = {
 	warning: 'bg-warning/15 text-warning',
 	danger: 'bg-danger/12 text-danger',
 	neutral: 'bg-surface-muted text-muted-foreground',
-	muted: 'bg-surface-muted text-foreground/70'
+	muted: 'bg-surface-muted text-secondary-foreground'
 };
 
 /** The same tones as a raw colour, for a stroke or a figure that is not a pill. */

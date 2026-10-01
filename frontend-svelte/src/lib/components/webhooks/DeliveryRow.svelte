@@ -75,7 +75,7 @@
 				{#each facts as [label, value] (label)}
 					<div class="flex gap-1.5">
 						<dt class="text-muted-foreground/70">{label}</dt>
-						<dd class="text-foreground/80">{value}</dd>
+						<dd class="text-secondary-foreground">{value}</dd>
 					</div>
 				{/each}
 			</dl>
@@ -91,7 +91,7 @@
 						{#if hasContent(part.value)}
 							<pre
 								class="max-h-64 overflow-auto rounded-lg bg-surface-muted/60 p-2 whitespace-pre-wrap
-									text-foreground/80 {MONO}">{show(part.value)}</pre>
+									text-secondary-foreground {MONO}">{show(part.value)}</pre>
 						{:else}
 							<p class="{MICRO} rounded-lg bg-surface-muted/40 p-2 italic">
 								Not returned by the webhook service.

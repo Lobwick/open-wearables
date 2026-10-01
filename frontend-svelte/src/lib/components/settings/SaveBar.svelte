@@ -35,7 +35,7 @@
 		<input type="hidden" {name} {value} />
 	{/each}
 
-	<p class="text-xs text-foreground/90">{note}</p>
+	<p class="text-xs text-secondary-foreground">{note}</p>
 	<Button type="submit" size="sm" disabled={disabled || submit.submitting}>
 		{submit.submitting ? 'Saving…' : 'Save changes'}
 	</Button>

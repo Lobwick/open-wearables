@@ -63,7 +63,7 @@
 						submit.submitting && 'opacity-50',
 						active
 							? `${option.on} shadow-sm`
-							: 'border-border bg-surface text-foreground/75 hover:border-primary/40 hover:bg-primary/5 hover:text-primary'
+							: 'border-border bg-surface text-secondary-foreground hover:border-primary/40 hover:bg-primary/5 hover:text-primary'
 					)}
 				>
 					<option.icon size={12} aria-hidden="true" />

@@ -26,11 +26,11 @@
 
 			<div class="mt-1.5 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-muted-foreground">
 				{#if covered}
-					<span>Covered <span class="text-foreground/80">{covered}</span></span>
+					<span>Covered <span class="text-secondary-foreground">{covered}</span></span>
 				{/if}
 				<SavedCounts inserted={run.items_inserted} updated={run.items_updated} />
 				{#if duration}
-					<span>Took <span class="text-foreground/80">{duration}</span></span>
+					<span>Took <span class="text-secondary-foreground">{duration}</span></span>
 				{/if}
 			</div>
 

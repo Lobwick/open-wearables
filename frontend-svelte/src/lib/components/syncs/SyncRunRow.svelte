@@ -28,7 +28,7 @@
 
 	<div class="min-w-0 flex-1">
 		<div class="flex items-center gap-2">
-			<span class="truncate text-sm text-foreground/90">{label}</span>
+			<span class="truncate text-sm text-secondary-foreground">{label}</span>
 			<RunStatus {run} />
 			<SourceGlyph source={run.source} />
 		</div>

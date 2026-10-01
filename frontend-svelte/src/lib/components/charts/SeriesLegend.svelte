@@ -39,7 +39,7 @@
 				class="h-0.5 w-4 rounded-full"
 				style="background: {colourFor(line.type)}; {line.dash ? DASHED : ''}"
 			></span>
-			<span class="text-foreground/80">{line.label}</span>
+			<span class="text-secondary-foreground">{line.label}</span>
 		</button>
 	{/each}
 </div>

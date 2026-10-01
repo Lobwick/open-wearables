@@ -42,7 +42,7 @@
 
 		<div class="min-w-0">
 			<span class={MICRO}>{fact.label}</span>
-			<code class="block truncate text-sm text-foreground/90 {MONO}">{fact.value}</code>
+			<code class="block truncate text-sm text-secondary-foreground {MONO}">{fact.value}</code>
 		</div>
 
 		{#if fact.copy}

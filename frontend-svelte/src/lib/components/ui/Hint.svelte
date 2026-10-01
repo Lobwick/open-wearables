@@ -73,7 +73,7 @@
 		class={cn(
 			`pointer-events-none absolute top-full z-20 mt-1 w-max max-w-52 rounded-lg border
 			border-border bg-surface px-2.5 py-1.5 text-[11px] leading-snug font-normal
-			tracking-normal text-foreground/90 normal-case shadow-lg
+			tracking-normal text-secondary-foreground normal-case shadow-lg
 			peer-hover:visible peer-focus-visible:visible`,
 			align === 'right' ? 'right-0' : 'left-0',
 			pinned ? 'visible' : 'invisible'

@@ -8,5 +8,5 @@
 <!-- One label over one value, for a wrapping <dl> of them. -->
 <div class="flex flex-col gap-0.5">
 	<dt class={MICRO}>{label}</dt>
-	<dd class="text-foreground/90 tabular-nums">{@render children()}</dd>
+	<dd class="text-secondary-foreground tabular-nums">{@render children()}</dd>
 </div>

@@ -45,7 +45,7 @@
 			class="flex min-w-0 flex-1 flex-col items-start gap-0.5 text-left"
 		>
 			<span class="flex flex-wrap items-center gap-2">
-				<span class="text-sm text-foreground/90">{label}</span>
+				<span class="text-sm text-secondary-foreground">{label}</span>
 				<RunStatus {run} />
 				<SourceGlyph source={run.source} />
 			</span>

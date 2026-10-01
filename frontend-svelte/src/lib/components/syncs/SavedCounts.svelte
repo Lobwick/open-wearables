@@ -12,14 +12,14 @@
 	{#if inserted > 0}
 		<span class="flex items-center gap-1" title="Records created">
 			<Plus size={12} aria-hidden="true" class="text-muted-foreground/60" />
-			<span class="text-foreground/80 tabular-nums">{inserted}</span>
+			<span class="text-secondary-foreground tabular-nums">{inserted}</span>
 			new
 		</span>
 	{/if}
 	{#if updated > 0}
 		<span class="flex items-center gap-1" title="Records already held, refreshed">
 			<RefreshCw size={11} aria-hidden="true" class="text-muted-foreground/60" />
-			<span class="text-foreground/80 tabular-nums">{updated}</span>
+			<span class="text-secondary-foreground tabular-nums">{updated}</span>
 			updated
 		</span>
 	{/if}

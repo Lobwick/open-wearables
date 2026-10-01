@@ -7,7 +7,7 @@ export type ButtonVariant = 'primary' | 'outline';
 export type ButtonSize = 'md' | 'sm';
 
 const VARIANT: Record<ButtonVariant, string> = {
-	primary: 'bg-primary text-primary-foreground hover:bg-primary-hover',
+	primary: 'bg-inverted text-inverted-foreground hover:bg-inverted-hover',
 	outline: 'border border-border hover:bg-surface-muted'
 };
 

@@ -30,7 +30,9 @@
 	<div class="flex flex-col gap-1">
 		{#each rows as row (row.key)}
 			<div class="flex items-center gap-3">
-				<span class="w-16 shrink-0 truncate text-xs text-foreground/80 sm:w-20">{row.label}</span>
+				<span class="w-16 shrink-0 truncate text-xs text-secondary-foreground sm:w-20"
+					>{row.label}</span
+				>
 				<div class="relative h-5 min-w-0 flex-1 overflow-hidden rounded bg-surface-muted/60">
 					{#each row.spans as gap (gap.start)}
 						<span

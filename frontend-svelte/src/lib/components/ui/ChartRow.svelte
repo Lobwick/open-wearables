@@ -22,7 +22,7 @@
      data rows beneath it, and keeping the numbers in both drifted once already. -->
 <div class={cn('flex items-center gap-3', hoverable && 'group')}>
 	<span
-		class={cn('w-20 shrink-0 truncate text-xs text-foreground/80 sm:w-32', shift)}
+		class={cn('w-20 shrink-0 truncate text-xs text-secondary-foreground sm:w-32', shift)}
 		title={label || undefined}
 	>
 		{label}

@@ -18,7 +18,7 @@
 	<span
 		title={tooltip(group)}
 		class="inline-flex max-w-full items-center gap-1.5 rounded-md px-2 py-1 text-xs
-			{group.stray ? 'bg-warning/12 text-warning' : 'bg-surface-muted text-foreground/90'}"
+			{group.stray ? 'bg-warning/12 text-warning' : 'bg-surface-muted text-secondary-foreground'}"
 	>
 		<span class="truncate">{group.label}</span>
 		{#if group.stray}

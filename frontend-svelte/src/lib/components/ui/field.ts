@@ -5,4 +5,4 @@
  * here once meant a `w-24` beside it lost to stylesheet order.
  */
 export const FIELD =
-	'min-h-11 rounded-lg border border-border bg-surface text-sm placeholder:text-muted-foreground/60';
+	'min-h-11 rounded-lg border border-border bg-background text-sm placeholder:text-muted-foreground/60';

@@ -46,7 +46,7 @@
 						{dim(part.key) ? 'opacity-40' : ''}"
 				>
 					<span aria-hidden="true" class="size-2 rounded-full {shadeOf(part, index)}"></span>
-					<span class="text-foreground/80">{part.label}</span>
+					<span class="text-secondary-foreground">{part.label}</span>
 					<span class="{MICRO} tabular-nums">
 						{format ? format(part, total) : `${share(part.value).toFixed(0)}%`}
 					</span>

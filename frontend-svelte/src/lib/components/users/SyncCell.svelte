@@ -6,7 +6,7 @@
 </script>
 
 {#if user.last_synced_at}
-	<span class="text-sm whitespace-nowrap text-foreground/80">
+	<span class="text-sm whitespace-nowrap text-secondary-foreground">
 		{formatRelativeTime(user.last_synced_at)}
 	</span>
 	{#if user.last_synced_provider}

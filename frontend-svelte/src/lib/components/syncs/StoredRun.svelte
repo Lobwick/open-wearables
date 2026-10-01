@@ -31,7 +31,7 @@
 	{:else if fetched.current === null}
 		<p class="text-sm text-danger">Could not read the stored record. Try opening it again.</p>
 	{:else if !stored}
-		<p class="text-sm text-foreground/85">
+		<p class="text-sm text-secondary-foreground">
 			None — a live sync is only kept in the 24-hour buffer above, and leaves it with the rest.
 		</p>
 	{:else}
@@ -51,7 +51,7 @@
 				{#each stored.data_types as type (type.data_type)}
 					{@const covered = formatWindow(type.covered_start, type.covered_end)}
 					<li class="flex flex-wrap items-center gap-x-3 gap-y-1 py-2 text-sm">
-						<span class="min-w-0 flex-1 truncate text-foreground/90"
+						<span class="min-w-0 flex-1 truncate text-secondary-foreground"
 							>{humanise(type.data_type)}</span
 						>
 						<RunStatus run={type} />

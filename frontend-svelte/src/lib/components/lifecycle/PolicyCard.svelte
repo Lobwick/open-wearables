@@ -39,7 +39,7 @@
 	{/snippet}
 
 	{#if enabled}
-		<div class="flex flex-wrap items-center gap-2 text-sm text-foreground/90">
+		<div class="flex flex-wrap items-center gap-2 text-sm text-secondary-foreground">
 			<label for={fieldId}>{lead}</label>
 			<input
 				id={fieldId}
