@@ -40,14 +40,14 @@
 	<!-- Centred in the flexible middle, so tiles stay balanced against each other
 	     however many sub-metrics each one has. -->
 	<div class="flex flex-1 flex-wrap items-baseline justify-center gap-x-2 py-4">
-		<span class="text-3xl font-semibold text-foreground tabular-nums">{value}</span>
+		<span class="text-3xl font-medium text-foreground tabular-nums">{value}</span>
 		{#if note}<span class={MICRO}>{note}</span>{/if}
 	</div>
 
 	<dl class="flex border-t border-border pt-3">
 		{#each parts as part (part.label)}
 			<div class="flex flex-1 flex-col items-center gap-0.5 text-center">
-				<dd class="text-sm font-semibold text-foreground tabular-nums">{part.value}</dd>
+				<dd class="text-sm font-medium text-foreground tabular-nums">{part.value}</dd>
 				<dt class="{MICRO} truncate">{part.label}</dt>
 			</div>
 		{/each}

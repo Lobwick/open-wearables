@@ -11,7 +11,7 @@
 		<Wordmark class="h-12" />
 
 		<div class="space-y-2 text-center">
-			<h1 class="text-2xl font-semibold text-foreground sm:text-3xl">{title}</h1>
+			<h1 class="text-2xl font-medium text-foreground sm:text-3xl">{title}</h1>
 			<p class="text-sm text-muted-foreground">{lead}</p>
 		</div>
 

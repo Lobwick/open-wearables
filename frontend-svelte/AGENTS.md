@@ -314,6 +314,13 @@ needs: red, a readable orange on white, dark-theme greens, a dark focus ring.
 Those carry a "Not in the design" comment and a stand-in that sits in the
 palette and passes WCAG AA; replace them when the designer supplies their own.
 
+Type is the design's too: Switzer in 400 and 500 only (no `font-semibold`),
+Fragment Mono for `CAPTION` taglines and ids, nothing under 12px. Icons are
+Lucide drawn at the design's 1px stroke (`setLucideProps` in the root layout)
+until a move to its Iconoir set. Transitions default to its 200ms ease. Its
+1px corners were tried and rejected — they looked harsh in a dashboard — so the
+radius scale stays ours.
+
 Two choices follow the design rather than the old dashboard: the primary
 button is the inverted surface (black in light, near-white in dark), and blue
 is the accent only — links, the current tab, switches, bars.

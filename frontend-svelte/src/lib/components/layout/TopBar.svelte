@@ -15,5 +15,5 @@
 >
 	<Wordmark class="mx-auto h-12 lg:hidden" />
 
-	<h1 class="hidden text-sm font-semibold tracking-tight lg:block">{sectionTitle}</h1>
+	<h1 class="hidden text-sm font-medium tracking-tight lg:block">{sectionTitle}</h1>
 </header>

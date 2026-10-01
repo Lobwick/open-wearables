@@ -151,7 +151,7 @@
 			{@const first = scaled[0]}
 			<div
 				class="pointer-events-none absolute inset-y-0 left-0 flex flex-col justify-between
-					py-0.5 text-[10px] tabular-nums"
+					py-0.5 text-xs tabular-nums"
 				style="color: {whole ? 'var(--color-muted-foreground)' : colourFor(first.type)}"
 			>
 				<!-- On their own background, because a line drawn to the top of the
@@ -165,7 +165,7 @@
 		     never which, nor where it ends. The label hangs under its own ceiling. -->
 		{#each bands.filter((band) => band.height >= LABEL_ROOM) as band (band.zone)}
 			<span
-				class="pointer-events-none absolute right-1 text-[10px] whitespace-nowrap
+				class="pointer-events-none absolute right-1 text-xs whitespace-nowrap
 					text-muted-foreground/70 tabular-nums"
 				style="top: {(band.y / H) * 100}%"
 			>

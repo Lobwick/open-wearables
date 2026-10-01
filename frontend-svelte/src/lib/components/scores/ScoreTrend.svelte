@@ -41,7 +41,7 @@
 		<span class="flex items-baseline gap-2">
 			{#each trend.latest as entry (entry.provider)}
 				<span
-					class="text-lg font-semibold tabular-nums"
+					class="text-lg font-medium tabular-nums"
 					style="color: {colourFor(entry.provider)}"
 					title={entry.label}
 				>

@@ -64,7 +64,7 @@
 								onclick={() => (chosen = toggled(chosen, group.parent!.name))}
 								aria-pressed={chosen.includes(group.parent.name)}
 								title="One event covering the whole category, instead of the granular ones"
-								class="{chip(chosen.includes(group.parent.name))} font-semibold"
+								class="{chip(chosen.includes(group.parent.name))} font-medium"
 							>
 								{group.parent.name}
 							</button>

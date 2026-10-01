@@ -30,7 +30,7 @@
 			{#if tick}
 				<span aria-hidden="true" class="absolute bottom-0 left-0 h-1 w-px bg-border"></span>
 				<span
-					class="absolute bottom-1.5 left-0 text-[10px] leading-none whitespace-nowrap
+					class="absolute bottom-1.5 left-0 text-xs leading-none whitespace-nowrap
 						text-muted-foreground/70 {tick.always ? '' : 'hidden sm:inline'}"
 				>
 					{tick.label}

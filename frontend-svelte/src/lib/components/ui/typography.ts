@@ -1,5 +1,5 @@
-/** The smallest step in the scale. Written as both 11px and 0.6875rem before. */
-export const TINY = 'text-[11px]';
+/** The smallest step in the scale: the design's text-tiny, 12px. */
+export const TINY = 'text-xs';
 
 /** Small print beside a chart or under a figure: axis ends, shares, cell labels. */
 export const MICRO = `${TINY} text-muted-foreground`;
@@ -11,17 +11,16 @@ export const FOOTNOTE = `${TINY} text-muted-foreground/80`;
 export const MONO = `${TINY} font-mono`;
 
 /** A small action set in running text — a group's "all", a "select all". */
+export const TEXT_LINK = `${MICRO} underline-offset-2 hover:text-foreground hover:underline`;
+
 /** A link inside a sentence, in the accent so it reads as one. */
 export const INLINE_LINK = 'text-primary hover:underline';
 
-export const TEXT_LINK = `${MICRO} underline-offset-2 hover:text-foreground hover:underline`;
-
-/** The micro heading used above a figure, a pane or a filter group. */
-export const CAPTION =
-	'text-[10px] font-semibold tracking-wider text-muted-foreground/70 uppercase';
+/** The micro heading above a figure, a pane, a filter group or a column: the design's tagline-small. */
+export const CAPTION = 'font-mono text-xs leading-[1.3] text-muted-foreground uppercase';
 
 /** What a card is called: a section's heading, and an accordion card's title. */
-export const HEADING = 'text-sm font-semibold text-foreground';
+export const HEADING = 'text-sm font-medium text-foreground';
 
 /** A one-line explanation standing in for content that is not there. */
 export const NOTE = 'py-6 text-center text-sm text-muted-foreground';

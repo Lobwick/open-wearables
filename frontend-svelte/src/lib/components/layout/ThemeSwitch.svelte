@@ -25,13 +25,12 @@
 <div
 	role="group"
 	aria-label="Theme"
-	class="relative inline-flex shrink-0 rounded-full border border-border bg-surface-muted p-0.5"
+	class="relative inline-flex shrink-0 rounded-full bg-surface-muted p-0.5"
 >
 	<!-- One thumb that slides, rather than three buttons that each light up. -->
 	<span
 		aria-hidden="true"
-		class="absolute top-0.5 left-0.5 size-7 rounded-full bg-surface shadow-sm ring-1 ring-border/70
-			transition-transform duration-200 ease-out"
+		class="absolute top-0.5 left-0.5 size-7 rounded-full bg-inverted transition-transform duration-300"
 		style="transform: translateX({at * 100}%)"
 	></span>
 	{#each OPTIONS as option (option.value)}
@@ -44,7 +43,7 @@
 			onclick={() => choose(option.value)}
 			class={cn(
 				'relative grid size-7 place-items-center rounded-full transition-colors',
-				active ? 'text-primary' : 'text-muted-foreground hover:text-foreground'
+				active ? 'text-inverted-foreground' : 'text-muted-foreground hover:text-foreground'
 			)}
 		>
 			<option.icon size={14} aria-hidden="true" />

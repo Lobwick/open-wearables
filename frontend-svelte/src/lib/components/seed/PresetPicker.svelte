@@ -44,7 +44,7 @@
 					</span>
 					<!-- Nine full descriptions stacked were a phone screen before the form began. -->
 					<span class="line-clamp-2 hidden sm:block {MICRO}">{preset.description}</span>
-					<span class="mt-auto pt-1 text-[10px] text-muted-foreground/80 tabular-nums">
+					<span class="mt-auto pt-1 text-xs text-muted-foreground/80 tabular-nums">
 						{countsOf(preset.profile).join(' · ')}
 					</span>
 				</button>

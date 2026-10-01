@@ -23,7 +23,7 @@
 <div class="flex min-w-0 items-center gap-2" title={label}>
 	<ProviderMark provider={reading.provider} {label} size="sm" />
 	<dt class="sr-only">{label}</dt>
-	<dd class="text-base font-semibold text-foreground tabular-nums">
+	<dd class="text-base font-medium text-foreground tabular-nums">
 		{showDecimal(reading.score)}
 	</dd>
 

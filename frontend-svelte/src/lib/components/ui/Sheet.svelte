@@ -58,7 +58,7 @@
 		<div class="mx-auto mt-3 h-1 w-9 shrink-0 rounded-full bg-border sm:hidden"></div>
 
 		<div class="flex items-center justify-between px-4 py-2">
-			<h2 id={headingId} class="text-sm font-semibold">{title}</h2>
+			<h2 id={headingId} class="text-sm font-medium">{title}</h2>
 			<button
 				type="button"
 				onclick={() => (open = false)}

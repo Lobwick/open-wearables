@@ -25,7 +25,7 @@
 	aria-label={label}
 	onclick={toggle}
 	class="relative inline-flex h-6 w-11 shrink-0 items-center rounded-full transition-colors
-		{checked ? 'bg-primary' : 'bg-surface-muted ring-1 ring-border'}"
+		{checked ? 'bg-brand' : 'bg-surface-muted ring-1 ring-border'}"
 >
 	<span
 		aria-hidden="true"

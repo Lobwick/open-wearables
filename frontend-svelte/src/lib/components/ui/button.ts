@@ -12,8 +12,9 @@ const VARIANT: Record<ButtonVariant, string> = {
 };
 
 const SIZE: Record<ButtonSize, string> = {
-	md: 'min-h-11 gap-2 px-4 text-sm',
-	sm: 'min-h-8 gap-1.5 px-2.5 text-xs'
+	// The design's 40 and 36, except 44 on a phone: the smallest target a thumb hits.
+	md: 'min-h-11 gap-2 px-4 text-sm md:min-h-10',
+	sm: 'min-h-9 gap-1.5 px-2.5 text-xs'
 };
 
 export function buttonClass(

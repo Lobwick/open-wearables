@@ -11,7 +11,7 @@ export const CHIP_OFF =
  */
 export function chipClass(selected: boolean): string {
 	return cn(
-		'inline-flex min-h-9 items-center rounded-full border px-3 text-xs font-medium capitalize transition-colors',
+		'inline-flex min-h-9 items-center rounded-full border px-3 text-sm capitalize transition-colors',
 		selected ? CHIP_ON : CHIP_OFF
 	);
 }

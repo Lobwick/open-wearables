@@ -9,7 +9,7 @@
 	aria-hidden="true"
 	class={cn(
 		'absolute -top-1 -right-2 grid size-3.5 place-items-center rounded-full bg-surface',
-		'text-[0.5rem] leading-none font-semibold text-primary ring-1 ring-primary/40',
+		'text-[0.5rem] leading-none font-medium text-primary ring-1 ring-primary/40',
 		className
 	)}
 >

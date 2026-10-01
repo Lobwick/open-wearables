@@ -32,7 +32,7 @@
 			type="button"
 			onclick={() => ontoggle(line.label)}
 			aria-pressed={on}
-			class="flex items-center gap-1.5 text-[11px] transition-opacity {on ? '' : 'opacity-40'}"
+			class="flex items-center gap-1.5 text-xs transition-opacity {on ? '' : 'opacity-40'}"
 		>
 			<span
 				aria-hidden="true"

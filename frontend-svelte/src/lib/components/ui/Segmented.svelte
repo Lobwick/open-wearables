@@ -20,9 +20,10 @@
 	const segment = (active: boolean) =>
 		cn(
 			'rounded-md px-2.5 py-1 text-xs font-medium whitespace-nowrap transition-colors',
+			// The design's tab list: a surface-3 bed, the chosen one inverted.
 			active
-				? 'bg-surface text-foreground shadow-sm'
-				: 'text-muted-foreground hover:text-foreground'
+				? 'bg-inverted text-inverted-foreground'
+				: 'text-secondary-foreground hover:bg-surface-hover hover:text-foreground'
 		);
 </script>
 

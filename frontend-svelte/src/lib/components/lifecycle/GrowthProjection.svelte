@@ -38,11 +38,11 @@
 		<div class="flex flex-wrap items-baseline gap-x-6 gap-y-1">
 			<div>
 				<span class={MICRO}>Time-series storage today</span>
-				<p class="text-lg font-semibold text-foreground tabular-nums">{formatBytes(today)}</p>
+				<p class="text-lg font-medium text-foreground tabular-nums">{formatBytes(today)}</p>
 			</div>
 			<div>
 				<span class={MICRO}>In {PROJECTION_MONTHS} months</span>
-				<p class="text-lg font-semibold tabular-nums" style="color: {colour}">
+				<p class="text-lg font-medium tabular-nums" style="color: {colour}">
 					{formatBytes(later)}
 				</p>
 			</div>

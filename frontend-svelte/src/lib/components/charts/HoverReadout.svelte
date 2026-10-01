@@ -18,7 +18,7 @@
 <!-- Clamped inside the frame, so a reading near either end stays legible. -->
 <div
 	class="pointer-events-none absolute top-1 flex -translate-x-1/2 flex-col gap-0.5 rounded-lg
-		border border-border bg-surface px-2 py-1.5 text-[11px] shadow-sm"
+		border border-border bg-surface px-2 py-1.5 text-xs shadow-sm"
 	style="left: clamp(4rem, {at}%, calc(100% - 4rem))"
 >
 	<span class="font-medium text-foreground tabular-nums">{heading}</span>

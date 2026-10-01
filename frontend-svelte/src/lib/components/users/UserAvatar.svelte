@@ -11,7 +11,7 @@
 <span
 	aria-hidden="true"
 	class={cn(
-		'grid shrink-0 place-items-center rounded-full font-semibold',
+		'grid shrink-0 place-items-center rounded-full font-medium',
 		SIZE[size],
 		avatarTone(user.id)
 	)}

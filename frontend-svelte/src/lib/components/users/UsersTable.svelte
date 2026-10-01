@@ -1,7 +1,7 @@
 <script lang="ts">
 	import CopyableId from '$lib/components/ui/CopyableId.svelte';
 	import SortableHeader from '$lib/components/ui/SortableHeader.svelte';
-	import { TINY } from '$lib/components/ui/typography';
+	import { CAPTION } from '$lib/components/ui/typography';
 	import { formatDate } from '$lib/utils/datetime';
 	import {
 		usersQueryHref,
@@ -18,7 +18,7 @@
 
 	let { users, query }: { users: User[]; query: UsersQuery } = $props();
 
-	const head = `px-4 py-3 text-left ${TINY} font-semibold tracking-wide text-muted-foreground uppercase`;
+	const head = `px-4 py-3 text-left ${CAPTION}`;
 
 	const sortHref = (field: string, order: SortOrder) =>
 		usersQueryHref(withUsersQuery(query, { sort: field as SortField, order }));

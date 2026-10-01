@@ -27,7 +27,7 @@
 		{:else if !group.whole}
 			<!-- A part of a group says how big a part; a whole one needs no count. -->
 			<span
-				class="shrink-0 rounded bg-surface px-1 text-[10px] leading-4 text-muted-foreground tabular-nums"
+				class="shrink-0 rounded bg-surface px-1 text-xs leading-4 text-muted-foreground tabular-nums"
 			>
 				{group.items.length}/{group.total}
 			</span>

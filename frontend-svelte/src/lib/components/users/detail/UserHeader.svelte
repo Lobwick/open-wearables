@@ -46,7 +46,7 @@
 			<UserAvatar {user} size="lg" />
 			<div class="min-w-0 flex-1">
 				<div class="flex flex-wrap items-center gap-2">
-					<h1 class="truncate text-xl font-semibold text-foreground sm:text-2xl">{name}</h1>
+					<h1 class="truncate text-xl font-medium text-foreground sm:text-2xl">{name}</h1>
 					<!-- Before the badge, so a narrow screen wraps the badge onto its own
 					     line rather than leaving the pencil stranded there. -->
 					<button

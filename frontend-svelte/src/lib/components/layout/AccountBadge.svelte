@@ -12,7 +12,7 @@
 	<div class="flex items-center gap-2.5 px-3 py-2">
 		<span
 			aria-hidden="true"
-			class="grid size-8 shrink-0 place-items-center rounded-full text-[11px] font-semibold
+			class="grid size-8 shrink-0 place-items-center rounded-full text-xs font-medium
 				{avatarTone(developer.id)}"
 		>
 			{initials(developer)}

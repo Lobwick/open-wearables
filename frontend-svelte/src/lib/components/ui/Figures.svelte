@@ -36,12 +36,12 @@
 				<figure.icon size={17} />
 			</span>
 			<div class="min-w-0">
-				<dd class="truncate text-lg font-semibold text-foreground tabular-nums sm:text-xl">
+				<dd class="truncate text-lg font-medium text-foreground tabular-nums sm:text-xl">
 					{figure.value}
 				</dd>
 				<dt class="truncate {MICRO}">{figure.label}</dt>
 				{#if figure.note}
-					<dd class="text-[10px] text-muted-foreground/70">{figure.note}</dd>
+					<dd class="text-xs text-muted-foreground/70">{figure.note}</dd>
 				{/if}
 			</div>
 		</div>

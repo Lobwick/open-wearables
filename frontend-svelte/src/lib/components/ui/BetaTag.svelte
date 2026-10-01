@@ -3,8 +3,8 @@
 </script>
 
 <span
-	class="rounded px-1 py-0.5 text-[0.625rem] leading-none font-semibold tracking-wide text-primary
-		uppercase ring-1 ring-primary/30"
+	class="rounded px-1 py-0.5 font-mono text-xs leading-none text-primary uppercase
+		ring-1 ring-primary/30"
 >
 	Beta
 </span>

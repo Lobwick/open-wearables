@@ -9,7 +9,7 @@
 	}: { provider: string; label: string; size?: 'sm' | 'md' | 'lg' } = $props();
 
 	const SIZE = {
-		sm: 'size-6 text-[10px]',
+		sm: 'size-6 text-xs',
 		md: 'size-9 text-xs',
 		lg: 'size-16 rounded-xl text-base'
 	} as const;
@@ -20,7 +20,7 @@
 <span
 	aria-hidden="true"
 	class={cn(
-		'grid shrink-0 place-items-center rounded-lg font-semibold',
+		'grid shrink-0 place-items-center rounded-lg font-medium',
 		SIZE[size],
 		avatarTone(provider)
 	)}

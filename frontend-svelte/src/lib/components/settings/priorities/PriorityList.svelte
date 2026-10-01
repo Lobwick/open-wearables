@@ -103,7 +103,7 @@
 			     this page answers. -->
 			<span
 				aria-hidden="true"
-				class="grid size-7 shrink-0 place-items-center rounded-lg text-xs font-semibold tabular-nums
+				class="grid size-7 shrink-0 place-items-center rounded-lg text-xs font-medium tabular-nums
 					{first ? 'bg-primary/12 text-primary' : 'bg-surface-muted text-muted-foreground'}"
 			>
 				{index + 1}

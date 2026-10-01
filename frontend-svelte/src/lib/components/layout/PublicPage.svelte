@@ -15,7 +15,7 @@
 			<Wordmark class="h-12" />
 		</div>
 
-		<h1 class="mt-8 text-center text-lg font-semibold tracking-tight">{title}</h1>
+		<h1 class="mt-8 text-center text-lg font-medium tracking-tight">{title}</h1>
 		<p class="mt-1 text-center text-sm text-muted-foreground">{description}</p>
 
 		<div class="mt-7">{@render children()}</div>

@@ -33,7 +33,7 @@
 <div class="flex flex-col gap-2 rounded-xl border border-border bg-surface p-4">
 	<div class="flex items-baseline justify-between gap-3">
 		<Caption {icon}>{label}</Caption>
-		<span class="text-lg font-semibold tabular-nums" style="color: {colour}">
+		<span class="text-lg font-medium tabular-nums" style="color: {colour}">
 			{show(latest.value)}<span class="text-xs font-normal text-muted-foreground">
 				{unitLabel(series.unit)}
 			</span>
