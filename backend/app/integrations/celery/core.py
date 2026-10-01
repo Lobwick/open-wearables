@@ -164,24 +164,6 @@ def create_celery() -> Celery:
             "args": (),
             "kwargs": {},
         },
-        "run-daily-archival": {
-            "task": "app.integrations.celery.tasks.archival_task.run_daily_archival",
-            "schedule": crontab(hour=3, minute=0),  # Daily at 03:00 UTC
-            "args": (),
-            "kwargs": {},
-        },
-        "fill-missing-sleep-scores": {
-            "task": "app.integrations.celery.tasks.fill_missing_sleep_scores_task.fill_missing_sleep_scores",
-            "schedule": float(settings.sleep_score_interval_seconds),
-            "args": (),
-            "kwargs": {},
-        },
-        "fill-missing-resilience-scores": {
-            "task": "app.integrations.celery.tasks.fill_missing_resilience_scores_task.fill_missing_resilience_scores",
-            "schedule": float(settings.resilience_score_interval_seconds),
-            "args": (),
-            "kwargs": {},
-        },
         "close-stale-sync-runs": {
             "task": "app.integrations.celery.tasks.close_stale_sync_runs_task.close_stale_sync_runs",
             "schedule": float(settings.sync_run_sweep_interval_seconds),
@@ -195,6 +177,28 @@ def create_celery() -> Celery:
             "kwargs": {},
         },
     }
+
+    if settings.data_lifecycle_enabled:
+        celery_app.conf.beat_schedule["run-daily-archival"] = {
+            "task": "app.integrations.celery.tasks.archival_task.run_daily_archival",
+            "schedule": crontab(hour=3, minute=0),  # Daily at 03:00 UTC
+            "args": (),
+            "kwargs": {},
+        }
+
+    if settings.ow_scores_enabled:
+        celery_app.conf.beat_schedule["fill-missing-sleep-scores"] = {
+            "task": "app.integrations.celery.tasks.fill_missing_sleep_scores_task.fill_missing_sleep_scores",
+            "schedule": float(settings.sleep_score_interval_seconds),
+            "args": (),
+            "kwargs": {},
+        }
+        celery_app.conf.beat_schedule["fill-missing-resilience-scores"] = {
+            "task": "app.integrations.celery.tasks.fill_missing_resilience_scores_task.fill_missing_resilience_scores",
+            "schedule": float(settings.resilience_score_interval_seconds),
+            "args": (),
+            "kwargs": {},
+        }
 
     if settings.telemetry_enabled:
         # Hourly due-check, not an hourly ping: the task delivers at most one
