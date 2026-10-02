@@ -46,7 +46,7 @@ class TestBackfillDeviceTypes:
 
         backfill_device_types(db, dry_run=False)
 
-        assert bpm.device_type == "other"
+        assert bpm.device_type == "bp_monitor"
         assert gearless.device_type is None
 
     def test_never_overwrites_concrete_sdk_type(self, db: Session) -> None:
@@ -65,3 +65,16 @@ class TestBackfillDeviceTypes:
 
         assert changes["whoop: None -> band"] == 1
         assert ds.device_type is None
+
+    def test_moves_ipad_phone_rows_to_tablet(self, db: Session) -> None:
+        ipad = DataSourceFactory(
+            provider=ProviderName.APPLE, device_model="iPad13,1", source="iPad", device_type="phone"
+        )
+        iphone = DataSourceFactory(
+            provider=ProviderName.APPLE, device_model="iPhone15,2", source="iPhone", device_type="phone"
+        )
+
+        backfill_device_types(db, dry_run=False)
+
+        assert ipad.device_type == "tablet"
+        assert iphone.device_type == "phone"
