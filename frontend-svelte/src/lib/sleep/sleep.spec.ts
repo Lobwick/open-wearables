@@ -19,7 +19,7 @@ describe('stageLanes', () => {
 		interval('light', '23:55', '23:59')
 	];
 
-	// Awake at the top down to deep, the way a hypnogram is read — not the order
+	// Awake at the top down to deep, the way a hypnogram is read - not the order
 	// the intervals happen to arrive in.
 	it('lays the stages out in reading order, not arrival order', () => {
 		expect(stageLanes(intervals, () => '').map((lane) => lane.key)).toEqual([
@@ -120,7 +120,7 @@ describe('sumSleep', () => {
 });
 
 describe('localRange', () => {
-	// Which end wears the weekday is the caller's call — the range only reports
+	// Which end wears the weekday is the caller's call - the range only reports
 	// that the two ends differ, and what both days are.
 	it('reports the crossing and both days', () => {
 		expect(localRange('2026-09-20T20:40:00Z', '2026-09-21T04:20:00Z', '+02:00')).toEqual({

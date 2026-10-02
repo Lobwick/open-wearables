@@ -28,7 +28,7 @@
 		placeholder?: string;
 		submitLabel: string;
 		busyLabel: string;
-		/** Seeded each time it opens — renaming starts from the current name. */
+		/** Seeded each time it opens - renaming starts from the current name. */
 		value?: string;
 		fields?: Record<string, string>;
 		message?: string;

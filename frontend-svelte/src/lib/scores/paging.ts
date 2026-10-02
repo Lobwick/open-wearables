@@ -3,8 +3,8 @@ import { DAY_MS } from '$lib/filters/period';
 export type DayWindow = { from: Date; to: Date };
 
 /**
- * A page is a stretch of days, because a card is a day: paging by record — what
- * the endpoint itself offers — made a page of twenty two cards for a provider
+ * A page is a stretch of days, because a card is a day: paging by record - what
+ * the endpoint itself offers - made a page of twenty two cards for a provider
  * that scores every half hour, and twenty for one that scores once.
  */
 export const dayCount = ({ from, to }: DayWindow): number =>

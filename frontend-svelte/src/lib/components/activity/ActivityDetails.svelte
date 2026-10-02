@@ -11,7 +11,7 @@
 	let { day, userId }: { day: ActivityDay; userId: string } = $props();
 
 	// A calendar date with no offset in the response, so the window is that date's
-	// UTC midnights — which is not quite the local day the sums were taken over.
+	// UTC midnights - which is not quite the local day the sums were taken over.
 	const from = $derived(`${day.date}T00:00:00Z`);
 	const to = $derived(`${day.date}T23:59:59Z`);
 

@@ -15,7 +15,7 @@
 	let { data, form }: { data: PageData; form: ActionData } = $props();
 
 	// Writable derived: it starts as the stored order and re-derives whenever the
-	// server's does, so saving one list leaves the draft agreeing with it — but
+	// server's does, so saving one list leaves the draft agreeing with it - but
 	// reordering still assigns straight to it.
 	let providers = $derived([...data.providers]);
 	let deviceTypes = $derived([...data.deviceTypes]);

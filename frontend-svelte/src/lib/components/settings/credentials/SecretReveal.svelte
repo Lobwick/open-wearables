@@ -19,7 +19,7 @@
 		<div class="flex flex-col gap-4 px-4 pb-2">
 			<!-- The API hashes it on the way in, so this really is the only showing. -->
 			<Alert tone="warning">
-				Copy this now. It is shown once and cannot be retrieved — losing it means rotating and
+				Copy this now. It is shown once and cannot be retrieved - losing it means rotating and
 				updating your integration.
 			</Alert>
 

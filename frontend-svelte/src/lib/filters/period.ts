@@ -57,7 +57,7 @@ export function spanDays(period: Period): number | null {
 	return Math.round((window.to.getTime() - window.from.getTime()) / DAY_MS);
 }
 
-/** Daily cells stop being readable — and stop fitting — past a few months. */
+/** Daily cells stop being readable - and stop fitting - past a few months. */
 export function periodBucket(period: Period): 'day' | 'week' {
 	const span = spanDays(period);
 	return span !== null && span <= 120 ? 'day' : 'week';

@@ -77,12 +77,12 @@
 		<TextField
 			name="user_id"
 			label="One user only"
-			placeholder="User ID — leave empty for every user"
+			placeholder="User ID - leave empty for every user"
 			bind:value={userId}
 		/>
 
 		<fieldset class="flex flex-col gap-2">
-			<legend class={MICRO}>Events — none chosen means every event</legend>
+			<legend class={MICRO}>Events - none chosen means every event</legend>
 			<EventPicker {types} bind:chosen />
 		</fieldset>
 

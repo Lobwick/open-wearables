@@ -8,7 +8,7 @@ export const SEED_PROVIDERS = ['apple', 'garmin', 'oura', 'polar', 'suunto', 'wh
 /** The API's ceiling on connections per user, and so on providers picked. */
 export const MAX_CONNECTIONS = 5;
 
-/** Emitted only inside workouts — `cadence: workout_bound` in the generator's config, held to it by a test. */
+/** Emitted only inside workouts - `cadence: workout_bound` in the generator's config, held to it by a test. */
 export const WORKOUT_BOUND = [
 	'running_power',
 	'running_speed',
@@ -18,8 +18,8 @@ export const WORKOUT_BOUND = [
 ];
 
 /**
- * The old dashboard's grouping; the API has none. Niche types are left out —
- * "any type" still draws from all of them — and a test checks each name exists.
+ * The old dashboard's grouping; the API has none. Niche types are left out -
+ * "any type" still draws from all of them - and a test checks each name exists.
  */
 export const WORKOUT_TYPE_GROUPS: { label: string; types: string[] }[] = [
 	{

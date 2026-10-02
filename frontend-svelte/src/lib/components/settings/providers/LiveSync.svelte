@@ -13,7 +13,7 @@
 	const submit = createSubmitFlag();
 
 	// The old dashboard's switcher: a light track, and the chosen mode a filled,
-	// bordered pill — webhook in the accent, pull in neutral — so which one is on
+	// bordered pill - webhook in the accent, pull in neutral - so which one is on
 	// reads from across the room rather than from a shadow.
 	const MODES = [
 		{

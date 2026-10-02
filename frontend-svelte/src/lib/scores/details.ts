@@ -25,7 +25,7 @@ function dayLines(scores: CategoryScores, labelFor: (provider: string) => string
 }
 
 /**
- * One column per provider, from the newest reading of the day — a stream's
+ * One column per provider, from the newest reading of the day - a stream's
  * rating changes through it, and the row above says which one held for most.
  */
 const dayGroups = (scores: CategoryScores, labelFor: (provider: string) => string): FieldGroup[] =>

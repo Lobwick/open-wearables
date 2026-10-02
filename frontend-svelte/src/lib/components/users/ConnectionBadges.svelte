@@ -20,7 +20,7 @@
 </script>
 
 {#if connections === null}
-	<span class="text-xs text-muted-foreground/60">—</span>
+	<span class="text-xs text-muted-foreground/60">-</span>
 {:else if ordered.length === 0}
 	<span class="text-xs text-muted-foreground/60">No connections</span>
 {:else}

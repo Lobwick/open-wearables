@@ -34,7 +34,7 @@
 	<!-- The HTTP code is what a reader checks first, so it wears the colour rather
 	     than sitting in grey next to a dot that repeats it. -->
 	<span class="w-11 shrink-0 rounded-md py-0.5 text-center tabular-nums {MONO} {TONE[status.tone]}">
-		{delivery.responseStatusCode || '—'}
+		{delivery.responseStatusCode || '-'}
 	</span>
 	<span class="sr-only">{status.label}</span>
 

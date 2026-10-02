@@ -3,7 +3,7 @@ export type ScoreComponent = { value: number | null; qualifier: string | null };
 
 /**
  * Mirrors backend `HealthScoreResponse`. There is no `source` here, unlike the
- * event endpoints — a score carries its provider and a bare `data_source_id`,
+ * event endpoints - a score carries its provider and a bare `data_source_id`,
  * so no device can be named.
  *
  * `zone_offset` is part of the contract but no provider has ever filled it, so

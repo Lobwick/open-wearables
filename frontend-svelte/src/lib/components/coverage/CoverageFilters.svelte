@@ -51,7 +51,7 @@
 
 	<!-- `min-w-0` is what lets this shrink: a flex item keeps `min-width: auto`,
 	     so without it `overflow-x-auto` has nothing to scroll inside and the whole
-	     page goes sideways. `w-full` is layout — the strip gets its own row on a
+	     page goes sideways. `w-full` is layout - the strip gets its own row on a
 	     phone rather than a sliver of one. -->
 	<div class="w-full min-w-0 sm:w-auto sm:flex-1">
 		<FilterGroup label="Layer">

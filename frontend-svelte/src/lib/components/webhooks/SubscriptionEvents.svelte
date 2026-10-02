@@ -8,7 +8,7 @@
 
 	const tooltip = (group: EventSummary) =>
 		group.stray
-			? `${group.items.map((item) => item.name).join(', ')} — ${strayNote(group.items.length)}`
+			? `${group.items.map((item) => item.name).join(', ')} - ${strayNote(group.items.length)}`
 			: group.items.map((item) => item.label).join(', ') || group.label;
 </script>
 

@@ -10,8 +10,8 @@ test('compacts the aggregates and spells out the cheap counts', async ({ page })
 	await page.goto('/dashboard');
 
 	// Users and connections are exact counts of small tables, so they are shown
-	// whole. Data points and event records are aggregates — one of them an
-	// estimate — so seven digits would claim a precision they have not got.
+	// whole. Data points and event records are aggregates - one of them an
+	// estimate - so seven digits would claim a precision they have not got.
 	await expect(page.getByText('1,247', { exact: true })).toBeVisible();
 	await expect(page.getByText('1.5M', { exact: true })).toBeVisible();
 	await expect(page.getByText('20.4K', { exact: true })).toBeVisible();
@@ -55,7 +55,7 @@ test('ranks the providers by name, with their counts grouped', async ({ page }) 
 	await page.goto('/dashboard');
 
 	// `exact`, because getByText matches a substring and ignores case by default
-	// — which is how an assertion on "WHOOP" passed against a rendered "Whoop".
+	// - which is how an assertion on "WHOOP" passed against a rendered "Whoop".
 	const connections = page.getByRole('region', { name: 'Connections' });
 	await expect(connections.getByText('Garmin', { exact: true })).toBeVisible();
 	await expect(connections.getByText('Whoop', { exact: true })).toBeVisible();
@@ -76,7 +76,7 @@ test('lists the newest users with how long ago each one synced', async ({ page }
 	await page.goto('/dashboard');
 
 	// Ten, and the limit is a readability choice: measured on 200k users, a page
-	// of 100 costs the same as a page of 6 — the scan and the sort are paid
+	// of 100 costs the same as a page of 6 - the scan and the sort are paid
 	// whatever it is.
 	const newest = page.getByRole('region', { name: 'Newest users' });
 	await expect(newest.getByRole('link')).toHaveCount(10);

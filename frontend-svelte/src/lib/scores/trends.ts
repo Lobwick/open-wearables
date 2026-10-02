@@ -16,8 +16,8 @@ export type CategoryTrend = {
 };
 
 /**
- * A point a day per provider. They sample at their own rhythm — one score a
- * night, or one every half hour — and a trend across weeks is read by the day.
+ * A point a day per provider. They sample at their own rhythm - one score a
+ * night, or one every half hour - and a trend across weeks is read by the day.
  */
 function providerLines(scores: HealthScore[], labelFor: (provider: string) => string): Line[] {
 	const scored = scores

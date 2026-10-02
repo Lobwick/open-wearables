@@ -15,7 +15,7 @@
 		label: string;
 		title: string;
 		class?: string;
-		/** Entries compose themselves — some are buttons, some submit a form. */
+		/** Entries compose themselves - some are buttons, some submit a form. */
 		children: Snippet;
 	} = $props();
 </script>

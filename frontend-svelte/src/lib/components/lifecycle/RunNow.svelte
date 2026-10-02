@@ -12,7 +12,7 @@
 		message,
 		dispatched
 	}: {
-		/** What the job will actually use — the stored settings, never the draft. */
+		/** What the job will actually use - the stored settings, never the draft. */
 		saved: ArchivalSettings;
 		unsaved: boolean;
 		message?: string;
@@ -27,7 +27,7 @@
 	// a rule nobody had confirmed.
 	const blocked = $derived(
 		unsaved
-			? 'Save your changes first — the job runs what is saved.'
+			? 'Save your changes first - the job runs what is saved.'
 			: idle
 				? 'Nothing to run: archival and deletion are both off.'
 				: null
@@ -44,7 +44,7 @@
 			{#if message}
 				<span class="text-danger">{message}</span>
 			{:else if dispatched}
-				Queued. It runs in the background, in batches — and space it frees is reused by new rows
+				Queued. It runs in the background, in batches - and space it frees is reused by new rows
 				rather than handed back, so the sizes above may not drop.
 			{:else}
 				{blocked ?? 'Runs in the background; this page does not wait for it.'}

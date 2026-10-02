@@ -31,8 +31,8 @@ describe('formatDate', () => {
 	});
 
 	it('falls back to a dash for missing or malformed input', () => {
-		expect(formatDate(null)).toBe('—');
-		expect(formatDate('nonsense')).toBe('—');
+		expect(formatDate(null)).toBe('-');
+		expect(formatDate('nonsense')).toBe('-');
 	});
 });
 

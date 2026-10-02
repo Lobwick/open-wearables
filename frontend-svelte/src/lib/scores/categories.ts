@@ -72,7 +72,7 @@ export function byCategory(left: string, right: string): number {
 
 /**
  * The number a reader means by "the score". For resilience that is a component,
- * not `value` — showing 0.157 as a resilience score is showing the wrong number.
+ * not `value` - showing 0.157 as a resilience score is showing the wrong number.
  */
 export function scoreOf(score: HealthScore): number | null {
 	const { scoreComponent } = categorySpec(score.category);
@@ -99,7 +99,7 @@ export function componentsOf(score: HealthScore): { label: string; value: string
 		.filter(([key]) => key !== scoreComponent)
 		.map(([key, component]) => ({
 			label: humanise(key),
-			// A component can be a rating with no number of its own — Suunto's
+			// A component can be a rating with no number of its own - Suunto's
 			// stress state arrives as both, Oura's metric type as a word only.
 			value:
 				[formatDecimal(component.value), component.qualifier].filter(Boolean).join(' · ') || DASH

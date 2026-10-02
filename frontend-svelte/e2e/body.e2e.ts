@@ -20,7 +20,7 @@ test('shows the body as it stands, dashing what was never measured', async ({ pa
 	// This user has no body-fat reading, and a fixed shape says so rather than
 	// quietly dropping the slot.
 	await expect(figures.getByText('Body fat')).toBeVisible();
-	await expect(figures.getByText('—')).toBeVisible();
+	await expect(figures.getByText('-')).toBeVisible();
 
 	// The endpoint takes no provider, so the one it read from is named instead.
 	await expect(page.getByText('Latest reading from Garmin')).toBeVisible();

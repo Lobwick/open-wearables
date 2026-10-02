@@ -32,7 +32,7 @@ describe('dailyMeans', () => {
 
 describe('resolutionFor', () => {
 	// A month of quarter-hours is three thousand buckets, which the endpoint caps
-	// at a thousand — so a long window has to ask for hours.
+	// at a thousand - so a long window has to ask for hours.
 	it('coarsens as the window grows', () => {
 		expect(resolutionFor(3600)).toBe('1min');
 		expect(resolutionFor(86_400 * 2)).toBe('5min');
@@ -44,6 +44,8 @@ describe('resolutionFor', () => {
 describe('unitLabel', () => {
 	it('shows a symbol where there is one and a spaced word where there is not', () => {
 		expect(unitLabel('percent')).toBe('%');
+		// The backend's breaths-per-minute code is not a unit anyone reads.
+		expect(unitLabel('brpm')).toBe(' breaths/min');
 		expect(unitLabel('bpm')).toBe(' bpm');
 		expect(unitLabel('ml_kg_min')).toBe(' ml/kg/min');
 	});

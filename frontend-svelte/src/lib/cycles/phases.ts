@@ -2,7 +2,7 @@ import { humanise } from '$lib/utils/text';
 import type { Cycle } from './types';
 
 /**
- * The phases a cycle bar is made of, in the order they happen — which is also
+ * The phases a cycle bar is made of, in the order they happen - which is also
  * the order the legend reads. The period is the one colour a reader already
  * expects; the fertile window is marked out because it is what anyone looks for
  * first.
@@ -38,7 +38,7 @@ export const PHASE_ORDER = Object.keys(PHASES);
 /** What the cycle ran to, or is expected to: a predicted one has no measured length. */
 export const cycleDays = (cycle: Cycle) => cycle.cycle_length ?? cycle.predicted_cycle_length;
 
-/** The days the window covers, inclusive — the bar and the detail column agree. */
+/** The days the window covers, inclusive - the bar and the detail column agree. */
 export function fertileWindow(cycle: Cycle): { from: number; to: number } | null {
 	const from = cycle.fertile_window_start;
 	const length = cycle.length_of_fertile_window;

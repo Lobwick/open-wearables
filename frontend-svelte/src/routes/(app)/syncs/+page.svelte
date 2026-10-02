@@ -65,7 +65,7 @@
 			<SyncOverview counts={data.overview} />
 			<p class={FOOTNOTE}>
 				{plural(data.total, 'sync')} from {plural(data.overview.users, 'user')}{#if data.capped}
-					— the newest {formatNumber(SYNC_WINDOW)}; more ran than one window holds, so narrow the
+					- the newest {formatNumber(SYNC_WINDOW)}; more ran than one window holds, so narrow the
 					filters to see the rest{/if}.
 			</p>
 		</div>

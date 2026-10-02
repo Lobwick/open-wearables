@@ -152,7 +152,8 @@ const server = Bun.serve({
 		const authorizeMatch = pathname.match(/^\/api\/v1\/oauth\/([^/]+)\/authorize$/);
 		if (authorizeMatch) {
 			const provider = authorizeMatch[1];
-			if (provider === 'whoop') {
+			// Enabled but missing its client credentials: on the pairing page, and still failing.
+			if (provider === 'suunto') {
 				return json({ detail: 'Provider credentials are not configured.' }, 400);
 			}
 			// A real provider sends the browser to redirect_uri once the person
@@ -482,7 +483,7 @@ const server = Bun.serve({
 			switch (detailMatch[2]) {
 				case undefined: {
 					// The backend derives these from the connections, so the mock must
-					// too — otherwise the header contradicts the provider cards.
+					// too - otherwise the header contradicts the provider cards.
 					const latest = connected ? makeConnections(user.id)[0] : null;
 					return json({
 						...user,

@@ -16,7 +16,7 @@
 		icon?: Component;
 		title?: string;
 		description?: string;
-		/** Rendered on the right of the header — a button, a count, a filter. */
+		/** Rendered on the right of the header - a button, a count, a filter. */
 		action?: Snippet;
 		class?: string;
 		bodyClass?: string;

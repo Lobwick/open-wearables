@@ -17,7 +17,7 @@ export function chipClass(selected: boolean): string {
 }
 
 /**
- * The small square chip for picking many from a long list — event types,
+ * The small square chip for picking many from a long list - event types,
  * workout types, series. `chipClass` is the round one for a short filter row.
  */
 export const tagClass = (selected: boolean): string =>

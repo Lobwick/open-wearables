@@ -20,7 +20,7 @@ const day = (over: Partial<ActivityDay>) =>
 	}) as ActivityDay;
 
 describe('sumActivity', () => {
-	// A day with no steps is a gap in the data, not a day someone spent still —
+	// A day with no steps is a gap in the data, not a day someone spent still -
 	// averaging it as zero would drag the figure down for the days that do count.
 	it('averages steps over the days that reported them', () => {
 		const totals = sumActivity(
@@ -48,7 +48,7 @@ describe('detailGroups', () => {
 		const titles = detailGroups(day({})).map((group) => group.title);
 		expect(titles).toContain('Movement');
 		// Oura reports no intensity bands and this day has no elevation, so neither
-		// heading appears — but energy does, because the total arrived.
+		// heading appears - but energy does, because the total arrived.
 		expect(titles).not.toContain('Intensity');
 		expect(titles).not.toContain('Elevation');
 		expect(titles).toContain('Energy');

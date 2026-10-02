@@ -65,7 +65,7 @@ export function overview(runs: SyncRunSummary[]) {
 		failed: count('failed'),
 		// Partial and the rest need a look, but are not outright failures.
 		attention: count('partial', 'unfinished', 'stale'),
-		// "Skipped" is a sync that found nothing new — done, and most of them.
+		// "Skipped" is a sync that found nothing new - done, and most of them.
 		completed: count('success', 'skipped'),
 		users: new Set(runs.map((run) => run.user_id)).size,
 		mix: SYNC_STATUSES.map((status) => ({

@@ -8,7 +8,7 @@
 	}: {
 		/** A fixed set per kind of card, so a column can be scanned down the list. */
 		metrics: { icon: Component; label: string; value: string }[];
-		/** A trailing cell for what a number cannot say — a stage mix, say. */
+		/** A trailing cell for what a number cannot say - a stage mix, say. */
 		children?: Snippet;
 	} = $props();
 </script>

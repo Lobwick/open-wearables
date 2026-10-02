@@ -1,4 +1,4 @@
-/** Mirrors backend `CoverageResponse` — what each provider can deliver, in code. */
+/** Mirrors backend `CoverageResponse` - what each provider can deliver, in code. */
 export type Coverage = {
 	providers: string[];
 	timeseries: { name: string; metrics: CoverageMetric[] }[];

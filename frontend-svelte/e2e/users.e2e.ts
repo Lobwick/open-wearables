@@ -164,7 +164,7 @@ test('copies a pairing link pointing at this app', async ({ page, context }) => 
 });
 
 test('opens a user from anywhere in the row', async ({ page }) => {
-	// force: the overlay link covers the cell, which is the thing being tested —
+	// force: the overlay link covers the cell, which is the thing being tested -
 	// without it Playwright refuses to click "through" another element.
 	await page.getByRole('row').nth(1).getByRole('cell').nth(3).click({ force: true });
 

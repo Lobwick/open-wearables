@@ -9,7 +9,7 @@ export type ActivityQuery = { period: Period; cursor?: string; limit?: number };
  * Newest first, unlike the endpoint's own default: every other list on this site
  * reads that way, and an admin opening a tab wants the last few days.
  *
- * There is no provider parameter because there is nothing to filter — the
+ * There is no provider parameter because there is nothing to filter - the
  * service keeps the highest-priority source per date before it answers.
  */
 export function fetchActivity(

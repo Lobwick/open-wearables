@@ -25,7 +25,7 @@ test('lists sessions newest first, dated by the morning they ended', async ({ pa
 	await expect(cards).toHaveCount(10);
 
 	// The kind titles the card, as the type does on a workout, and the day it was
-	// woken up in sits under it — which is how anyone looks for "last night".
+	// woken up in sits under it - which is how anyone looks for "last night".
 	const first = cards.first().getByRole('heading');
 	await expect(first).toContainText('Night sleep');
 	await expect(first).toContainText(named({ weekday: 'short' }));

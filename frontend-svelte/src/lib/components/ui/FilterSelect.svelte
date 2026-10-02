@@ -11,7 +11,7 @@
 		label: string;
 		value: string | number;
 		options: { value: string | number; label: string }[];
-		/** What to do with the new value — navigate, or change state in place. */
+		/** What to do with the new value - navigate, or change state in place. */
 		onselect: (value: string) => void;
 		/** False when something outside already captions it, as `FilterGroup` does. */
 		labelled?: boolean;

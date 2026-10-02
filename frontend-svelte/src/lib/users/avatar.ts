@@ -28,7 +28,7 @@ export function initials(user: Pick<User, 'first_name' | 'last_name' | 'email'>)
 	if (fromName.length > 0) return fromName.join('').slice(0, 2).toUpperCase();
 
 	const local = user.email?.trim();
-	return local ? local.slice(0, 2).toUpperCase() : '—';
+	return local ? local.slice(0, 2).toUpperCase() : '-';
 }
 
 export function fullName(user: Pick<User, 'first_name' | 'last_name'>): string {

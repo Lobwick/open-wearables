@@ -2,7 +2,7 @@ import type { Component } from 'svelte';
 import type { FieldGroup } from '$lib/components/ui/FieldGroups.svelte';
 
 /**
- * Format a reading, or keep the null that says the provider sent none — which
+ * Format a reading, or keep the null that says the provider sent none - which
  * is what `toFieldGroups` drops the field on.
  */
 export const maybe = <T>(
@@ -16,7 +16,7 @@ export type GroupSpec = [string, Component, [string, string | null][]];
 /**
  * Drops absent fields, then groups left with nothing. On a card's summary row a
  * dash says "this provider sent nothing", but a column of them says nothing at
- * all — so the detail columns show only what arrived.
+ * all - so the detail columns show only what arrived.
  */
 export const toFieldGroups = (groups: GroupSpec[]): FieldGroup[] =>
 	groups

@@ -17,7 +17,7 @@
 		/** Described, not named: inside the label it becomes part of the field's name. */
 		hint?: string;
 		value?: string;
-		/** A control sitting inside the box — the password eye, so far. */
+		/** A control sitting inside the box - the password eye, so far. */
 		trailing?: Snippet;
 	} = $props();
 

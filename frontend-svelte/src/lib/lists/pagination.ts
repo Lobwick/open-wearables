@@ -10,7 +10,7 @@ export function isPageSize(value: unknown): value is PageSize {
 /**
  * Keeps the first visible item visible, rather than resetting to page 1 and
  * losing the reader's place. Can exceed the new page count if the total has
- * shrunk — the loader clamps that, since only it knows the total.
+ * shrunk - the loader clamps that, since only it knows the total.
  */
 export function pageForSize(page: number, from: PageSize | number, to: PageSize | number): number {
 	const firstVisibleIndex = (Math.max(page, 1) - 1) * from;

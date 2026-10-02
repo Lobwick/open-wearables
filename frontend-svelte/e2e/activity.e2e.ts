@@ -53,7 +53,7 @@ test('pages on without claiming a last page the endpoint never counted', async (
 	const pager = page.getByRole('navigation', { name: 'Pagination' });
 
 	// This endpoint builds its Pagination without a total, so there is no "of N"
-	// to show — and showing "of 1" beside a working next arrow is worse than
+	// to show - and showing "of 1" beside a working next arrow is worse than
 	// showing nothing.
 	await expect(pager).toContainText('1–10');
 	await expect(pager).not.toContainText('of 1');
@@ -81,7 +81,7 @@ test('draws the readings through the day, and only once a row is opened', async 
 	await expect(chart).toBeVisible();
 	expect(calls).toHaveLength(1);
 
-	// Steps and heart rate, each its own line — and no daily totals towering over
+	// Steps and heart rate, each its own line - and no daily totals towering over
 	// them, which share this endpoint in raw mode.
 	await expect(card.getByRole('button', { name: 'Steps' })).toBeVisible();
 	await expect(card.getByRole('button', { name: 'Heart rate' })).toBeVisible();

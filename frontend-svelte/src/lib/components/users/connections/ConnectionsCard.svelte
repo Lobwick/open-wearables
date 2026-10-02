@@ -3,7 +3,7 @@
 	import Card from '$lib/components/ui/Card.svelte';
 	import EmptyState from '$lib/components/ui/EmptyState.svelte';
 	import type { Connection } from '$lib/connections/types';
-	import { providerLabel } from '$lib/providers/labels';
+	import { providerLabel, viaSdk } from '$lib/providers/labels';
 	import type { Provider } from '$lib/server/providers';
 	import type { SyncRun } from '$lib/syncs/types';
 	import ConnectionCard from './ConnectionCard.svelte';
@@ -43,6 +43,7 @@
 				<ConnectionCard
 					{connection}
 					label={providerLabel(providers, connection.provider)}
+					viaSdk={viaSdk(providers, connection.provider)}
 					backfills={byProvider.get(connection.provider) ?? []}
 					onrevoke={() => onrevoke(connection)}
 					onpurge={() => onpurge(connection)}

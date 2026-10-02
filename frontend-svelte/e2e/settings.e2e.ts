@@ -141,7 +141,7 @@ test('will not send the mode a provider is already in', async ({ page, request }
 	const webhook = oura.getByRole('button', { name: 'Webhook' });
 
 	// Each switch reconciles the provider's subscriptions, and on pull that
-	// deletes every one — so the chosen mode is not something to press again.
+	// deletes every one - so the chosen mode is not something to press again.
 	await expect(pull).toBeDisabled();
 	await pull.click({ force: true });
 	expect(await calls()).toBe(0);
@@ -270,7 +270,7 @@ test('marks Data Lifecycle as beta, in words on a desktop and as a mark on a pho
 	await expect(tab).toContainText('Beta');
 
 	await page.setViewportSize({ width: 390, height: 844 });
-	// The word costs a tab's width on a phone, so the mark rides the icon — the
+	// The word costs a tab's width on a phone, so the mark rides the icon - the
 	// same trade the bottom bar makes for Webhooks.
 	await expect(tab.getByText('Beta', { exact: true })).toBeHidden();
 	await expect(tab).toContainText('β');

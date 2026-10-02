@@ -152,7 +152,7 @@ describe('policy', () => {
 	});
 
 	// The PUT rejects these with a 422 whose detail is a list, which the
-	// reader would see as nothing — so the form says it first.
+	// reader would see as nothing - so the form says it first.
 	it('refuses what the API would', () => {
 		expect(invalid({ archive: 0, retain: null })).toMatch(/1 to 3650/);
 		expect(invalid({ archive: 1.5, retain: null })).toMatch(/whole number/);

@@ -7,10 +7,10 @@ export const MICRO = `${TINY} text-muted-foreground`;
 /** The small print under a section: how a figure was reached, what it leaves out. */
 export const FOOTNOTE = `${TINY} text-muted-foreground/80`;
 
-/** An id, a URL, an event name — anything read character by character. */
+/** An id, a URL, an event name - anything read character by character. */
 export const MONO = `${TINY} font-mono`;
 
-/** A small action set in running text — a group's "all", a "select all". */
+/** A small action set in running text - a group's "all", a "select all". */
 export const TEXT_LINK = `${MICRO} underline-offset-2 hover:text-foreground hover:underline`;
 
 /** A link inside a sentence, in the accent so it reads as one. */

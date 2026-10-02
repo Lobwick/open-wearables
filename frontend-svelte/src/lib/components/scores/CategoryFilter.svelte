@@ -10,7 +10,7 @@
 		hrefFor
 	}: {
 		category: string;
-		/** Only what the period actually holds — coverage cannot name them all. */
+		/** Only what the period actually holds - coverage cannot name them all. */
 		categories: string[];
 		hrefFor: (changes: Record<string, string | null>) => string;
 	} = $props();
@@ -21,7 +21,7 @@
 	]);
 </script>
 
-<!-- Nothing to choose between with one category and none chosen — but once one
+<!-- Nothing to choose between with one category and none chosen - but once one
      is, the control has to be there to clear it. -->
 {#if categories.length > 1 || category}
 	<FilterGroup label="Category">

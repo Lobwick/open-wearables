@@ -68,7 +68,7 @@
 
 		<p class={FOOTNOTE}>
 			Row counts are Postgres's own planner estimate, not a count, and can trail far behind until
-			the next ANALYZE — counting for real would mean scanning the table this page watches.
+			the next ANALYZE - counting for real would mean scanning the table this page watches.
 		</p>
 	</div>
 </Card>

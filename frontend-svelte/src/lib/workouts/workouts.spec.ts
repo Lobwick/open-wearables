@@ -68,7 +68,7 @@ describe('formatLocalTime', () => {
 	const morning = '2026-09-15T07:12:00Z';
 
 	// The offset is the workout's own, so a run at 09:12 in Warsaw must not read
-	// as 07:12 because the admin — or the CI box — sits in UTC.
+	// as 07:12 because the admin - or the CI box - sits in UTC.
 	it('shows the clock the workout was recorded against', () => {
 		expect(formatLocalTime(morning, '+02:00')).toBe('09:12');
 		expect(formatLocalTime(morning, '-05:30')).toBe('01:42');
@@ -122,8 +122,8 @@ describe('zoneKinds', () => {
 			power_zones: power ? { zones: [{ zone: 0, seconds: 60, max_watts: 150 }] } : null
 		}) as Workout;
 
-	// Both shapes name their ceiling differently, and everything downstream — the
-	// bands, the ranges in the strip — reads one `max`.
+	// Both shapes name their ceiling differently, and everything downstream - the
+	// bands, the ranges in the strip - reads one `max`.
 	it('flattens either ceiling to the same field', () => {
 		expect(zoneKinds(workout(true, true)).map((kind) => [kind.type, kind.zones[0].max])).toEqual([
 			['heart_rate', 120],

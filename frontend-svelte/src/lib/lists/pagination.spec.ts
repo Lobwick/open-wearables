@@ -109,7 +109,7 @@ describe('cursorHrefs', () => {
 	});
 
 	// Page one reached by a prev_ cursor has nothing before it, so the API reports
-	// has_more false and withholds the forward cursor too — both arrows go dead.
+	// has_more false and withholds the forward cursor too - both arrows go dead.
 	it('steps back to page one as the bare URL, not as a cursor', () => {
 		expect(at('?cursor=page2&at=2').stepHref('prev_x', -1)).toBe('/users/1/workouts');
 	});

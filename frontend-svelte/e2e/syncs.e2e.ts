@@ -81,6 +81,6 @@ test('an open run shows what Postgres kept, or says a live one is not kept', asy
 	await page.goto('/syncs?source=webhook');
 	await rows(page).first().click();
 	await expect(
-		page.getByText(/None — a live sync is only kept in the 24-hour buffer/)
+		page.getByText(/None - a live sync is only kept in the 24-hour buffer/)
 	).toBeVisible();
 });

@@ -6,7 +6,7 @@ export type ApiKey = {
 	created_at: string;
 };
 
-/** `ApiKeyReadWithSecret` — the one response that carries the key. */
+/** `ApiKeyReadWithSecret` - the one response that carries the key. */
 export type ApiKeySecret = ApiKey & { key: string };
 
 /** Mirrors `ApplicationRead`: SDK credentials for a mobile app. */

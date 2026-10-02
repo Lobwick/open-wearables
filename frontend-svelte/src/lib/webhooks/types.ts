@@ -20,7 +20,7 @@ export type EventType = {
 	child_events: string[] | null;
 };
 
-/** Mirrors `WebhookMessageResponse` — the event, as sent. */
+/** Mirrors `WebhookMessageResponse` - the event, as sent. */
 export type WebhookMessage = {
 	id: string;
 	eventType: string;
@@ -29,7 +29,7 @@ export type WebhookMessage = {
 	payload: Record<string, unknown> | null;
 };
 
-/** Mirrors `WebhookMessageAttemptResponse` — one delivery of one message. */
+/** Mirrors `WebhookMessageAttemptResponse` - one delivery of one message. */
 export type Delivery = {
 	id: string;
 	msgId: string;

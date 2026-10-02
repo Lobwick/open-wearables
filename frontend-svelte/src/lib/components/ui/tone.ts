@@ -1,6 +1,6 @@
 /**
  * A tinted background with the foreground that belongs to it. Written out three
- * times before this existed — badges, status pills and tile icons — with the
+ * times before this existed - badges, status pills and tile icons - with the
  * same colour under two names.
  */
 export type Tone = 'primary' | 'success' | 'warning' | 'danger' | 'neutral' | 'muted';

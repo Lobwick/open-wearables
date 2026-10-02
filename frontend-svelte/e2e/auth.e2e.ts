@@ -32,7 +32,7 @@ test('keeps the session cookie out of reach of JavaScript', async ({ page, conte
 	expect(cookie?.httpOnly).toBe(true);
 	expect(cookie?.sameSite).toBe('Lax');
 
-	// And it holds only an opaque id — no token ever reaches the browser.
+	// And it holds only an opaque id - no token ever reaches the browser.
 	expect(cookie?.value).not.toContain('access');
 	await expect(page.evaluate(() => document.cookie)).resolves.not.toContain('ow_session');
 });

@@ -2,7 +2,7 @@ import { noun } from './text';
 import { isoDay } from './datetime';
 
 /** A missing value is a fact about the provider, not a zero. */
-export const DASH = '—';
+export const DASH = '-';
 
 export function formatDuration(seconds: number | null): string {
 	if (seconds === null || seconds <= 0) return DASH;
@@ -124,7 +124,7 @@ export function formatLocalTime(iso: string, zoneOffset: string | null): string 
 }
 
 /**
- * The calendar day a reading belongs to, in its own zone — the key a list is
+ * The calendar day a reading belongs to, in its own zone - the key a list is
  * grouped by, where `formatLocalDay` is what the group is called.
  */
 export function localDayKey(iso: string, zoneOffset: string | null): string {
@@ -139,7 +139,7 @@ export function formatLocalDay(iso: string, zoneOffset: string | null): string {
 
 /**
  * A calendar date with no weekday, for a record measured in days rather than
- * hours — where which weekday it fell on says nothing.
+ * hours - where which weekday it fell on says nothing.
  */
 export function formatLocalDate(iso: string, zoneOffset: string | null): string {
 	const at = inZone(iso, zoneOffset);
@@ -159,7 +159,7 @@ export type LocalRange = {
 
 /**
  * A range in the session's own zone, in parts, so a caller can style the clock
- * times apart from the days — and choose which end wears its weekday. Without
+ * times apart from the days - and choose which end wears its weekday. Without
  * one, a range that crosses midnight reads as running backwards, which is what
  * a US offset did to the old dashboard.
  */

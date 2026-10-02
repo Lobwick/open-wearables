@@ -61,6 +61,6 @@
 	{:else if sent}
 		<!-- Svix queues it, so it turns up in the list below on the next load
 		     rather than immediately. -->
-		<span class={MICRO}>Sent — it will appear below once delivered.</span>
+		<span class={MICRO}>Sent - it will appear below once delivered.</span>
 	{/if}
 </form>

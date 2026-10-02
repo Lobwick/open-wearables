@@ -9,7 +9,7 @@ export type PowerZones = { zones: PowerZone[]; ftp_watts: number | null };
 
 /**
  * Mirrors backend `Workout`. Almost everything is nullable because no provider
- * fills every field — see each provider's `WORKOUT_FIELDS` in the coverage matrix.
+ * fills every field - see each provider's `WORKOUT_FIELDS` in the coverage matrix.
  */
 export type Workout = {
 	id: string;
@@ -30,7 +30,7 @@ export type Workout = {
 	avg_pace_sec_per_km: number | null;
 	elevation_gain_meters: number | null;
 	steps_count: number | null;
-	/** Unit differs per provider — Suunto stores km/h, the rest m/s. Do not format. */
+	/** Unit differs per provider - Suunto stores km/h, the rest m/s. Do not format. */
 	average_speed: number | null;
 	max_speed: number | null;
 	average_cadence: number | null;

@@ -158,8 +158,8 @@ export const requestOf = (draft: Draft, preset: string | null): SeedRequest => (
 });
 
 /**
- * One string per meaning. Keys are sorted at every level — the backend's field
- * order is not this module's, and `JSON.stringify` minds — and a list of names
+ * One string per meaning. Keys are sorted at every level - the backend's field
+ * order is not this module's, and `JSON.stringify` minds - and a list of names
  * is sorted too, since chips switched on in another order ask for the same thing.
  */
 const canonical = (value: unknown) =>

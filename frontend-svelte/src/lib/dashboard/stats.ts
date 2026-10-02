@@ -100,7 +100,7 @@ export function reachParts(info: SystemInfo): Part[] {
 
 /**
  * The event mix. `count` is every category, and only three of them have a field
- * of their own — so whatever is left over is named rather than silently making
+ * of their own - so whatever is left over is named rather than silently making
  * the parts fail to add up.
  */
 export function eventMix(info: SystemInfo): Record<string, number> {

@@ -137,5 +137,5 @@ const inRange = (days: number, max: number) => isWholeIn(days, 1, max);
 export function conflict(policy: Policy): string | null {
 	if (policy.archive === null || policy.retain === null || policy.retain > policy.archive)
 		return null;
-	return `Deletion at ${policy.retain} days comes before archival at ${policy.archive}, so rows are deleted before they can be archived — archival never happens with these numbers.`;
+	return `Deletion at ${policy.retain} days comes before archival at ${policy.archive}, so rows are deleted before they can be archived - archival never happens with these numbers.`;
 }

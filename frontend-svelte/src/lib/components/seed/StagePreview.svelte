@@ -7,7 +7,7 @@
 	let { deep, rem, awake }: { deep: Range; rem: Range; awake: Range } = $props();
 
 	// A typical night from the ranges: each stage at its midpoint, light sleep
-	// whatever is left — which is how the generator fills the rest too.
+	// whatever is left - which is how the generator fills the rest too.
 	const mid = ([low, high]: Range) => (low + high) / 2;
 	const parts = $derived.by(() => {
 		const shares = { deep: mid(deep), rem: mid(rem), awake: mid(awake) };

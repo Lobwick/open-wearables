@@ -36,7 +36,7 @@
 	{#snippet aside()}
 		<!-- Narrow screens keep the mark and drop the words; the title holds them.
 		     The icon belongs to the device, not the provider, and comes from
-		     `device_type` — a ring must not be drawn as a watch. -->
+		     `device_type` - a ring must not be drawn as a watch. -->
 		<span class="flex shrink-0 items-center gap-1.5" title={origin}>
 			<ProviderMark provider={source.provider} label={providerLabel} size="sm" />
 			<span class="hidden items-center gap-1 text-xs text-muted-foreground sm:inline-flex">

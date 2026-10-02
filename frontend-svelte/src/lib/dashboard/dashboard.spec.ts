@@ -21,7 +21,7 @@ const info = (over: Partial<SystemInfo> = {}): SystemInfo => ({
 
 describe('formatCompact', () => {
 	// The tiles carry counts that reach seven digits, and one of them is an
-	// estimate — a compact figure fits the tile and does not overclaim.
+	// estimate - a compact figure fits the tile and does not overclaim.
 	it.each([
 		[7, '7'],
 		[999, '999'],
@@ -40,7 +40,7 @@ describe('formatCompact', () => {
 	});
 
 	it('has a dash for a count that is not there', () => {
-		expect(formatCompact(null)).toBe('—');
+		expect(formatCompact(null)).toBe('-');
 	});
 });
 

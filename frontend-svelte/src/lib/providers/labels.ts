@@ -8,13 +8,17 @@ import type { Provider } from '$lib/server/providers';
 export const byName = <T extends { name: string }>(providers: T[]) =>
 	[...providers].sort((a, b) => a.name.localeCompare(b.name));
 
+/** Fed by the mobile SDK rather than a cloud API. Unknown counts as cloud. */
+export const viaSdk = (providers: Pick<Provider, 'provider' | 'has_cloud_api'>[], slug: string) =>
+	providers.find((entry) => entry.provider === slug)?.has_cloud_api === false;
+
 /** What a provider needs to be shown: its slug, its name and where its logo is. */
 export type ProviderBrand = Pick<Provider, 'provider' | 'name' | 'icon_url'>;
 
 /**
  * Backend `ProviderName` values that are not OAuth connections, so `/oauth/providers`
- * never names them. `internal` is Open Wearables' own work — its sleep and
- * resilience scores — and left to `humanise()` it read as "Internal".
+ * never names them. `internal` is Open Wearables' own work - its sleep and
+ * resilience scores - and left to `humanise()` it read as "Internal".
  */
 const UNLISTED: Record<string, string> = { internal: 'OW' };
 

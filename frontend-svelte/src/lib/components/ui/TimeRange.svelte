@@ -14,7 +14,7 @@
 		from: string;
 		to: string;
 		zoneOffset: string | null;
-		/** Icons name the two ends where they mean something — bed and sunrise. */
+		/** Icons name the two ends where they mean something - bed and sunrise. */
 		fromIcon?: Component;
 		toIcon?: Component;
 		/**

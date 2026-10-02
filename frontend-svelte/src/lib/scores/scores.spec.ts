@@ -197,7 +197,7 @@ describe('categoryTrends', () => {
 
 	/**
 	 * Readiness is 1-100 from Oura and 0-10 from Polar. Scaled apart, a 6 out of
-	 * 10 draws level with a 93 out of 100 — which is the comparison this tab
+	 * 10 draws level with a 93 out of 100 - which is the comparison this tab
 	 * exists to make, drawn backwards.
 	 */
 	it('spans every provider in the category with one range', () => {
@@ -270,7 +270,7 @@ describe('dayWindow', () => {
 	});
 
 	// Page one is the newest stretch, which is where an admin opening the tab is
-	// looking — not the oldest, the way an ascending list would start.
+	// looking - not the oldest, the way an ascending list would start.
 	it('starts page one at the newest days', () => {
 		expect(dayWindow(period, 1, 10)).toEqual({
 			from: new Date('2026-09-12T00:00:00Z'),
@@ -339,7 +339,7 @@ describe('categoriesIn', () => {
 	});
 
 	// The trends are fetched by the browser, so the chosen one has to stay on the
-	// list while they are in flight — or the control contradicts the page it is on.
+	// list while they are in flight - or the control contradicts the page it is on.
 	it('keeps the chosen category while the trends are still in flight', () => {
 		expect(categoriesIn([], 'recovery')).toEqual(['recovery']);
 	});

@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+import { calendarTicks, ticksClear } from '$lib/charts/ticks';
 import {
 	ALL_TIME,
 	parsePeriod,
@@ -217,5 +218,54 @@ describe('narrowToProvider', () => {
 			total_workouts: 0,
 			total_sleep_events: 0
 		});
+	});
+});
+
+describe('calendarTicks', () => {
+	const at = (date: string) => Date.parse(`${date}T00:00:00Z`);
+	const labels = (from: string, to: string, width: number) =>
+		calendarTicks(at(from), at(to), width).map((tick) => tick.label);
+	const clear = (from: string, to: string, width: number) =>
+		ticksClear(calendarTicks(at(from), at(to), width), width);
+
+	it('labels every month when there is room, with the year where it starts', () => {
+		expect(labels('2026-01-01', '2026-07-01', 1200)).toEqual([
+			'Jan 2026',
+			'Feb',
+			'Mar',
+			'Apr',
+			'May',
+			'Jun'
+		]);
+	});
+
+	// Snapped to weekly cells, a five-Monday December stood a fifth wider.
+	it('spaces months by their days, not by how many weeks start in them', () => {
+		const ticks = calendarTicks(at('2025-11-01'), at('2026-03-02'), 1000);
+		const gaps = ticks.slice(1).map((tick, rank) => tick.at - ticks[rank].at);
+		const [shortest, longest] = [Math.min(...gaps), Math.max(...gaps)];
+		// February's 28 days against December's 31, and no more than that.
+		expect(longest / shortest).toBeCloseTo(31 / 28, 2);
+	});
+
+	// The bug before that: five years put sixty month names on one line.
+	it('thins a long span to calendar steps instead of crowding it', () => {
+		expect(clear('2021-08-01', '2026-08-01', 1150)).toBe(true);
+		expect(labels('2021-08-01', '2026-08-01', 1150).length).toBeLessThan(30);
+		expect(labels('2021-08-01', '2026-08-01', 320)).toEqual([
+			'2022',
+			'2023',
+			'2024',
+			'2025',
+			'2026'
+		]);
+	});
+
+	// "All time" has no upper bound: the 2012 history on Railway, and beyond.
+	it('never crowds, however long the history', () => {
+		for (const end of ['2005-01-01', '2030-01-01', '2110-01-01']) {
+			expect(clear('1990-01-01', end, 320)).toBe(true);
+			expect(labels('1990-01-01', end, 320).length).toBeGreaterThan(0);
+		}
 	});
 });

@@ -57,7 +57,7 @@
 			description="Rolls per-sample series older than the window into one row a day. Totals and averages survive; the individual samples do not."
 			toggle="Archive old samples"
 			lead="Archive data older than"
-			off="Off — every sample is kept at full resolution."
+			off="Off - every sample is kept at full resolution."
 			max={LIMITS.archive}
 			bind:enabled={archiveOn}
 			bind:days={archiveDays}
@@ -66,10 +66,10 @@
 		<PolicyCard
 			icon={Trash2}
 			title="Deletion"
-			description="Permanently removes data older than the window — archived rows when archival is on, live ones when it is not. There is no undo."
+			description="Permanently removes data older than the window - archived rows when archival is on, live ones when it is not. There is no undo."
 			toggle="Delete old data"
 			lead="Delete data older than"
-			off="Off — nothing is ever deleted."
+			off="Off - nothing is ever deleted."
 			max={LIMITS.retain}
 			bind:enabled={retainOn}
 			bind:days={retainDays}

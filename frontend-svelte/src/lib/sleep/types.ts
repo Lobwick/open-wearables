@@ -6,7 +6,7 @@ export type StageName = 'awake' | 'rem' | 'light' | 'deep' | 'sleeping' | 'in_be
 /** Mirrors `SleepStage`: one continuous interval from the stages JSONB. */
 export type StageInterval = { stage: StageName; start_time: string; end_time: string };
 
-/** Mirrors `SleepStagesSummary` — minutes per stage, which most providers send. */
+/** Mirrors `SleepStagesSummary` - minutes per stage, which most providers send. */
 export type StageMinutes = {
 	awake_minutes: number | null;
 	light_minutes: number | null;

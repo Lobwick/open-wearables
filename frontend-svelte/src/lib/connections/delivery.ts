@@ -1,5 +1,21 @@
 import type { Connection } from './types';
 
+/**
+ * A provider with no cloud API (Apple Health, Samsung Health, Health Connect)
+ * is fed by the mobile SDK: the app does both jobs, and nothing on this side
+ * configures or starts either.
+ */
+export const SDK_DELIVERY = {
+	live: {
+		label: 'Pushed by the SDK',
+		hint: 'The SDK uploads in the background whenever the phone lets it: on new Health data on iOS, about every 15 minutes on Android.'
+	},
+	history: {
+		label: 'Pushed by the SDK on demand',
+		hint: "The app starts it through the SDK, at any time, as far back as its syncDaysBack setting. It can't be started from this dashboard."
+	}
+};
+
 /** Configured mode first; the capability flags only explain how it travels. */
 export function liveDelivery(connection: Connection): string {
 	if (!connection.live_sync_mode) return 'Not configured';
@@ -28,8 +44,8 @@ const RANGES = [7, 30, 90, 180, 365] as const;
 export const DEFAULT_RANGE = 90;
 
 /**
- * A callback backfill ignores the requested window — Garmin's
- * start_historical_sync drops `days` and always covers its cap — so only the cap
+ * A callback backfill ignores the requested window - Garmin's
+ * start_historical_sync drops `days` and always covers its cap - so only the cap
  * is truthful there. Deleting that branch is the whole fix if it ever changes.
  */
 export function historyRanges(connection: Connection): number[] {

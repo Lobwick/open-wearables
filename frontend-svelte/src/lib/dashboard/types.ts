@@ -1,4 +1,4 @@
-/** Mirrors backend `SystemInfoResponse` — the whole dashboard, in one response. */
+/** Mirrors backend `SystemInfoResponse` - the whole dashboard, in one response. */
 export type SystemInfo = {
 	total_users: { count: number };
 	active_conn: { count: number };

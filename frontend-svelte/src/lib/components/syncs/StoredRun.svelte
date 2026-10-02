@@ -32,7 +32,7 @@
 		<p class="text-sm text-danger">Could not read the stored record. Try opening it again.</p>
 	{:else if !stored}
 		<p class="text-sm text-secondary-foreground">
-			None — a live sync is only kept in the 24-hour buffer above, and leaves it with the rest.
+			None - a live sync is only kept in the 24-hour buffer above, and leaves it with the rest.
 		</p>
 	{:else}
 		<Facts>

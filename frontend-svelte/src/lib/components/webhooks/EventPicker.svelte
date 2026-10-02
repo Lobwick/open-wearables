@@ -16,8 +16,8 @@
 
 	/**
 	 * Every event in the family at once. Deliberately *not* what the group event
-	 * does: `heart_rate.created` is its own subscription — one event covering the
-	 * category — while its children are the granular ones. Making the parent a
+	 * does: `heart_rate.created` is its own subscription - one event covering the
+	 * category - while its children are the granular ones. Making the parent a
 	 * bulk selector would take that choice away.
 	 */
 	function setAll(names: string[], on: boolean) {

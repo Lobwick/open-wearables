@@ -8,7 +8,7 @@
 		provider,
 		size = 'sm'
 	}: {
-		/** Whatever carries a logo — an OAuth catalogue entry or a settings row. */
+		/** Whatever carries a logo - an OAuth catalogue entry or a settings row. */
 		provider: ProviderBrand;
 		size?: 'xs' | 'sm' | 'md' | 'lg';
 	} = $props();

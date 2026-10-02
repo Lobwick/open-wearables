@@ -15,7 +15,7 @@
 		class: className
 	}: {
 		label: string;
-		/** Null while the box is empty — which is what an optional number wants. */
+		/** Null while the box is empty - which is what an optional number wants. */
 		value?: number | null;
 		min?: number;
 		max?: number;

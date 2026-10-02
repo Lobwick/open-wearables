@@ -5,7 +5,7 @@ import { describe, expect, it } from 'vitest';
 /**
  * Every API path the server layer calls, as written in the source. The mock in
  * `e2e/` answers whatever this asks for, so a wrong path passes every test in
- * the suite and only fails against the real backend — which is how
+ * the suite and only fails against the real backend - which is how
  * `/api/v1/stats` shipped when the route is mounted at `/api/v1/dashboard/stats`.
  */
 const CALLED = /['"`](\/api\/v1\/[^'"`?]*)/g;

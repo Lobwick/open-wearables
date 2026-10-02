@@ -19,7 +19,7 @@ export type User = {
 	last_synced_at: string | null;
 	last_synced_provider: string | null;
 	has_active_connection: boolean;
-	/** Null means "not requested", [] means "none" — do not collapse the two. */
+	/** Null means "not requested", [] means "none" - do not collapse the two. */
 	connections: UserConnection[] | null;
 };
 

@@ -61,8 +61,9 @@
 	--ow-muted-foreground: light-dark(#747678, #747678); /* ink-3 */
 	--ow-border: light-dark(#e6e8ec, #414141); /* line */
 
-	--ow-primary: light-dark(#2353c4, #7598ea); /* ink-brand: text, icons, lines */
-	--ow-brand: #2353c4; /* surface-brand: a fill with white on it, in both themes */
+	/* ink-brand in light. Dark keeps the dashboard's original accent: the
+	   design's #2353c4 is 2.6:1 on a dark card and read as murky. */
+	--ow-primary: light-dark(#2353c4, #39d4e4);
 	--ow-inverted: light-dark(#2c2c2c, #f7f8fa); /* surface-inverted-1 */
 	--ow-inverted-hover: light-dark(#414141, #ebeef2); /* surface-inverted-2 */
 	--ow-inverted-foreground: light-dark(#ffffff, #000000); /* ink-inverted */
@@ -91,7 +92,6 @@
 	--color-border: var(--ow-border);
 
 	--color-primary: var(--ow-primary);
-	--color-brand: var(--ow-brand);
 	--color-inverted: var(--ow-inverted);
 	--color-inverted-hover: var(--ow-inverted-hover);
 	--color-inverted-foreground: var(--ow-inverted-foreground);

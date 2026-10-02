@@ -62,7 +62,7 @@ export function resolutionFor(seconds: number): '1min' | '5min' | '15min' | '1ho
  * devices instead of either one's curve.
  *
  * Daily totals share this endpoint in raw mode and would tower over every real
- * reading, so they go — the flag is tri-state and a legacy null means "not a
+ * reading, so they go - the flag is tri-state and a legacy null means "not a
  * total".
  */
 export function toSeries(samples: Sample[], order: string[] = WORKOUT_TYPES): Series[] {
@@ -136,6 +136,7 @@ const UNIT_LABEL: Record<string, string> = {
 	percent: '%',
 	ml_kg_min: ' ml/kg/min',
 	m_per_s: ' m/s',
+	brpm: ' breaths/min',
 	kg_m2: '',
 	count: ''
 };

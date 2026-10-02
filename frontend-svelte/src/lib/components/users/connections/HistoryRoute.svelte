@@ -4,6 +4,7 @@
 	import { enhance } from '$app/forms';
 	import StatePlate from '$lib/components/ui/StatePlate.svelte';
 	import {
+		SDK_DELIVERY,
 		DEFAULT_RANGE,
 		canSyncHistory,
 		historyDelivery,
@@ -14,16 +15,22 @@
 	import { createSubmitFlag } from '$lib/utils/forms.svelte';
 	import RoutePane from './RoutePane.svelte';
 
-	let { connection, actionable }: { connection: Connection; actionable: boolean } = $props();
+	let {
+		connection,
+		actionable,
+		viaSdk = false
+	}: { connection: Connection; actionable: boolean; viaSdk?: boolean } = $props();
 
 	const submit = createSubmitFlag();
 
 	const startable = $derived(actionable && canSyncHistory(connection));
 	const ranges = $derived(historyRanges(connection));
 	const note = $derived(
-		[startable ? historyDelivery(connection) + '.' : null, historyLimitNote(connection)]
-			.filter(Boolean)
-			.join(' ') || null
+		viaSdk
+			? SDK_DELIVERY.history.hint
+			: [startable ? historyDelivery(connection) + '.' : null, historyLimitNote(connection)]
+					.filter(Boolean)
+					.join(' ') || null
 	);
 	// A capped provider's last option is its cap, the only window it honours.
 	const preselected = $derived(
@@ -73,6 +80,6 @@
 			</div>
 		</form>
 	{:else}
-		<StatePlate>{historyDelivery(connection)}</StatePlate>
+		<StatePlate>{viaSdk ? SDK_DELIVERY.history.label : historyDelivery(connection)}</StatePlate>
 	{/if}
 </RoutePane>

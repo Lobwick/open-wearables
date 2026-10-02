@@ -1,5 +1,5 @@
 /**
- * The calendar day of an instant as its UTC fields read — which, for a date
+ * The calendar day of an instant as its UTC fields read - which, for a date
  * shifted into a zone first, is that zone's day. The key every day grid and
  * date input here uses.
  */
@@ -33,9 +33,9 @@ export function formatRelativeTime(iso: string | null, now = Date.now()): string
 }
 
 export function formatDate(iso: string | null): string {
-	if (!iso) return '—';
+	if (!iso) return '-';
 	const date = new Date(iso);
-	return Number.isNaN(date.getTime()) ? '—' : absolute.format(date);
+	return Number.isNaN(date.getTime()) ? '-' : absolute.format(date);
 }
 
 const stamp = new Intl.DateTimeFormat('en-GB', {
@@ -47,7 +47,7 @@ const stamp = new Intl.DateTimeFormat('en-GB', {
 });
 
 export function formatDateTime(iso: string | null): string {
-	if (!iso) return '—';
+	if (!iso) return '-';
 	const date = new Date(iso);
-	return Number.isNaN(date.getTime()) ? '—' : stamp.format(date);
+	return Number.isNaN(date.getTime()) ? '-' : stamp.format(date);
 }

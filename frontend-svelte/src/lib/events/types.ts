@@ -1,5 +1,5 @@
 /**
- * Mirrors backend `SourceMetadata`, which every event response carries — a
+ * Mirrors backend `SourceMetadata`, which every event response carries - a
  * workout, a night, a day, a cycle. `provider` is the integration, `source` the
  * writer inside it.
  */

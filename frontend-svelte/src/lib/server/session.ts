@@ -60,7 +60,7 @@ export async function createSession(
 	});
 }
 
-/** Null means "not signed in" — including when Redis is unreachable. */
+/** Null means "not signed in" - including when Redis is unreachable. */
 export async function readSession(cookies: Cookies): Promise<SessionRecord | null> {
 	const id = cookies.get(SESSION_COOKIE);
 	if (!id) return null;

@@ -36,7 +36,7 @@
 {:else}
 	<div class="flex flex-col gap-3">
 		<div class="flex flex-col gap-1.5">
-			<ChartRow><MonthAxis dates={grid.dates} /></ChartRow>
+			<ChartRow><MonthAxis from={grid.from} to={grid.to} /></ChartRow>
 
 			{#each rows as row (row.key)}
 				<HeatmapRow {row} label={labelFor(row.key)} max={grid.max} {unit} />

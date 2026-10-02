@@ -23,7 +23,7 @@ export const triggerOf = (trigger: number) => (trigger === 1 ? 'Retry' : 'Schedu
 /**
  * Svix keeps the response body and the event payload behind a `with_content`
  * flag that v2 of its SDK defaults to **false**, so both arrive empty until the
- * backend asks for them. An empty object is not "the provider sent nothing" —
+ * backend asks for them. An empty object is not "the provider sent nothing" -
  * it is "nobody asked", and the two must not read the same.
  */
 export const hasContent = (value: unknown): boolean => {

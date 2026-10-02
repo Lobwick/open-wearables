@@ -1,7 +1,7 @@
 import type { SourceMetadata } from '$lib/events/types';
 
 /**
- * Mirrors backend `MenstrualCycleRecord`. The columns are the unified ones —
+ * Mirrors backend `MenstrualCycleRecord`. The columns are the unified ones -
  * Garmin's MCT fills them today, and any provider that sends cycles writes into
  * the same shape.
  */

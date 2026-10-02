@@ -17,10 +17,10 @@
 		title: Snippet;
 		/** A second heading line, where the title does not say when. */
 		when?: Snippet;
-		/** What sits before the chevron — where a record came from, usually. Part of the toggle's name. */
+		/** What sits before the chevron - where a record came from, usually. Part of the toggle's name. */
 		aside?: Snippet;
 		/**
-		 * A control of the card's own — a switch, say. Outside the header button,
+		 * A control of the card's own - a switch, say. Outside the header button,
 		 * because a button inside a button is not HTML: the parser closes the
 		 * first at the second, so the server's markup arrives already broken.
 		 */

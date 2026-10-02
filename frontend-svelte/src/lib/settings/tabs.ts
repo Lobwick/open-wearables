@@ -16,7 +16,7 @@ export type SettingsTab = {
 };
 
 /**
- * Each tab is a route of its own, so a tab loads only what it shows — the old
+ * Each tab is a route of its own, so a tab loads only what it shows - the old
  * dashboard mounted all seven at once and fetched for every one of them.
  * Written out rather than built from slugs: `resolve` checks the routes exist.
  */

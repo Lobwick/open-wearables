@@ -56,7 +56,7 @@
 					Daily ingest ≈ <strong class="font-medium text-muted-foreground"
 						>{formatBytes(dailyIngest(storage))}/day</strong
 					>
-					— the live table ({formatBytes(liveBytes(storage))}) over the {Math.max(
+					- the live table ({formatBytes(liveBytes(storage))}) over the {Math.max(
 						storage.live_data_span_days,
 						1
 					)} days its data covers.
@@ -68,7 +68,7 @@
 			{/if}
 			<p>
 				Live and archive tables only; the rest of the database is left out, since no policy here
-				changes it. An estimate — it moves with devices, sampling rates and schema changes.
+				changes it. An estimate - it moves with devices, sampling rates and schema changes.
 			</p>
 		</div>
 	</div>

@@ -1,6 +1,6 @@
 /**
  * The fields this app reads from backend `UserConnectionWithCapabilities`.
- * Deliberately not the whole schema — see AGENTS.md on porting types.
+ * Deliberately not the whole schema - see AGENTS.md on porting types.
  */
 export type Connection = {
 	id: string;

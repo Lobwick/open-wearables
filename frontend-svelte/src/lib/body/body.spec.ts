@@ -48,7 +48,7 @@ describe('composition', () => {
 		expect(shown).toEqual([
 			['Weight', '74.3 kg'],
 			['Height', '181 cm'],
-			['Body fat', '—'],
+			['Body fat', '-'],
 			['BMI', '22.7']
 		]);
 	});

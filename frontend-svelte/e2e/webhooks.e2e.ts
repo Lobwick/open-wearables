@@ -35,7 +35,7 @@ test('leaves the card alone when a control on it is clicked', async ({ page }) =
 	const toggle = card.getByRole('button', { name: /Production listener/ });
 
 	// The card opens on a click anywhere, so its own buttons have to be the
-	// exception — an edit that folded the row underneath the dialog would be one.
+	// exception - an edit that folded the row underneath the dialog would be one.
 	await card.getByRole('button', { name: 'Edit' }).click();
 	await expect(page.getByRole('dialog')).toContainText('Edit subscription');
 	await expect(toggle).toHaveAttribute('aria-expanded', 'false');
@@ -140,7 +140,7 @@ test('sends a test event, offering only what the subscription listens for', asyn
 	await expect(picker.locator('option', { hasText: 'connection.created' })).toHaveCount(0);
 
 	await card.getByRole('button', { name: 'Send test' }).click();
-	await expect(card.getByText(/^Sent —/)).toBeVisible();
+	await expect(card.getByText(/^Sent -/)).toBeVisible();
 });
 
 test('offers every event type where the subscription filters none', async ({ page }) => {
@@ -159,7 +159,7 @@ test('selects a whole family at once, without that being the group event', async
 	const family = page.getByRole('button', { name: /^Heart rate/ });
 	await family.click();
 
-	// The group event is its own choice — one event covering the category — so
+	// The group event is its own choice - one event covering the category - so
 	// "select all" is a separate control rather than the parent chip.
 	await page.getByRole('button', { name: 'Select all' }).click();
 	await expect(
@@ -187,7 +187,7 @@ test('keeps exactly the events that were ticked', async ({ page }) => {
 	await page.getByRole('button', { name: 'workout.created' }).click();
 	await page.getByRole('button', { name: 'Create subscription' }).click();
 
-	// Not "All events", which is what an empty filter means — and what a dropped
+	// Not "All events", which is what an empty filter means - and what a dropped
 	// selection would look like.
 	const card = page.getByRole('article').filter({ hasText: 'Picked one' });
 	await expect(card).toContainText('1 event');
@@ -209,7 +209,7 @@ test('steps through the deliveries and back again', async ({ page }) => {
 	await page.goto('/webhooks/ep_live/deliveries');
 
 	// Svix counts nothing, so the bar marks the position and never claims a last
-	// page — but it does step both ways.
+	// page - but it does step both ways.
 	const bar = page.getByRole('navigation', { name: 'Pagination' });
 	await expect(bar).toContainText('1–20');
 	await expect(bar).not.toContainText('of');
@@ -230,7 +230,7 @@ test('keeps the test-event picker inside its card, however long the names are', 
 	await page.setViewportSize({ width: 390, height: 844 });
 	await page.goto('/webhooks');
 
-	// The second subscription filters nothing, so its picker lists every type —
+	// The second subscription filters nothing, so its picker lists every type -
 	// including the longest name the catalogue carries. A `select` sizes itself
 	// to its widest option unless it is told not to.
 	const card = page.getByRole('article').nth(1);

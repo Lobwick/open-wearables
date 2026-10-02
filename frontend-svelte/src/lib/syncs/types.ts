@@ -8,7 +8,7 @@ export type SyncStatus =
 	| 'unfinished'
 	| 'stale';
 
-/** Mirrors backend `SyncRunRecord` — Postgres, unbounded in time, historical runs. */
+/** Mirrors backend `SyncRunRecord` - Postgres, unbounded in time, historical runs. */
 export type SyncRun = {
 	run_key: string;
 	user_id: string;
@@ -26,7 +26,7 @@ export type SyncRun = {
 	error: string | null;
 };
 
-/** Mirrors backend `SyncRunSummary` — Redis, last 24h, every scope. */
+/** Mirrors backend `SyncRunSummary` - Redis, last 24h, every scope. */
 export type SyncRunSummary = {
 	run_id: string;
 	user_id: string;

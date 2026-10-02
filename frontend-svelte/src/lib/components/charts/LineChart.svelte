@@ -29,12 +29,12 @@
 		/** The caller owns the clock: only it knows whose timezone to read in. */
 		formatTime: (at: number) => string;
 		label: string;
-		/** What a line's `type` means as a colour — a sensor, or a provider. */
+		/** What a line's `type` means as a colour - a sensor, or a provider. */
 		colourFor?: (type: string) => string;
 		format?: (value: number, unit: string) => string;
 		/**
 		 * One scale for every line instead of each on its own. Sensors share no
-		 * axis — a pulse and a cadence are not comparable heights — but readings of
+		 * axis - a pulse and a cadence are not comparable heights - but readings of
 		 * the same thing from two providers are exactly what has to be compared.
 		 */
 		shared?: boolean;
@@ -82,7 +82,7 @@
 	);
 
 	// A band is drawn on its own series' scale, so it is only honest while that
-	// line is on — and only where it overlaps what the line actually covers.
+	// line is on - and only where it overlaps what the line actually covers.
 	const owner = $derived(scaled.find((entry) => entry.type === zones?.type));
 	const bands = $derived.by(() => {
 		if (!owner || !zones) return [];

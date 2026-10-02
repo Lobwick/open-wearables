@@ -16,7 +16,7 @@ export type StorageEstimate = {
 	archive_index_bytes: number;
 	other_tables_bytes: number;
 	total_bytes: number;
-	/** From `pg_stat_user_tables.n_live_tup` — a planner statistic, not a count. */
+	/** From `pg_stat_user_tables.n_live_tup` - a planner statistic, not a count. */
 	live_row_count: number;
 	archive_row_count: number;
 	live_data_span_days: number;

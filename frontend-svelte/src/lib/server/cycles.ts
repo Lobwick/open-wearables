@@ -5,7 +5,7 @@ import type { CyclePage } from '$lib/cycles/types';
 
 /**
  * Always the whole history: this endpoint drops the upper bound of the window
- * on purpose — a cycle running now ends in the future, and filtering on
+ * on purpose - a cycle running now ends in the future, and filtering on
  * `end_datetime` would hide exactly the cycle a reader came for. A period
  * control would therefore narrow one end of the range and not the other.
  */

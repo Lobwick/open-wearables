@@ -50,11 +50,16 @@ export function totalsFromTimeline(timeline: DataTimeline): Record<string, numbe
 export function toRows(
 	timeline: DataTimeline,
 	window: { from: Date; to: Date } | null
-): { rows: Row[]; dates: string[]; max: number } {
+): { rows: Row[]; dates: string[]; max: number; from: number; to: number } {
 	const bounds = window ?? span(timeline.series, timeline.bucket);
-	if (!bounds) return { rows: [], dates: [], max: 0 };
+	if (!bounds) return { rows: [], dates: [], max: 0, from: 0, to: 0 };
 
 	const dates = grid(bounds.from, bounds.to, timeline.bucket, window !== null);
+	// What the cells cover, start of the first to end of the last: the axis's scale.
+	const from = dates.length ? Date.parse(`${dates[0]}T00:00:00Z`) : 0;
+	const to = dates.length
+		? step(new Date(`${dates[dates.length - 1]}T00:00:00Z`), timeline.bucket).getTime()
+		: 0;
 
 	const rows = timeline.series.map((entry) => {
 		const counts = new Map(entry.buckets);
@@ -65,5 +70,5 @@ export function toRows(
 	const max = Math.max(0, ...rows.flatMap((row) => row.cells.map((cell) => cell.count)));
 	rows.sort((a, b) => b.total - a.total);
 
-	return { rows, dates, max };
+	return { rows, dates, max, from, to };
 }

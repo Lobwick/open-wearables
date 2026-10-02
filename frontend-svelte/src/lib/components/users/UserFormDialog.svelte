@@ -17,7 +17,7 @@
 	const submit = createDialogSubmit(() => (open = false));
 
 	// The dialog stays mounted between openings, and enhance resets the form on
-	// success — which clears the DOM but leaves the props unchanged, so Svelte
+	// success - which clears the DOM but leaves the props unchanged, so Svelte
 	// has nothing to re-apply. Local state re-seeded on open avoids both.
 	let firstName = $state('');
 	let lastName = $state('');

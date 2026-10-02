@@ -33,7 +33,7 @@
 			<EmptyState
 				icon={HardDrive}
 				title="Could not read the storage estimate"
-				description="The backend did not answer in time. On a large database the estimate scans the series table, which can take a while — try again in a moment."
+				description="The backend did not answer in time. On a large database the estimate scans the series table, which can take a while - try again in a moment."
 			/>
 		</Card>
 	{/await}

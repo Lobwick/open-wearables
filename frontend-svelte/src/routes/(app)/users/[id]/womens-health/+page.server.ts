@@ -8,7 +8,7 @@ import type { Actions, PageServerLoad } from './$types';
 
 /**
  * No period and no provider control. This endpoint drops the upper bound of the
- * window on purpose — a cycle running now ends in the future — so a range would
+ * window on purpose - a cycle running now ends in the future - so a range would
  * narrow one end of it and silently not the other.
  */
 export const load: PageServerLoad = async ({ params, url, locals }) => {

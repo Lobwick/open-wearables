@@ -18,7 +18,7 @@
 		/** In the order they should read; `shade` overrides the default ramp. */
 		rows: { label: string; seconds: number; shade?: string }[];
 		unit?: string;
-		/** A control sharing the heading's line — a kind switch, where there is one. */
+		/** A control sharing the heading's line - a kind switch, where there is one. */
 		children?: Snippet;
 	} = $props();
 
@@ -27,7 +27,7 @@
 	const longest = $derived(Math.max(...spent.map((row) => row.seconds), 0));
 
 	// First row palest: the ramp reads as intensity, which is what both callers
-	// mean — effort climbing through zones, sleep deepening through stages.
+	// mean - effort climbing through zones, sleep deepening through stages.
 	const shade = (row: { shade?: string }, index: number) =>
 		row.shade ?? HEAT_STEPS[Math.min(index + 1, HEAT_STEPS.length - 1)];
 

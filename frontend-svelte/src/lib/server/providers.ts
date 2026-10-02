@@ -1,5 +1,5 @@
 import { apiGet } from './api';
-import { cached } from './cache';
+import { cached, forget } from './cache';
 import { byName } from '$lib/providers/labels';
 
 export type Provider = {
@@ -12,19 +12,25 @@ export type Provider = {
 };
 
 const TTL_SECONDS = 60;
+const KEY = 'ow:providers:all';
+
+/**
+ * Every provider, enabled or not, cached once; the narrower lists are cut from
+ * it. A connection can outlive its provider being switched off. Public, so the
+ * pairing page needs no session.
+ */
+export const fetchAllProviders = async (accessToken?: string) =>
+	byName(
+		await cached(KEY, TTL_SECONDS, () => apiGet<Provider[]>('/api/v1/oauth/providers', accessToken))
+	);
+
+/** After a save in Settings, so a provider switched off leaves every list at once. */
+export const forgetProviders = () => forget(KEY);
 
 /** Enabled only: a filter chip for a provider nobody can connect is noise. */
 export const fetchProviders = async (accessToken: string) =>
-	byName(
-		await cached('ow:providers:enabled', TTL_SECONDS, () =>
-			apiGet<Provider[]>('/api/v1/oauth/providers?enabled_only=true', accessToken)
-		)
-	);
+	(await fetchAllProviders(accessToken)).filter((provider) => provider.is_enabled);
 
-/** Public: the pairing page has no session. */
+/** What the pairing page offers: enabled, and reached through a cloud OAuth flow. */
 export const fetchCloudProviders = async () =>
-	byName(
-		await cached('ow:providers:cloud', TTL_SECONDS, () =>
-			apiGet<Provider[]>('/api/v1/oauth/providers?enabled_only=true&cloud_only=true')
-		)
-	);
+	(await fetchAllProviders()).filter((provider) => provider.is_enabled && provider.has_cloud_api);

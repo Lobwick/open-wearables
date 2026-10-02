@@ -107,7 +107,7 @@ export type MockConnection = {
 
 /**
  * Mirrors UserConnectionWithCapabilities, with each provider's real
- * capabilities — the backend rejects webhook_stream together with webhook_ping,
+ * capabilities - the backend rejects webhook_stream together with webhook_ping,
  * so a fixture must not set both. Three cards: one webhook-only provider (no
  * Sync now), one pull provider (both buttons), one expired (no buttons).
  */
@@ -494,7 +494,7 @@ export const resetWorkouts = () => {
 };
 
 /**
- * Base64 of the record it points at, and `prev_`-prefixed going backwards —
+ * Base64 of the record it points at, and `prev_`-prefixed going backwards -
  * the same opaque shape `app/utils/pagination.py` emits. A counter would have
  * hidden any mangling of the real thing on its way through the URL.
  */
@@ -527,7 +527,7 @@ export const makeWorkouts = (query: URLSearchParams) => {
 
 	// Cursor handling mirrors event_record_service.get_workouts line for line,
 	// quirk included: going backwards, `has_more` means "records exist before this
-	// page" and the same flag gates next_cursor — so page one reached by a prev_
+	// page" and the same flag gates next_cursor - so page one reached by a prev_
 	// cursor comes back with neither cursor and strands the reader.
 	const offset = backwards ? Math.max(found - limit, 0) : found + 1;
 	const hasMore = backwards ? found > limit : offset + limit < matching.length;
@@ -582,7 +582,7 @@ export const makeTimeseries = (query: URLSearchParams) => {
 		const fraction = (at - start) / Math.max(end - start, 1);
 
 		// A whole day asks for movement rather than a session's sensors, and the
-		// daily totals ride the same endpoint — the chart has to drop those.
+		// daily totals ride the same endpoint - the chart has to drop those.
 		if (types.includes('steps')) {
 			data.push({
 				timestamp: new Date(at).toISOString(),
@@ -642,7 +642,7 @@ export const makeTimeseries = (query: URLSearchParams) => {
 };
 
 /**
- * Oura reports stage intervals, Suunto only the per-stage minutes — the split
+ * Oura reports stage intervals, Suunto only the per-stage minutes - the split
  * the cards have to render differently. Naps every fifth night.
  */
 const SLEEP_SHAPES = [
@@ -1030,7 +1030,7 @@ const buildScores = () => {
 
 const SCORES = buildScores();
 
-/** Offset paging with a real count — the one list endpoint that has both. */
+/** Offset paging with a real count - the one list endpoint that has both. */
 export const makeScores = (query: URLSearchParams) => {
 	const bound = (raw: string | null, fallback: number) =>
 		new Date(raw && raw !== '0' ? raw : fallback).getTime();
@@ -1103,7 +1103,7 @@ const buildCycles = () => {
 	});
 
 	// The cycle after the newest: a forecast, so no day in it and no measured
-	// length — only the one the provider expects.
+	// length - only the one the provider expects.
 	const next = {
 		...cycles[0],
 		id: 'cycle-next',
@@ -1173,7 +1173,7 @@ export const makeCycles = (query: URLSearchParams) => {
 export const makeSystemInfo = () => ({
 	total_users: { count: 1247 },
 	active_conn: { count: 902 },
-	// Both approximate in the real thing — a cached count with a planner estimate
+	// Both approximate in the real thing - a cached count with a planner estimate
 	// behind it, and the archive count straight from planner statistics.
 	data_points: { count: 1_452_310, archived: 318_004 },
 	event_records: { count: 20_418, workouts: 8432, sleep: 11_766, menstrual_cycles: 220 },

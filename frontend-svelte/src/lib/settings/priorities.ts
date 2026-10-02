@@ -17,7 +17,7 @@ export const reordered = <T>(items: T[], original: T[], key: (item: T) => string
 	items.some((item, index) => key(item) !== key(original[index]));
 
 /**
- * Position in the list is the priority, counted from 1 — the API stores a
+ * Position in the list is the priority, counted from 1 - the API stores a
  * number per row, and sending the index keeps the two from drifting apart.
  */
 export const ranked = <T, K extends string>(items: T[], key: K, of: (item: T) => string) =>

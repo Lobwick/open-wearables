@@ -64,7 +64,7 @@ test('collapses a provider that scores all day into one card and a curve', async
 	const card = page.getByRole('article').first();
 	await expect(card.getByText(/\d+–\d+ over \d+ readings/)).toBeVisible();
 
-	// Opened, the day's own curve — drawn from readings the page already has, so
+	// Opened, the day's own curve - drawn from readings the page already has, so
 	// it costs no request.
 	await card.getByRole('button').first().click();
 	await expect(card.getByLabel('Recovery readings across the day')).toBeVisible();
@@ -92,7 +92,7 @@ test('pages the whole history under All time, rather than snapping to a preset',
 	await page.goto(SCORES);
 
 	// Paging by day needs a first day to count back from, and this endpoint only
-	// answers newest-first — so All time finds its own start from the oldest
+	// answers newest-first - so All time finds its own start from the oldest
 	// score rather than being quietly replaced by the ninety-day range.
 	const period = page.getByRole('group', { name: 'Period' });
 	await expect(period.getByRole('link', { name: 'All time' })).toHaveAttribute(

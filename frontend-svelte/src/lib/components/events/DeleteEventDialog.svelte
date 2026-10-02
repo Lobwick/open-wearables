@@ -28,6 +28,6 @@
 	destructive
 	fields={{ [field]: id }}
 >
-	This removes the {noun} and everything stored with it. It cannot be undone — though a later sync will
+	This removes the {noun} and everything stored with it. It cannot be undone - though a later sync will
 	bring it back if the provider still has it.
 </ConfirmDialog>

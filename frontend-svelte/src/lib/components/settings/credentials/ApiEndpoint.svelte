@@ -4,13 +4,13 @@
 	import { MICRO, MONO } from '$lib/components/ui/typography';
 	import { publicApiUrl } from '$lib/config/public-api';
 
-	// VITE_API_URL — what a browser or a phone dials, never the server's own hop.
+	// VITE_API_URL - what a browser or a phone dials, never the server's own hop.
 	const url = publicApiUrl();
 
 	// A key is worth nothing until you know which header it goes in, and the old
 	// dashboard left that to the docs.
 	const facts = $derived([
-		{ label: 'API base URL', value: url || 'Not configured — set VITE_API_URL here.', copy: url },
+		{ label: 'API base URL', value: url || 'Not configured - set VITE_API_URL here.', copy: url },
 		{
 			label: 'Send a key as',
 			value: 'Authorization: Bearer <your API key>',

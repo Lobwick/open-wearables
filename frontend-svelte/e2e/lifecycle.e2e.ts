@@ -40,7 +40,7 @@ test('draws the draft, not what is saved, so a change can be seen before it is m
 	await expect(projection.getByText('O(n) · linear')).toBeVisible();
 
 	await page.getByRole('switch', { name: 'Delete old data' }).click();
-	// Nothing saved yet — the class and the curve already follow the switch.
+	// Nothing saved yet - the class and the curve already follow the switch.
 	await expect(projection.getByText('O(1) · bounded')).toBeVisible();
 	await expect(page.getByText('Lifecycle policy changed')).toBeVisible();
 });
@@ -86,7 +86,7 @@ test('will not run a policy that has not been saved', async ({ page }) => {
 	await expect(run).toBeDisabled();
 	await expect(page.getByText('Nothing to run')).toBeVisible();
 
-	// The old dashboard saved on the way and then ran — with deletion on, that
+	// The old dashboard saved on the way and then ran - with deletion on, that
 	// deleted by a rule nobody had confirmed.
 	await page.getByRole('switch', { name: 'Delete old data' }).click();
 	await expect(run).toBeDisabled();
@@ -127,7 +127,7 @@ test('does not scan again to show what a save just returned', async ({ page, req
 	await page.getByRole('button', { name: 'Save changes' }).click();
 	await expect(page.getByText('Lifecycle policy changed')).toHaveCount(0);
 
-	// The GET that opened the page and the PUT that saved — the PUT answers with
+	// The GET that opened the page and the PUT that saved - the PUT answers with
 	// fresh sizes, so the reload after it is served from that.
 	expect(await scans(request)).toBe(2);
 });

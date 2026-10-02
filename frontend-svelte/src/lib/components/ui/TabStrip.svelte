@@ -63,7 +63,7 @@
 						>
 							{#if tab.icon}
 								<!-- The word costs a tab's width on a phone, so below sm the mark
-								     rides the icon instead — the same trade the bottom bar makes. -->
+								     rides the icon instead - the same trade the bottom bar makes. -->
 								<span class="relative {tab.beta ? 'mr-1 sm:mr-0' : ''}">
 									<tab.icon size={15} aria-hidden="true" />
 									{#if tab.beta}<BetaMark class="sm:hidden" />{/if}

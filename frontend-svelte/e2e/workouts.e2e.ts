@@ -21,7 +21,7 @@ test('lists workouts newest first, with a dash where the provider sent nothing',
 	// Strength training has no distance and Oura reports no workout heart rate.
 	// A dash is the honest answer; a zero would be a measurement.
 	const strength = cards.filter({ hasText: 'Strength training' }).first();
-	await expect(strength.getByText('—')).toHaveCount(1);
+	await expect(strength.getByText('-')).toHaveCount(1);
 	await expect(strength.getByText('240 kcal')).toBeVisible();
 
 	// Same bar as the users list, minus the numbered links a cursor cannot offer.
@@ -197,7 +197,7 @@ test('deletes a workout after confirming, and the list agrees afterwards', async
 	await page.getByRole('button', { name: 'Delete', exact: true }).click();
 
 	// The count comes from the API, so a stale one would mean the page never
-	// reloaded — which is the whole risk with an enhanced form.
+	// reloaded - which is the whole risk with an enhanced form.
 	await expect(pager).toContainText('of 22');
 	await expect(page.getByRole('article').first().getByRole('heading')).toContainText('Cycling');
 });
@@ -258,7 +258,7 @@ test('switches which zones the strip and the chart bands show', async ({ page })
 
 test('shows the cards without waiting for the figures above them', async ({ page, request }) => {
 	// Summing the period reads every record in it, and there is no aggregate
-	// endpoint to ask instead — so it is its own request and the list must not
+	// endpoint to ask instead - so it is its own request and the list must not
 	// queue behind it.
 	await request.post('http://localhost:8787/__slow/workouts-summary');
 	await page.goto(WORKOUTS);

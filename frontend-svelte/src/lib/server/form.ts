@@ -32,7 +32,7 @@ export async function attempt<
 	action: string,
 	context: T,
 	work: () => Promise<R>,
-	/** What the page needs from the result — a one-time secret, mostly. */
+	/** What the page needs from the result - a one-time secret, mostly. */
 	onSuccess?: (result: R) => E
 ) {
 	try {

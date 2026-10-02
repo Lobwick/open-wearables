@@ -186,8 +186,8 @@ test.describe('mobile', () => {
 
 // A control inside a control is not HTML: the parser closes a <button> at the
 // next <button>, so the server's markup arrives broken before hydration starts.
-// Nothing else here catches it — svelte-check ignores nesting and the build
-// strips Svelte's dev warning — and a switch in an accordion header shipped
+// Nothing else here catches it - svelte-check ignores nesting and the build
+// strips Svelte's dev warning - and a switch in an accordion header shipped
 // that way, where it quietly broke the preset the card was showing.
 const CONTROLS = 'a[href], button, input, select, textarea';
 const NESTED_ROUTES = [

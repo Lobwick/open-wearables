@@ -15,7 +15,7 @@
 		icon: Component;
 		label: string;
 		value: string;
-		/** A word about the figure itself — that it is an estimate, say. */
+		/** A word about the figure itself - that it is an estimate, say. */
 		note?: string;
 		/**
 		 * Always rendered, zero included: "0 archived" says the archive is empty,

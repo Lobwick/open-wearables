@@ -15,7 +15,7 @@ import type { Component } from 'svelte';
  * revisited every time the backend adds a sport. Anything unmatched gets the
  * generic mark, which is a fair answer for `other` too.
  *
- * Order decides ties — `mountain_biking` is cycling, not mountaineering.
+ * Order decides ties - `mountain_biking` is cycling, not mountaineering.
  */
 const KINDS: [RegExp, Component][] = [
 	[/cycl|bik/, Bike],

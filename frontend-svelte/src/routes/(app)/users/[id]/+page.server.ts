@@ -7,7 +7,7 @@ import {
 } from '$lib/server/connections';
 import { attempt } from '$lib/server/form';
 import { requireToken } from '$lib/server/guard';
-import { fetchProviders } from '$lib/server/providers';
+import { fetchAllProviders } from '$lib/server/providers';
 import { fetchRecentRuns, fetchSyncHistory } from '$lib/server/syncs';
 import { userActions } from '$lib/server/user-actions';
 import { RECENT_WINDOW } from '$lib/syncs/recent';
@@ -32,7 +32,8 @@ export const load: PageServerLoad = async ({ params, locals }) => {
 		fetchConnections(params.id, accessToken),
 		optional(fetchSyncHistory(params.id, accessToken), []),
 		optional(fetchRecentRuns(params.id, accessToken, RECENT_WINDOW), []),
-		fetchProviders(accessToken)
+		// All of them: a connection can outlive its provider being switched off.
+		fetchAllProviders(accessToken)
 	]);
 
 	return { connections, backfills, recentRuns, providers };

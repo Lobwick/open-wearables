@@ -59,7 +59,7 @@ function reduceProvider(provider: string, readings: HealthScore[]): ProviderRead
 
 /**
  * A card is a day, and inside it a row per measure. A provider that sampled all
- * day collapses to that day's mean — which is read off the number of readings,
+ * day collapses to that day's mean - which is read off the number of readings,
  * never off a list of providers known to stream.
  */
 export function groupByDay(scores: HealthScore[]): DayScores[] {

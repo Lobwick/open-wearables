@@ -8,6 +8,7 @@ import {
 	liveDelivery
 } from './delivery';
 import { parseScopes, scopeLabel } from './scopes';
+import { viaSdk } from '$lib/providers/labels';
 import type { Connection } from './types';
 
 const connection = (overrides: Partial<Connection>): Connection =>
@@ -50,6 +51,17 @@ describe('historyDelivery', () => {
 			'Pushed by the provider on demand'
 		);
 		expect(historyDelivery(connection({}))).toBe('Not supported');
+	});
+
+	it('takes a provider with no cloud API to be fed by the SDK', () => {
+		const providers = [
+			{ provider: 'apple', has_cloud_api: false },
+			{ provider: 'oura', has_cloud_api: true }
+		];
+		expect(viaSdk(providers, 'apple')).toBe(true);
+		expect(viaSdk(providers, 'oura')).toBe(false);
+		// A provider the list does not have is not assumed to be one.
+		expect(viaSdk(providers, 'garmin')).toBe(false);
 	});
 
 	it('only notes a limit when the provider imposes one', () => {

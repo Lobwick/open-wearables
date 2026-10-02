@@ -10,12 +10,15 @@
 	let {
 		connection,
 		label,
+		viaSdk = false,
 		backfills,
 		onrevoke,
 		onpurge
 	}: {
 		connection: Connection;
 		label: string;
+		/** Fed by the mobile SDK, so the app does the syncing. */
+		viaSdk?: boolean;
 		backfills: SyncRun[];
 		onrevoke: () => void;
 		onpurge: () => void;
@@ -27,7 +30,7 @@
 <article class="flex flex-col gap-3 rounded-xl border border-border bg-background p-4">
 	<ConnectionHeader {connection} {label} {onrevoke} {onpurge} />
 
-	<ConnectionRoutes {connection} />
+	<ConnectionRoutes {connection} {viaSdk} />
 
 	{#if shared > 0}
 		<p class="text-xs text-muted-foreground">
@@ -55,7 +58,7 @@
 		<div class="mt-2.5">
 			{#if backfills.length === 0}
 				<p class="text-xs text-muted-foreground">
-					No stored backfill for this provider. Live syncs are not kept here — see recent activity
+					No stored backfill for this provider. Live syncs are not kept here - see recent activity
 					below.
 				</p>
 			{:else}

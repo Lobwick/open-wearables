@@ -13,7 +13,7 @@
 		icon: Component;
 		name: string;
 		created: string;
-		/** The public half — a key prefix, an app id. */
+		/** The public half - a key prefix, an app id. */
 		identifier: Snippet;
 		actions: Snippet;
 	} = $props();

@@ -12,7 +12,7 @@
 		row
 	}: {
 		items: T[];
-		/** Names the list for assistive tech — there are two on the page. */
+		/** Names the list for assistive tech - there are two on the page. */
 		label: string;
 		keyOf: (item: T) => string;
 		row: Snippet<[T]>;
@@ -25,9 +25,13 @@
 	 * does not fire on touch at all, and this is one list on one page.
 	 *
 	 * The dragged row follows the finger, and crossing half a row swaps it with
-	 * its neighbour there and then — so the gap is always where you are pointing.
+	 * its neighbour there and then - so the gap is always where you are pointing.
 	 * `startY` moves with each swap, which is what keeps the row under the finger
 	 * instead of drifting a row further every time.
+	 *
+	 * Move and release are heard on the window, not captured on the handle: each
+	 * swap moves rows in the DOM, and moving the captured element drops the
+	 * capture, so the row froze until the next click.
 	 */
 	let dragging = $state<number | null>(null);
 	let offset = $state(0);
@@ -36,7 +40,6 @@
 
 	function grab(event: PointerEvent, index: number) {
 		const handle = event.currentTarget as HTMLElement;
-		handle.setPointerCapture(event.pointerId);
 		rowHeight = handle.closest('li')!.getBoundingClientRect().height;
 		startY = event.clientY;
 		offset = 0;
@@ -65,6 +68,7 @@
 	}
 
 	function drop() {
+		if (dragging === null) return;
 		dragging = null;
 		offset = 0;
 	}
@@ -72,6 +76,8 @@
 	const ARROW =
 		'grid h-5 w-7 place-items-center rounded text-muted-foreground transition-colors hover:bg-surface-muted hover:text-foreground disabled:pointer-events-none disabled:opacity-20';
 </script>
+
+<svelte:window onpointermove={drag} onpointerup={drop} onpointercancel={drop} />
 
 <ol aria-label={label} class="divide-y divide-border {dragging !== null ? 'select-none' : ''}">
 	{#each items as item, index (keyOf(item))}
@@ -89,9 +95,6 @@
 			<span
 				aria-hidden="true"
 				onpointerdown={(event) => grab(event, index)}
-				onpointermove={drag}
-				onpointerup={drop}
-				onpointercancel={drop}
 				class="grid w-5 shrink-0 cursor-grab touch-none place-items-center self-stretch
 					text-muted-foreground/50 transition-colors hover:text-foreground active:cursor-grabbing"
 			>

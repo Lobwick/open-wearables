@@ -1,6 +1,6 @@
 import type { SourceMetadata } from '$lib/events/types';
 
-/** Mirrors backend `IntensityMinutes` — minutes in each heart-rate band. */
+/** Mirrors backend `IntensityMinutes` - minutes in each heart-rate band. */
 export type IntensityMinutes = {
 	light: number | null;
 	moderate: number | null;
@@ -17,7 +17,7 @@ export type HeartRateStats = {
 /**
  * Mirrors backend `ActivitySummary`: one day, aggregated from the time series.
  * The endpoint already keeps the highest-priority source per date, so there is
- * one row per day and no id — a day is not a record anyone can delete.
+ * one row per day and no id - a day is not a record anyone can delete.
  */
 export type ActivityDay = {
 	date: string;

@@ -13,7 +13,7 @@
 		parts: Part[];
 		/** Dims the rest, so the bar still says how big the chosen slice is. */
 		selected?: string;
-		/** What to put beside each label — its share of the whole by default. */
+		/** What to put beside each label - its share of the whole by default. */
 		format?: (part: Part, total: number) => string;
 	} = $props();
 

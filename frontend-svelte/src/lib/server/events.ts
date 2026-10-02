@@ -24,7 +24,7 @@ export function tomorrow(): Date {
 
 /**
  * Timestamps, never bare dates: the backend widens a date-only `end_date` to the
- * next midnight, and `periodWindow` has already done that — sending a date would
+ * next midnight, and `periodWindow` has already done that - sending a date would
  * widen an already-widened bound and stretch every window by a day.
  */
 export function eventWindow(period: Period, limit: number): URLSearchParams {

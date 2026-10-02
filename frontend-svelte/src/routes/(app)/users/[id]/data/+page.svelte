@@ -51,7 +51,7 @@
 			{#if overTime && data.byProvider.series.length > 0}
 				<div class="flex flex-col gap-2 border-t border-border pt-4">
 					<span class={CAPTION}>
-						Data points per {data.byProvider.bucket} — workouts and sleep are counted above, not here
+						Data points per {data.byProvider.bucket} - workouts and sleep are counted above, not here
 					</span>
 					<Heatmap timeline={data.byProvider} period={data.period} labelFor={label} />
 				</div>

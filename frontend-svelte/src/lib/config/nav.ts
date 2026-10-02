@@ -23,7 +23,7 @@ export type NavItem = {
 
 /**
  * The one place navigation is defined; sidebar, bottom bar and More sheet all
- * derive from it. At most four `primary` items — the fifth bottom-bar slot is
+ * derive from it. At most four `primary` items - the fifth bottom-bar slot is
  * "More", and a unit test enforces it.
  */
 export const NAV_ITEMS: NavItem[] = [
@@ -51,7 +51,7 @@ export function isNavItemActive(item: NavItem, pathname: string): boolean {
 	return isWithin(pathname, item.href);
 }
 
-/** Label of the destination a path belongs to — drives the header and <title>. */
+/** Label of the destination a path belongs to - drives the header and <title>. */
 export function navLabelFor(pathname: string): string | undefined {
 	return NAV_ITEMS.find((item) => isNavItemActive(item, pathname))?.label;
 }

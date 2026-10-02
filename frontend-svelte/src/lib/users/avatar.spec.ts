@@ -16,7 +16,7 @@ describe('initials', () => {
 		[{ first_name: 'Zofia' }, 'Z'],
 		[{ last_name: 'Kowalska' }, 'K'],
 		[{ email: 'ola@example.com' }, 'OL'],
-		[{}, '—']
+		[{}, '-']
 	])('renders %o as %s', (over, expected) => {
 		expect(initials(user(over))).toBe(expected);
 	});

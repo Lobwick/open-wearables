@@ -13,7 +13,7 @@
 
 	// Writable derived: the draft starts as what the server holds and re-derives
 	// when that changes, so a save leaves it agreeing rather than holding stale
-	// switches — while a flipped switch still assigns straight to it.
+	// switches - while a flipped switch still assigns straight to it.
 	let draft = $derived(enabledMap(data.providers));
 
 	const changed = $derived(flipped(data.providers, draft));

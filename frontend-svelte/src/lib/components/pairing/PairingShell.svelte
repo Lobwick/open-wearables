@@ -19,7 +19,7 @@
 
 		<p class="flex items-center gap-2 text-xs text-muted-foreground">
 			<ShieldCheck size={14} aria-hidden="true" />
-			You sign in with the provider — we never see your password.
+			You sign in with the provider - we never see your password.
 		</p>
 	</div>
 </main>

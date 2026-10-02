@@ -12,7 +12,7 @@
 		icon: Component;
 		/** The whole accessible name: there is no text beside the glyph. */
 		label: string;
-		/** Quiet until the pointer is on it — deleting is a thing you can do, not
+		/** Quiet until the pointer is on it - deleting is a thing you can do, not
 		 *  a thing to be invited to do. */
 		danger?: boolean;
 	} = $props();

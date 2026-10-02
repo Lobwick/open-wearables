@@ -23,7 +23,7 @@ test('shows the stored record and the connection state together', async ({ page 
 	await expect(garmin.getByText('Active')).toBeVisible();
 	await expect(garmin.getByText('Pushed by the provider', { exact: true })).toBeVisible();
 
-	// Where a control exists, the route moves into its hint — reachable by tap,
+	// Where a control exists, the route moves into its hint - reachable by tap,
 	// because hover never fires on a phone.
 	await garmin.getByRole('button', { name: 'Historical backfill details' }).click();
 	await expect(garmin.getByRole('tooltip').first()).toContainText(
@@ -55,7 +55,7 @@ test('offers only the sync actions a connection can actually perform', async ({ 
 	await page.goto(`/users/${CONNECTED}`);
 
 	// Garmin is webhook-driven with a 30-day cap: a backfill is possible, forcing
-	// a live pull is not — there is nothing to pull.
+	// a live pull is not - there is nothing to pull.
 	const garmin = page.getByRole('article').filter({ hasText: 'Garmin' });
 	await expect(garmin.getByRole('button', { name: 'Sync history' })).toBeVisible();
 	await expect(garmin.getByRole('button', { name: 'Sync now' })).toHaveCount(0);
@@ -67,7 +67,7 @@ test('offers only the sync actions a connection can actually perform', async ({ 
 	await expect(oura.getByRole('button', { name: 'Sync now' })).toBeVisible();
 
 	// Garmin's backfill ignores the window, so the only truthful option is its
-	// cap — the control is still there, ready for the day that changes.
+	// cap - the control is still there, ready for the day that changes.
 	await expect(garmin.getByLabel('History range')).toHaveValue('30');
 	await expect(garmin.getByLabel('History range').locator('option')).toHaveCount(1);
 

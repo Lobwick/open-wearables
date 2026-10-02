@@ -8,7 +8,7 @@ export type Totals = Pick<
 
 /**
  * Totals as one provider sees them. Absent from `by_provider` means it
- * delivered nothing in the period, so zeroes — not everyone's totals.
+ * delivered nothing in the period, so zeroes - not everyone's totals.
  */
 export function narrowToProvider(summary: DataSummary, provider: string): Totals {
 	const only = summary.by_provider.find((entry) => entry.provider === provider);

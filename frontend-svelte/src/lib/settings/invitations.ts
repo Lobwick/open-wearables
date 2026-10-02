@@ -16,7 +16,7 @@ export const expired = (invitation: Invitation, now = Date.now()): boolean =>
 /**
  * What is still worth acting on. An accepted invitation is a team member and
  * shows up in that list instead; a lapsed one is noise. A failed send stays,
- * because that one needs a human — the link can still be copied out by hand.
+ * because that one needs a human - the link can still be copied out by hand.
  */
 export const outstanding = (invitations: Invitation[], now = Date.now()): Invitation[] =>
 	invitations.filter((invitation) => {

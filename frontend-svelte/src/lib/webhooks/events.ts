@@ -51,7 +51,7 @@ export type EventSummary = {
 	label: string;
 	/** Nothing in the group is left out: its group event, or every event of a family. */
 	whole: boolean;
-	/** The group event itself, where it is in the filter — one event for the lot. */
+	/** The group event itself, where it is in the filter - one event for the lot. */
 	groupEvent: EventType | null;
 	/** The chosen events, in the fewest words that still tell them apart. */
 	items: { label: string; name: string; description: string }[];

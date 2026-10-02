@@ -1,6 +1,6 @@
 /**
  * Data a component fetches for itself, because the page load has no business
- * waiting for it — a chart nobody expanded, figures nobody has scrolled to.
+ * waiting for it - a chart nobody expanded, figures nobody has scrolled to.
  *
  * The URL is a function so the caller's reactive reads happen inside the effect:
  * pass the string and it is read once, at setup, and never refetched.

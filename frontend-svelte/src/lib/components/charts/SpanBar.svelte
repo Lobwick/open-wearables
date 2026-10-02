@@ -6,7 +6,7 @@
 		to,
 		marker = null
 	}: {
-		/** Inclusive whole units — a span from 1 to 5 covers five of them. */
+		/** Inclusive whole units - a span from 1 to 5 covers five of them. */
 		spans: Span[];
 		/** The scale, shared by every bar on a page so their widths compare. */
 		to: number;

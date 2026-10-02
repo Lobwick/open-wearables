@@ -12,7 +12,7 @@ export type Layer = keyof typeof LAYERS;
 
 /**
  * One shape for every layer of the matrix. The response splits them by the table
- * they land in, which is a backend concern — to a reader they are all "a thing a
+ * they land in, which is a backend concern - to a reader they are all "a thing a
  * provider can send".
  */
 export type Capability = {

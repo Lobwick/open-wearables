@@ -1,8 +1,8 @@
 export type Point = { at: number; value: number };
 
 /**
- * One drawn line. `type` is the key a palette resolves to a colour — a series
- * type on a sensor chart, a provider on a score chart — and `label` is what the
+ * One drawn line. `type` is the key a palette resolves to a colour - a series
+ * type on a sensor chart, a provider on a score chart - and `label` is what the
  * legend calls it.
  */
 export type Line = { type: string; label: string; unit: string; points: Point[] };

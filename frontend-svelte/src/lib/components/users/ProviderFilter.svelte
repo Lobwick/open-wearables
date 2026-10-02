@@ -13,7 +13,7 @@
 
 	let open = $state(false);
 	// Selection is local until applied, so several providers can be picked in one
-	// visit — and one navigation, not one per chip.
+	// visit - and one navigation, not one per chip.
 	let draft = $state<string[]>([]);
 
 	function show() {

@@ -1,7 +1,7 @@
 import type { SubmitFunction } from '@sveltejs/kit';
 
 /**
- * Shared submit behaviour: track submission, and by default never reset —
+ * Shared submit behaviour: track submission, and by default never reset -
  * fields are bound to local state, and a failed submit must keep what was
  * typed. `reset` is for the one form where keeping it would be wrong.
  */

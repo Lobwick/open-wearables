@@ -4,7 +4,7 @@ export const sumOf = <T>(items: T[], pick: (item: T) => number | null) =>
 
 /**
  * No list endpoint has an aggregate to ask, so the figures are summed from the
- * records — and the API's own `has_more` is what says it held some back. A count
+ * records - and the API's own `has_more` is what says it held some back. A count
  * comparison misses it entirely on the endpoints that return no count at all.
  */
 export const isPartial = (hasMore: boolean) => hasMore;

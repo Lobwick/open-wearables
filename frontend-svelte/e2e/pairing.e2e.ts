@@ -27,10 +27,17 @@ test('walks the provider round trip and names what connected', async ({ page }) 
 
 test('reports a provider that cannot be reached instead of a blank page', async ({ page }) => {
 	await page.goto(PAIR);
-	await page.getByRole('button', { name: /Whoop/ }).click();
+	await page.getByRole('button', { name: /Suunto/ }).click();
 
 	await expect(page.getByRole('alert')).toContainText('Provider credentials are not configured');
 	await expect(page.getByRole('button', { name: /Garmin/ })).toBeVisible();
+});
+
+// Disabled in Settings, so a user cannot be sent to it at all.
+test('offers only the providers that are switched on', async ({ page }) => {
+	await page.goto(PAIR);
+	await expect(page.getByRole('button', { name: /Garmin/ })).toBeVisible();
+	await expect(page.getByRole('button', { name: /Whoop/ })).toHaveCount(0);
 });
 
 test('carries a return link through the provider, and only if it is a web address', async ({

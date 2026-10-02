@@ -1,5 +1,6 @@
 import { attempt, field, jsonField } from '$lib/server/form';
 import { requireToken } from '$lib/server/guard';
+import { forgetProviders } from '$lib/server/providers';
 import { listProviderSettings, saveProviderSettings, setLiveSyncMode } from '$lib/server/settings';
 import type { Actions, PageServerLoad } from './$types';
 
@@ -19,16 +20,22 @@ export const actions: Actions = {
 		const accessToken = await requireToken(locals);
 		const providers = jsonField<Record<string, boolean>>(await request.formData(), 'providers', {});
 
-		return attempt('save', {}, () => saveProviderSettings(providers, accessToken));
+		return attempt('save', {}, async () => {
+			await saveProviderSettings(providers, accessToken);
+			await forgetProviders();
+		});
 	},
 
-	/** How one provider reports new data — its own setting, saved on the click. */
+	/** How one provider reports new data - its own setting, saved on the click. */
 	liveSync: async ({ request, locals }) => {
 		const accessToken = await requireToken(locals);
 		const form = await request.formData();
 		const provider = field(form, 'provider');
 		const mode = field(form, 'mode');
 
-		return attempt('liveSync', { provider }, () => setLiveSyncMode(provider, mode, accessToken));
+		return attempt('liveSync', { provider }, async () => {
+			await setLiveSyncMode(provider, mode, accessToken);
+			await forgetProviders();
+		});
 	}
 };
