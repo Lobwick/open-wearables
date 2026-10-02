@@ -162,6 +162,8 @@ The defaults in `.env.example` are development values. Override at least these f
 
 `VITE_API_URL` is a frontend variable and is not part of `.env.example`—add it to the same `.env`. For a local trial of this stack, set it to `http://localhost:8000`; in production it is typically the same value as `API_BASE_URL`.
 
+Open Wearables does not use `OTEL_PROPAGATORS`, but FastAPI loads the propagators it lists at startup. If your platform sets it to one that is not installed in the image, such as `b3`, every backend container fails with `ValueError: Propagator b3 not found`. Unset it for these containers.
+
 ### Running it
 
 <Steps>
