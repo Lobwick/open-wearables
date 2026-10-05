@@ -86,6 +86,7 @@ let DISCONNECTED = new Set<string>();
 let SLOW = new Set<string>();
 const late = (name: string, ms: number) =>
 	SLOW.has(name) ? new Promise((resolve) => setTimeout(resolve, ms)) : undefined;
+let LIFECYCLE_ENABLED = true;
 /** Lets a test see what an untouched archive looks like on the dashboard. */
 let EMPTY_ARCHIVE = false;
 
@@ -116,6 +117,7 @@ const server = Bun.serve({
 			USERS = makeUsers();
 			DISCONNECTED = new Set();
 			SLOW = new Set();
+			LIFECYCLE_ENABLED = true;
 			EMPTY_ARCHIVE = false;
 			resetWorkouts();
 			resetSleep();
@@ -132,6 +134,19 @@ const server = Bun.serve({
 		if (pathname === '/__empty-archive') {
 			EMPTY_ARCHIVE = true;
 			return new Response(null, { status: 204 });
+		}
+
+		if (pathname === '/__lifecycle-off') {
+			LIFECYCLE_ENABLED = false;
+			return new Response(null, { status: 204 });
+		}
+
+		if (pathname === '/api/v1/config') {
+			return json({
+				outgoing_webhooks_enabled: true,
+				data_lifecycle_enabled: LIFECYCLE_ENABLED,
+				email_enabled: false
+			});
 		}
 
 		const slowMatch = pathname.match(/^\/__slow\/([a-z-]+)$/);

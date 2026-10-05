@@ -1,4 +1,5 @@
-import { fail } from '@sveltejs/kit';
+import { fail, redirect } from '@sveltejs/kit';
+import { resolve } from '$app/paths';
 import { attempt } from '$lib/server/form';
 import { requireToken } from '$lib/server/guard';
 import {
@@ -11,7 +12,8 @@ import { fromFields, invalid, settingsOf } from '$lib/lifecycle/projection';
 import type { Actions, PageServerLoad } from './$types';
 
 /** A hit is handed over as it is; a miss is streamed, so the tab opens on a skeleton. */
-export const load: PageServerLoad = async ({ locals }) => {
+export const load: PageServerLoad = async ({ locals, parent }) => {
+	if (!(await parent()).features.lifecycle) redirect(303, resolve('/settings'));
 	const accessToken = await requireToken(locals);
 
 	return { lifecycle: (await cachedLifecycle()) ?? fetchLifecycle(accessToken) };

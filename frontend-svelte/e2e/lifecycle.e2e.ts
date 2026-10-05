@@ -148,3 +148,17 @@ test('fits a phone', async ({ page }) => {
 	const width = await page.evaluate(() => document.documentElement.scrollWidth);
 	expect(width).toBeLessThanOrEqual(390);
 });
+
+test('leaves the tab out, and a link to it lands on Settings, where the instance has it off', async ({
+	page,
+	request
+}) => {
+	const tabs = page.getByRole('navigation', { name: 'Settings sections' });
+	await page.goto('/settings');
+	await expect(tabs.getByRole('link', { name: /Data Lifecycle/ })).toBeVisible();
+
+	await request.post('http://localhost:8787/__lifecycle-off');
+	await page.goto('/settings/data-lifecycle');
+	await expect(page).toHaveURL('/settings');
+	await expect(tabs.getByRole('link', { name: /Data Lifecycle/ })).toHaveCount(0);
+});

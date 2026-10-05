@@ -4,11 +4,13 @@
 	import PageHeader from '$lib/components/layout/PageHeader.svelte';
 	import PendingOutlet from '$lib/components/layout/PendingOutlet.svelte';
 	import { resolve } from '$app/paths';
-	import { SETTINGS_TABS, activeSettingsTab } from '$lib/settings/tabs';
+	import { activeSettingsTab, settingsTabs } from '$lib/settings/tabs';
+	import type { Snippet } from 'svelte';
+	import type { LayoutData } from './$types';
 
-	let { children } = $props();
+	let { data, children }: { data: LayoutData; children: Snippet } = $props();
 
-	const tabs = [...SETTINGS_TABS];
+	const tabs = $derived(settingsTabs(data.features));
 
 	const active = $derived(activeSettingsTab(page.url.pathname));
 </script>

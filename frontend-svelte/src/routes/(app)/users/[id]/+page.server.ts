@@ -11,16 +11,8 @@ import { fetchAllProviders } from '$lib/server/providers';
 import { fetchRecentRuns, fetchSyncHistory } from '$lib/server/syncs';
 import { userActions } from '$lib/server/user-actions';
 import { RECENT_WINDOW } from '$lib/syncs/recent';
+import { optional } from '$lib/server/optional';
 import type { Actions, PageServerLoad } from './$types';
-
-/** Sync activity is reporting: Redis being down costs the section, not the page. */
-async function optional<T>(work: Promise<T>, fallback: T): Promise<T> {
-	try {
-		return await work;
-	} catch {
-		return fallback;
-	}
-}
 
 export const load: PageServerLoad = async ({ params, locals }) => {
 	const accessToken = await requireToken(locals);
