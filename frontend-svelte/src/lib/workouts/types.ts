@@ -54,3 +54,11 @@ export type WorkoutPage = {
 		total_count: number | null;
 	};
 };
+
+/** Mirrors `WorkoutTotals`: the matching workouts, added up by the database. */
+export type WorkoutTotalsResponse = {
+	count: number;
+	duration_seconds: number;
+	calories_kcal: number | null;
+	distance_meters: number | null;
+};

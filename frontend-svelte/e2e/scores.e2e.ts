@@ -71,7 +71,7 @@ test('collapses a provider that scores all day into one card and a curve', async
 });
 
 test('pages in days, because a card is a day', async ({ page }) => {
-	await page.goto(SCORES);
+	await page.goto(`${SCORES}?period=all`);
 
 	// The endpoint pages by record, and a page of twenty records is two cards for
 	// a provider that scores every half hour. So a page is ten days of the
@@ -89,7 +89,7 @@ test('pages in days, because a card is a day', async ({ page }) => {
 test('pages the whole history under All time, rather than snapping to a preset', async ({
 	page
 }) => {
-	await page.goto(SCORES);
+	await page.goto(`${SCORES}?period=all`);
 
 	// Paging by day needs a first day to count back from, and this endpoint only
 	// answers newest-first - so All time finds its own start from the oldest
@@ -141,7 +141,7 @@ test('keeps the category when the period changes, and returns to page one', asyn
 });
 
 test('says so when the user has no scores at all', async ({ page }) => {
-	await page.goto(`/users/${UNCONNECTED}/scores`);
+	await page.goto(`/users/${UNCONNECTED}/scores?period=all`);
 
 	await expect(page.getByText('No scores recorded')).toBeVisible();
 	await expect(page.getByText('No score was recorded in this period')).toBeVisible();

@@ -15,7 +15,7 @@ export const load: PageServerLoad = async ({ params, url, locals }) => {
 
 	// The trends need bounds, and "all time" would ask for a decade of readings
 	// to draw a line nobody can read. A window is the honest default here.
-	const asked = parsePeriod(url.searchParams);
+	const asked = parsePeriod(url.searchParams, defaultRange());
 	const period = asked.from ? asked : defaultRange();
 
 	const [providers, body] = await Promise.all([

@@ -507,6 +507,19 @@ const decodeCursor = (cursor: string) => ({
 });
 
 /** Keyset paging, like the API: the cursor is a position, not a page number. */
+/** What the totals endpoint adds up: every workout `makeWorkouts` would page through. */
+export const workoutTotals = (query: URLSearchParams) => {
+	const all = makeWorkouts(new URLSearchParams({ ...Object.fromEntries(query), limit: '100000' }));
+	const sum = (pick: (workout: (typeof all.data)[number]) => number | null) =>
+		all.data.reduce((total, workout) => total + (pick(workout) ?? 0), 0);
+	return {
+		count: all.data.length,
+		duration_seconds: sum((workout) => workout.duration_seconds),
+		calories_kcal: sum((workout) => workout.calories_kcal),
+		distance_meters: sum((workout) => workout.distance_meters)
+	};
+};
+
 export const makeWorkouts = (query: URLSearchParams) => {
 	const provider = query.get('provider') ?? '';
 	const type = query.get('type') ?? '';
@@ -726,6 +739,28 @@ export const deleteSleep = (id: string) => {
 };
 
 /** Keyset paging and the same cursor shape as the workouts list. */
+/** What the totals endpoint adds up: every session `makeSleep` would page through. */
+export const sleepTotals = (query: URLSearchParams) => {
+	const all = makeSleep(
+		new URLSearchParams({ ...Object.fromEntries(query), limit: '100000' })
+	).data;
+	const efficiencies = all.flatMap((s) =>
+		s.efficiency_percent == null ? [] : [s.efficiency_percent]
+	);
+	return {
+		count: all.length,
+		naps: all.filter((s) => s.is_nap).length,
+		sleep_duration_seconds: all.reduce((sum, s) => sum + (s.sleep_duration_seconds ?? 0), 0),
+		time_in_bed_seconds: all.reduce(
+			(sum, s) => sum + (s.time_in_bed_seconds ?? s.duration_seconds),
+			0
+		),
+		avg_efficiency_percent: efficiencies.length
+			? efficiencies.reduce((sum, value) => sum + value, 0) / efficiencies.length
+			: null
+	};
+};
+
 export const makeSleep = (query: URLSearchParams) => {
 	const provider = query.get('provider') ?? '';
 	const limit = Number(query.get('limit') ?? 50);
@@ -817,6 +852,21 @@ let ACTIVITY = buildActivity();
 
 export const resetActivity = () => {
 	ACTIVITY = buildActivity();
+};
+
+/** What the totals endpoint adds up: every day `makeActivity` would page through. */
+export const activityTotals = (query: URLSearchParams) => {
+	const days = makeActivity(
+		new URLSearchParams({ ...Object.fromEntries(query), limit: '100000' })
+	).data;
+	const steps = days.flatMap((day) => (day.steps == null ? [] : [day.steps]));
+	return {
+		days: days.length,
+		steps: steps.reduce((sum, value) => sum + value, 0),
+		distance_meters: days.reduce((sum, day) => sum + (day.distance_meters ?? 0), 0),
+		active_calories_kcal: days.reduce((sum, day) => sum + (day.active_calories_kcal ?? 0), 0),
+		avg_steps: steps.length ? Math.round(steps.reduce((sum, v) => sum + v, 0) / steps.length) : null
+	};
 };
 
 /** Keyset paging and the same cursor shape as the other lists. */

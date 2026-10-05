@@ -2,7 +2,6 @@ import { describe, expect, it } from 'vitest';
 import { isNapParam, sessionFilter } from './query';
 import { localRange } from '$lib/utils/format';
 import { stageLanes, stageRows } from './stages';
-import { sumSleep } from './totals';
 import type { SleepSession, StageInterval } from './types';
 
 const interval = (stage: StageInterval['stage'], from: string, to: string): StageInterval => ({
@@ -73,49 +72,6 @@ describe('stageRows', () => {
 				session({ awake_minutes: 0, light_minutes: null, deep_minutes: 30, rem_minutes: null })
 			).map((row) => row.label)
 		).toEqual(['Deep']);
-	});
-});
-
-describe('sumSleep', () => {
-	const session = (over: Partial<SleepSession>) =>
-		({
-			duration_seconds: 28_800,
-			sleep_duration_seconds: 25_200,
-			time_in_bed_seconds: 28_800,
-			efficiency_percent: null,
-			is_nap: false,
-			...over
-		}) as SleepSession;
-
-	it('counts naps apart from the sessions that hold them', () => {
-		const totals = sumSleep([session({}), session({ is_nap: true })], 2, false);
-		expect([totals.count, totals.naps]).toEqual([2, 1]);
-	});
-
-	// Averaging a missing efficiency as zero would drag the figure down for every
-	// provider that does not report one.
-	it('averages efficiency only over the sessions that reported it', () => {
-		const totals = sumSleep(
-			[session({ efficiency_percent: 90 }), session({}), session({ efficiency_percent: 80 })],
-			3,
-			false
-		);
-		expect(totals.efficiency).toBe(85);
-	});
-
-	it('has no efficiency at all when nobody reported one', () => {
-		expect(sumSleep([session({})], 1, false).efficiency).toBeNull();
-	});
-
-	// The API's own has_more, not a count comparison: the activity endpoint
-	// returns no count at all, and a comparison would quietly miss the case.
-	it('flags itself partial only when the API says it held some back', () => {
-		expect(sumSleep([session({})], null, true).partial).toBe(true);
-		expect(sumSleep([session({})], 1, false).partial).toBe(false);
-	});
-
-	it('falls back to the recorded span when time in bed is missing', () => {
-		expect(sumSleep([session({ time_in_bed_seconds: null })], 1, false).inBedSeconds).toBe(28_800);
 	});
 });
 

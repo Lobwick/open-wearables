@@ -1,6 +1,5 @@
 import { describe, expect, it } from 'vitest';
 import { detailGroups } from './fields';
-import { sumActivity } from './totals';
 import type { ActivityDay } from './types';
 
 const day = (over: Partial<ActivityDay>) =>
@@ -18,30 +17,6 @@ const day = (over: Partial<ActivityDay>) =>
 		heart_rate: null,
 		...over
 	}) as ActivityDay;
-
-describe('sumActivity', () => {
-	// A day with no steps is a gap in the data, not a day someone spent still -
-	// averaging it as zero would drag the figure down for the days that do count.
-	it('averages steps over the days that reported them', () => {
-		const totals = sumActivity(
-			[day({ steps: 10_000 }), day({ steps: null }), day({ steps: 6000 })],
-			3,
-			false
-		);
-		expect([totals.steps, totals.averageSteps]).toEqual([16_000, 8000]);
-	});
-
-	it('has no average when nobody reported steps', () => {
-		expect(sumActivity([day({ steps: null })], 1, false).averageSteps).toBeNull();
-	});
-
-	// This endpoint returns no count at all, so `has_more` is the only honest
-	// signal that the sums are short.
-	it('flags itself partial from has_more, with no count to compare', () => {
-		expect(sumActivity([day({})], null, true).partial).toBe(true);
-		expect(sumActivity([day({})], null, false).partial).toBe(false);
-	});
-});
 
 describe('detailGroups', () => {
 	it('drops a group the provider had nothing for', () => {

@@ -1,4 +1,4 @@
-import { parsePeriod, periodWindow, type Period } from '$lib/filters/period';
+import { periodWindow, type Period } from '$lib/filters/period';
 
 /** The envelope every cursor-paged list endpoint returns. */
 export type Page<Item> = {
@@ -27,14 +27,20 @@ export function tomorrow(): Date {
  * next midnight, and `periodWindow` has already done that - sending a date would
  * widen an already-widened bound and stretch every window by a day.
  */
-export function eventWindow(period: Period, limit: number): URLSearchParams {
+/** The period's bounds as the API reads them, for a totals endpoint that pages nothing. */
+export function periodBounds(period: Period): URLSearchParams {
 	const window = periodWindow(period);
 
 	return new URLSearchParams({
 		start_date: window ? stamp(window.from) : ALL_TIME_START,
-		end_date: stamp(window ? window.to : tomorrow()),
-		limit: String(limit)
+		end_date: stamp(window ? window.to : tomorrow())
 	});
+}
+
+export function eventWindow(period: Period, limit: number): URLSearchParams {
+	const params = periodBounds(period);
+	params.set('limit', String(limit));
+	return params;
 }
 
 /** The same bounds from explicit dates, for a list that pages by day. */
@@ -51,18 +57,3 @@ export const SUMMARY_CAP = 1000;
  */
 export const knownProvider = (connections: { provider: string }[], asked: string) =>
 	connections.some((connection) => connection.provider === asked) ? asked : '';
-
-/**
- * A summary endpoint: sum every record in the period, in its own request because
- * no list endpoint has an aggregate to ask and the cards must not wait for it.
- * `has_more` rides along because it is the only honest "there was more" signal
- * on the endpoints that return no count.
- */
-export async function summaryOf<Item, Totals>(
-	url: URL,
-	fetchPage: (period: Period, limit: number) => Promise<Page<Item>>,
-	sum: (items: Item[], total: number | null, hasMore: boolean) => Totals
-): Promise<Totals> {
-	const page = await fetchPage(parsePeriod(url.searchParams), SUMMARY_CAP);
-	return sum(page.data, page.pagination.total_count, page.pagination.has_more);
-}

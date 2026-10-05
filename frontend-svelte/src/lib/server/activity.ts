@@ -1,6 +1,6 @@
 import { apiGet } from './api';
-import { eventWindow } from './events';
-import type { ActivityPage } from '$lib/activity/types';
+import { eventWindow, periodBounds } from './events';
+import type { ActivityPage, ActivityTotalsResponse } from '$lib/activity/types';
 import type { Period } from '$lib/filters/period';
 
 export type ActivityQuery = { period: Period; cursor?: string; limit?: number };
@@ -22,4 +22,17 @@ export function fetchActivity(
 	if (cursor) params.set('cursor', cursor);
 
 	return apiGet<ActivityPage>(`/api/v1/users/${userId}/summaries/activity?${params}`, accessToken);
+}
+
+/** The period's days added up by the API, rather than paged through and summed here. */
+export function fetchActivityTotals(
+	userId: string,
+	accessToken: string,
+	period: Period
+): Promise<ActivityTotalsResponse> {
+	const params = periodBounds(period);
+	return apiGet<ActivityTotalsResponse>(
+		`/api/v1/users/${userId}/summaries/activity/totals?${params}`,
+		accessToken
+	);
 }

@@ -42,3 +42,12 @@ export type SleepPage = {
 		total_count: number | null;
 	};
 };
+
+/** Mirrors `SleepTotals`: the matching sessions, added up by the database. */
+export type SleepTotalsResponse = {
+	count: number;
+	naps: number;
+	sleep_duration_seconds: number;
+	time_in_bed_seconds: number;
+	avg_efficiency_percent: number | null;
+};

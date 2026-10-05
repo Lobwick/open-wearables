@@ -257,9 +257,7 @@ test('switches which zones the strip and the chart bands show', async ({ page })
 });
 
 test('shows the cards without waiting for the figures above them', async ({ page, request }) => {
-	// Summing the period reads every record in it, and there is no aggregate
-	// endpoint to ask instead - so it is its own request and the list must not
-	// queue behind it.
+	// The totals are their own request, so the list must not queue behind them.
 	await request.post('http://localhost:8787/__slow/workouts-summary');
 	await page.goto(WORKOUTS);
 

@@ -14,18 +14,43 @@ const DAY = /^\d{4}-\d{2}-\d{2}$/;
 
 const clean = (raw: string | null) => (raw && DAY.test(raw) ? raw : null);
 
-export function parsePeriod(params: URLSearchParams): Period {
+/** "All time" has to be asked for by name, now that no bounds means the last year. */
+const ALL_TIME_PARAM = ['period', 'all'] as const;
+
+/** The last `days` days, today included. */
+export function lastDays(days: number, now = new Date()): Period {
+	const from = new Date(now);
+	from.setUTCDate(from.getUTCDate() - (days - 1));
+	return { mode: 'range', from: todayIso(from), to: todayIso(now) };
+}
+
+/**
+ * What a tab shows until the reader picks a period: the last year. "All time"
+ * scans every row a user has, which for a heavy one is many seconds a request.
+ */
+export const defaultPeriod = (now = new Date()) => lastDays(365, now);
+
+export function parsePeriod(params: URLSearchParams, fallback = defaultPeriod()): Period {
 	const first = clean(params.get('from'));
 	const second = clean(params.get('to'));
-	if (!first && !second) return ALL_TIME;
+	if (!first && !second)
+		return params.get(ALL_TIME_PARAM[0]) === ALL_TIME_PARAM[1] ? ALL_TIME : fallback;
 
 	// One bound alone means that single day, and an inverted pair is a typo.
 	const [from, to] = [first ?? second!, second ?? first!].sort();
 	return { mode: from === to ? 'day' : 'range', from, to };
 }
 
+/** The URL changes that select `period`, for a link or a filter. */
+export const periodChanges = (period: Period): Record<string, string | null> => ({
+	from: period.from,
+	to: period.to,
+	[ALL_TIME_PARAM[0]]: period.mode === 'all' ? ALL_TIME_PARAM[1] : null
+});
+
 export function periodParams(period: Period): URLSearchParams {
 	const params = new URLSearchParams();
+	if (period.mode === 'all') params.set(...ALL_TIME_PARAM);
 	if (period.from) params.set('from', period.from);
 	if (period.to) params.set('to', period.to);
 	return params;
@@ -64,12 +89,7 @@ export function periodBucket(period: Period): 'day' | 'week' {
 }
 
 /** The day a `day` or `range` picker should start from when none is chosen. */
-export function defaultRange(now = new Date()): Period {
-	const to = new Date(now);
-	const from = new Date(now);
-	from.setUTCDate(from.getUTCDate() - 89);
-	return { mode: 'range', from: todayIso(from), to: todayIso(to) };
-}
+export const defaultRange = (now = new Date()) => lastDays(90, now);
 
 /** False for a single day, where a timeline would be one column. */
 export const plottable = (period: Period): boolean => {

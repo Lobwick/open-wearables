@@ -1,7 +1,13 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import Segmented from '$lib/components/ui/Segmented.svelte';
-	import { defaultRange, todayIso, type Period } from '$lib/filters/period';
+	import {
+		ALL_TIME,
+		defaultRange,
+		periodChanges,
+		todayIso,
+		type Period
+	} from '$lib/filters/period';
 
 	let {
 		period,
@@ -12,13 +18,15 @@
 	const preset = defaultRange();
 
 	const items = $derived([
-		{ value: 'all', label: 'All time', href: hrefFor({ from: null, to: null }) },
+		{ value: 'all', label: 'All time', href: hrefFor(periodChanges(ALL_TIME)) },
 		{
 			value: 'day',
 			label: 'Day',
-			href: hrefFor({ from: period.to ?? today, to: period.to ?? today })
+			href: hrefFor(
+				periodChanges({ mode: 'day', from: period.to ?? today, to: period.to ?? today })
+			)
 		},
-		{ value: 'range', label: 'Range', href: hrefFor({ from: preset.from, to: preset.to }) }
+		{ value: 'range', label: 'Range', href: hrefFor(periodChanges(preset)) }
 	]);
 
 	// Borderless inputs inside one bordered box, so the pair reads as one field.

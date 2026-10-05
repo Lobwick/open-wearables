@@ -1,5 +1,4 @@
-import { isPartial, meanOf, sumOf } from '$lib/events/totals';
-import type { SleepSession } from './types';
+import type { SleepTotalsResponse } from './types';
 
 export type SleepTotals = {
 	count: number;
@@ -8,24 +7,15 @@ export type SleepTotals = {
 	asleepSeconds: number;
 	inBedSeconds: number;
 	efficiency: number | null;
+	/** Always false: the database adds up every matching session, not a page of them. */
 	partial: boolean;
 };
 
-export function sumSleep(
-	sessions: SleepSession[],
-	total: number | null,
-	hasMore: boolean
-): SleepTotals {
-	return {
-		count: total ?? sessions.length,
-		naps: sessions.filter((session) => session.is_nap).length,
-		asleepSeconds: sumOf(sessions, (session) => session.sleep_duration_seconds),
-		// A provider that sends no time in bed still recorded a span.
-		inBedSeconds: sumOf(
-			sessions,
-			(session) => session.time_in_bed_seconds ?? session.duration_seconds
-		),
-		efficiency: meanOf(sessions, (session) => session.efficiency_percent),
-		partial: isPartial(hasMore)
-	};
-}
+export const toSleepTotals = (totals: SleepTotalsResponse): SleepTotals => ({
+	count: totals.count,
+	naps: totals.naps,
+	asleepSeconds: totals.sleep_duration_seconds,
+	inBedSeconds: totals.time_in_bed_seconds,
+	efficiency: totals.avg_efficiency_percent,
+	partial: false
+});

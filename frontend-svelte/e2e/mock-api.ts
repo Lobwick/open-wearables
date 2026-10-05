@@ -57,15 +57,18 @@ import {
 	deleteCycle,
 	deleteSleep,
 	makeActivity,
+	activityTotals,
 	makeBody,
 	deleteWorkout,
 	makeCycles,
 	makeScores,
 	makeSleep,
+	sleepTotals,
 	makeUsers,
 	makeTimeseries,
 	makeVitals,
 	makeWorkouts,
+	workoutTotals,
 	workoutTypes,
 	resetActivity,
 	resetCycles,
@@ -531,16 +534,16 @@ const server = Bun.serve({
 				}
 				case '/events/workouts/types':
 					return json(workoutTypes());
-				case '/events/workouts': {
-					const query = new URL(request.url).searchParams;
-					// The page asks for one screen of records and, separately, for
-					// everything in the period to sum. Only the second is held back.
-					if (Number(query.get('limit')) > 100) await late('workouts-summary', 600);
-					return json(makeWorkouts(query));
-				}
+				case '/events/workouts':
+					return json(makeWorkouts(new URL(request.url).searchParams));
+				case '/events/workouts/totals':
+					await late('workouts-summary', 600);
+					return json(workoutTotals(new URL(request.url).searchParams));
 				case '/summaries/activity':
 					await late('activity', 1500);
 					return json(makeActivity(new URL(request.url).searchParams));
+				case '/summaries/activity/totals':
+					return json(activityTotals(new URL(request.url).searchParams));
 				case '/health-scores':
 					// Gated like the other data endpoints: a user with no connection has
 					// nothing scored, which is the empty state worth testing.
@@ -559,6 +562,8 @@ const server = Bun.serve({
 					);
 				case '/events/sleep':
 					return json(makeSleep(new URL(request.url).searchParams));
+				case '/events/sleep/totals':
+					return json(sleepTotals(new URL(request.url).searchParams));
 				case '/sync/runs':
 					return json(connected ? makeRecentRuns(user.id) : []);
 				default:

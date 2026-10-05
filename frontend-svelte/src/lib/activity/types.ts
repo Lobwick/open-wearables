@@ -43,3 +43,12 @@ export type ActivityPage = {
 		total_count: number | null;
 	};
 };
+
+/** Mirrors `ActivityTotals`: the period's daily activity, added up by the API. */
+export type ActivityTotalsResponse = {
+	days: number;
+	steps: number;
+	distance_meters: number;
+	active_calories_kcal: number;
+	avg_steps: number | null;
+};

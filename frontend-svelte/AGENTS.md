@@ -1264,7 +1264,10 @@ undiscoverable, which is worse. The legend is a legend again.
 
 ### Period is All time / Day / Range, like `frontend/`
 
-`?from=…&to=…` inclusive; both absent is all time, equal is a day. `parsePeriod`
+`?from=…&to=…` inclusive, equal is a day. Both absent is **the last year**, not
+all time: "All time" scans every row a user has, seconds a request for a heavy
+user, so it is asked for by name as `?period=all`, and `periodParams` carries
+that on to the totals and trends requests. Body keeps its own 90 days. `parsePeriod`
 sorts an inverted pair and ignores anything that is not a date, so a hand-edited
 URL cannot ask for nothing. `periodBucket` switches to weeks past 120 days.
 
@@ -1432,10 +1435,12 @@ page load:
 
 - **Samples** load when a card opens. Ten cards' worth of curves would be ten
   timeseries scans for the nine nobody expands.
-- **Totals** load beside the list. There is no workout aggregate endpoint, so
-  they are summed from every record in the period, and the cards must not queue
-  behind that. An e2e test holds the summary back 600 ms and asserts the cards
-  are on screen while the figures are not.
+- **Totals** load beside the list, from the API's own totals endpoints
+  (`/events/workouts/totals`, `/events/sleep/totals`,
+  `/summaries/activity/totals`), which add up the whole period in SQL with the
+  list's own filters. Cycles have none yet and still sum a page of records. The
+  cards must not queue behind the figures either: an e2e test holds the totals
+  back 600 ms and asserts the cards are on screen while the figures are not.
 
 Both use [`resource()`](src/lib/utils/resource.svelte.ts), which owns the one
 subtlety: a card closed mid-flight must not write into a component that is gone.
@@ -1515,8 +1520,8 @@ What the third tab made obvious, in `src/lib/events/` and
 | `CursorBar`                | pagination wiring, and passing `total_count` through untouched       |
 | `SamplesChart`             | fetch-on-open, skeleton, empty note, chart, bucket note              |
 | `events/fields.ts`         | dropping absent fields and then empty groups                         |
-| `events/totals.ts`         | `sumOf`, `meanOf`, `isPartial`                                       |
-| `server/events.ts`         | the window params, the provider guard, `summaryOf`                   |
+| `events/totals.ts`         | `meanOf`, `isPartial`, for figures still summed from records         |
+| `server/events.ts`         | the window params and bounds, the provider guard                     |
 | `lists/cursor.ts`          | `at`, `hrefFor`, and the page-one rule                               |
 
 Each tab is then its own `*Card`, `*Metrics`, `*Details`, `*Summary` and a

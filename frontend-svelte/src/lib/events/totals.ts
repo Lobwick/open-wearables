@@ -1,10 +1,6 @@
-/** Adds up one field across records, treating a missing value as nothing. */
-export const sumOf = <T>(items: T[], pick: (item: T) => number | null) =>
-	items.reduce((sum, item) => sum + (pick(item) ?? 0), 0);
-
 /**
- * No list endpoint has an aggregate to ask, so the figures are summed from the
- * records - and the API's own `has_more` is what says it held some back. A count
+ * For figures still summed from a page of records (cycles have no totals
+ * endpoint): the API's own `has_more` is what says it held some back. A count
  * comparison misses it entirely on the endpoints that return no count at all.
  */
 export const isPartial = (hasMore: boolean) => hasMore;

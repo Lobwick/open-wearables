@@ -93,7 +93,7 @@ test('keeps the chosen provider when the period changes', async ({ page }) => {
 
 	await page.getByRole('link', { name: 'All time' }).click();
 
-	await expect(page).toHaveURL(`${DATA}?provider=oura`);
+	await expect(page).toHaveURL(`${DATA}?provider=oura&period=all`);
 	await expect(page.getByRole('link', { name: 'Oura', exact: true })).toHaveAttribute(
 		'aria-current',
 		'true'
@@ -111,6 +111,16 @@ test('drops a provider the user is not connected to rather than failing', async 
 	);
 });
 
+// "All time" scans every row a heavy user has, so a tab opens on the last year.
+test('opens on the last year, not the whole history', async ({ page }) => {
+	await page.goto(DATA);
+	const period = page.getByRole('group', { name: 'Period' });
+	await expect(period.getByRole('link', { name: 'Range' })).toHaveAttribute('aria-current', 'true');
+	await expect(page.getByRole('textbox', { name: 'To' })).toHaveValue(
+		new Date().toISOString().slice(0, 10)
+	);
+});
+
 test('offers all time, a single day, and a range', async ({ page }) => {
 	await page.goto(QUARTER);
 	await expect(page.getByRole('textbox', { name: 'From' })).toHaveValue('2026-06-13');
@@ -118,8 +128,9 @@ test('offers all time, a single day, and a range', async ({ page }) => {
 	await page.getByRole('link', { name: 'Day' }).click();
 	await expect(page.getByRole('textbox', { name: 'Day' })).toBeVisible();
 
+	// Asked for by name: no bounds at all now means the last year.
 	await page.getByRole('link', { name: 'All time' }).click();
-	await expect(page).toHaveURL(DATA);
+	await expect(page).toHaveURL(`${DATA}?period=all`);
 });
 
 test('keeps the provider filter visible while stepping through days', async ({ page }) => {

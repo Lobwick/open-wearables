@@ -1,7 +1,7 @@
 import { apiDelete, apiGet } from './api';
-import { eventWindow } from './events';
+import { eventWindow, periodBounds } from './events';
 import type { Period } from '$lib/filters/period';
-import type { WorkoutPage } from '$lib/workouts/types';
+import type { WorkoutPage, WorkoutTotalsResponse } from '$lib/workouts/types';
 
 export type WorkoutQuery = {
 	period: Period;
@@ -9,24 +9,42 @@ export type WorkoutQuery = {
 	type?: string;
 	cursor?: string;
 	limit?: number;
-	/** Zones are a second table read, so the totals pass asks for none. */
-	zones?: boolean;
 };
+
+/** The filters the list and its totals share, so both count the same workouts. */
+function filterParams(
+	params: URLSearchParams,
+	{ provider, type }: { provider: string; type: string }
+) {
+	if (provider) params.set('provider', provider);
+	if (type) params.set('type', type);
+	return params;
+}
 
 export function fetchWorkouts(
 	userId: string,
 	accessToken: string,
-	{ period, provider = '', type = '', cursor = '', limit = 10, zones = true }: WorkoutQuery
+	{ period, provider = '', type = '', cursor = '', limit = 10 }: WorkoutQuery
 ): Promise<WorkoutPage> {
-	const params = eventWindow(period, limit);
+	const params = filterParams(eventWindow(period, limit), { provider, type });
 	// A card cannot draw zones until it is expanded, but paging again on expand
 	// would be worse than carrying them.
-	if (zones) params.set('include', 'zones');
-	if (provider) params.set('provider', provider);
-	if (type) params.set('type', type);
+	params.set('include', 'zones');
 	if (cursor) params.set('cursor', cursor);
 
 	return apiGet<WorkoutPage>(`/api/v1/users/${userId}/events/workouts?${params}`, accessToken);
+}
+
+/** Every matching workout in the period, added up by the API rather than paged through. */
+export function fetchWorkoutTotals(
+	userId: string,
+	accessToken: string,
+	{ period, provider = '', type = '' }: Pick<WorkoutQuery, 'period' | 'provider' | 'type'>
+): Promise<WorkoutTotalsResponse> {
+	return apiGet<WorkoutTotalsResponse>(
+		`/api/v1/users/${userId}/events/workouts/totals?${filterParams(periodBounds(period), { provider, type })}`,
+		accessToken
+	);
 }
 
 export const deleteWorkout = (userId: string, workoutId: string, accessToken: string) =>
