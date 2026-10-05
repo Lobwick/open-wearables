@@ -14,7 +14,7 @@ const DAY = /^\d{4}-\d{2}-\d{2}$/;
 
 const clean = (raw: string | null) => (raw && DAY.test(raw) ? raw : null);
 
-/** "All time" has to be asked for by name, now that no bounds means the last year. */
+/** "All time" is asked for by name, so it survives on a tab whose default is narrower. */
 const ALL_TIME_PARAM = ['period', 'all'] as const;
 
 /** The last `days` days, today included. */
@@ -24,13 +24,8 @@ export function lastDays(days: number, now = new Date()): Period {
 	return { mode: 'range', from: todayIso(from), to: todayIso(now) };
 }
 
-/**
- * What a tab shows until the reader picks a period: the last year. "All time"
- * scans every row a user has, which for a heavy one is many seconds a request.
- */
-export const defaultPeriod = (now = new Date()) => lastDays(365, now);
-
-export function parsePeriod(params: URLSearchParams, fallback = defaultPeriod()): Period {
+/** Paginated tabs show everything by default; the aggregate-only ones pass a narrower window. */
+export function parsePeriod(params: URLSearchParams, fallback: Period = ALL_TIME): Period {
 	const first = clean(params.get('from'));
 	const second = clean(params.get('to'));
 	if (!first && !second)

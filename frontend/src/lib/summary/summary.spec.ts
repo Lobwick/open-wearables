@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { calendarTicks, ticksClear } from '$lib/charts/ticks';
 import {
 	ALL_TIME,
-	defaultPeriod,
+	lastDays,
 	parsePeriod,
 	periodParams,
 	periodBucket,
@@ -17,15 +17,12 @@ import type { DataTimeline } from './types';
 const params = (query: string) => new URLSearchParams(query);
 
 describe('parsePeriod', () => {
-	// "All time" scans every row a user has, so it is asked for, never assumed.
-	it('reads no bounds as the last year, and the whole history only by name', () => {
-		expect(parsePeriod(params(''))).toEqual(defaultPeriod());
-		expect(defaultPeriod(new Date('2026-10-02T12:00:00Z'))).toEqual({
-			mode: 'range',
-			from: '2025-10-03',
-			to: '2026-10-02'
-		});
-		expect(parsePeriod(params('period=all'))).toEqual(ALL_TIME);
+	it('reads no bounds as the fallback, and the whole history also by name', () => {
+		expect(parsePeriod(params(''))).toEqual(ALL_TIME);
+		const month = lastDays(30, new Date('2026-10-02T12:00:00Z'));
+		expect(month).toEqual({ mode: 'range', from: '2026-09-03', to: '2026-10-02' });
+		expect(parsePeriod(params(''), month)).toEqual(month);
+		expect(parsePeriod(params('period=all'), month)).toEqual(ALL_TIME);
 		// And it travels: a request built from it still asks for everything.
 		expect(parsePeriod(periodParams(ALL_TIME))).toEqual(ALL_TIME);
 	});
@@ -52,7 +49,7 @@ describe('parsePeriod', () => {
 	});
 
 	it('ignores a query string that is not a date', () => {
-		expect(parsePeriod(params('from=yesterday&to=soon'))).toEqual(defaultPeriod());
+		expect(parsePeriod(params('from=yesterday&to=soon'))).toEqual(ALL_TIME);
 	});
 });
 

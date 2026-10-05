@@ -278,3 +278,12 @@ test('says which day a workout ended on when it runs past midnight', async ({ pa
 	await expect(heading).toContainText('22:30');
 	await expect(heading).toContainText(/\w{3}\s*02:19/);
 });
+
+test('opens on all time, since the list pages through it', async ({ page }) => {
+	await page.goto(WORKOUTS);
+	const period = page.getByRole('group', { name: 'Period' });
+	await expect(period.getByRole('link', { name: 'All time' })).toHaveAttribute(
+		'aria-current',
+		'true'
+	);
+});

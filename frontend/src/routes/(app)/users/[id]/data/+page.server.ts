@@ -14,7 +14,7 @@ import type { Actions, PageServerLoad } from './$types';
  */
 export const load: PageServerLoad = async ({ params, url, locals }) => {
 	const accessToken = await requireToken(locals);
-	// The heaviest tab, so it opens on a month rather than the year the others use.
+	// Aggregates only, no paging, so the heaviest tab opens on a month rather than all time.
 	const period = parsePeriod(url.searchParams, lastDays(30));
 
 	const asked = url.searchParams.get('provider') ?? '';
