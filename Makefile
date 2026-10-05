@@ -2,10 +2,7 @@ DOCKER_COMMAND = docker compose -f docker-compose.yml
 DOCKER_EXEC = $(DOCKER_COMMAND) exec app
 ALEMBIC_CMD = uv run alembic
 
-# Svelte frontend. Targets keep the `svelte-` prefix while both frontends
-# exist; rename to `frontend-` once the React app is retired.
-SVELTE_DIR = frontend-svelte
-SVELTE_RUN = cd $(SVELTE_DIR) && bun run
+FRONTEND_RUN = cd frontend && bun run
 
 help:	## Show this help.
 	@echo "============================================================"
@@ -55,26 +52,26 @@ downgrade:  ## Revert the last migration
 reset_db:  ## Truncate all tables in the database (WARNING: deletes all data)
 	$(DOCKER_EXEC) uv run python scripts/reset_database.py
 
-svelte_install:  ## Install Svelte frontend dependencies
-	cd $(SVELTE_DIR) && bun install --frozen-lockfile
+frontend_install:  ## Install frontend dependencies
+	cd frontend && bun install --frozen-lockfile
 
-svelte_check:  ## Type-check the Svelte frontend
-	$(SVELTE_RUN) check
+frontend_check:  ## Type-check the frontend
+	$(FRONTEND_RUN) check
 
-svelte_lint:  ## Lint the Svelte frontend
-	$(SVELTE_RUN) lint
+frontend_lint:  ## Lint the frontend
+	$(FRONTEND_RUN) lint
 
-svelte_format:  ## Auto-format the Svelte frontend
-	$(SVELTE_RUN) format
+frontend_format:  ## Auto-format the frontend
+	$(FRONTEND_RUN) format
 
-svelte_format_check:  ## Check Svelte frontend formatting without writing
-	$(SVELTE_RUN) format:check
+frontend_format_check:  ## Check frontend formatting without writing
+	$(FRONTEND_RUN) format:check
 
-svelte_test:  ## Run Svelte unit and component tests
-	$(SVELTE_RUN) test:unit --run
+frontend_test:  ## Run frontend unit and component tests
+	$(FRONTEND_RUN) test:unit --run
 
-svelte_test_e2e:  ## Run Svelte end-to-end tests (downloads browsers on first run)
-	$(SVELTE_RUN) test:e2e
+frontend_test_e2e:  ## Run frontend end-to-end tests (downloads browsers on first run)
+	$(FRONTEND_RUN) test:e2e
 
-svelte_verify:  ## Run everything CI runs for the Svelte frontend
-	$(MAKE) svelte_check svelte_lint svelte_format_check svelte_test svelte_test_e2e
+frontend_verify:  ## Run everything CI runs for the frontend
+	$(MAKE) frontend_check frontend_lint frontend_format_check frontend_test frontend_test_e2e

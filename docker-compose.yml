@@ -199,66 +199,30 @@ services:
       - ./frontend/.env.example
       - path: ./frontend/.env
         required: false
-    ports:
-      - "${FRONTEND_PORT:-3000}:3000"
-    depends_on:
-      - app
-    develop:
-      watch:
-        - action: sync
-          path: ./frontend/src
-          target: /app/src
-        - action: sync
-          path: ./frontend/public
-          target: /app/public
-        - action: rebuild
-          path: ./frontend/package.json
-        - action: rebuild
-          path: ./frontend/pnpm-lock.yaml
-        - action: rebuild
-          path: ./frontend/vite.config.ts
-    restart: on-failure
-
-  # Svelte rewrite, developed alongside the React frontend until it reaches
-  # parity. Runs on its own port so both can be compared side by side.
-  frontend-svelte:
-    build:
-      context: ./frontend-svelte
-      dockerfile: Dockerfile.dev
-    container_name: frontend-svelte__open-wearables
-    image: open-wearables-frontend-svelte:dev
-    pull_policy: never
-    env_file:
-      # .env.example supplies the defaults; .env overrides it when present.
-      - ./frontend-svelte/.env.example
-      - path: ./frontend-svelte/.env
-        required: false
     environment:
-      # Inside the network the browser never calls FastAPI directly, so this is
-      # the internal service address, not localhost.
-      # Shortcut for the server's own hop; VITE_API_URL from the env file stays
-      # the address a browser or phone dials.
+      # The server's own hop to the API stays inside the network; VITE_API_URL
+      # from the env file is the address a browser or phone dials.
       - API_URL=http://app:8000
       - REDIS_URL=redis://redis:6379/2
     ports:
-      - "${FRONTEND_SVELTE_PORT:-3001}:3001"
+      - "${FRONTEND_PORT:-3000}:3000"
     depends_on:
       - app
       - redis
     develop:
       watch:
         - action: sync
-          path: ./frontend-svelte/src
+          path: ./frontend/src
           target: /app/src
         - action: sync
-          path: ./frontend-svelte/static
+          path: ./frontend/static
           target: /app/static
         - action: rebuild
-          path: ./frontend-svelte/package.json
+          path: ./frontend/package.json
         - action: rebuild
-          path: ./frontend-svelte/bun.lock
+          path: ./frontend/bun.lock
         - action: rebuild
-          path: ./frontend-svelte/vite.config.ts
+          path: ./frontend/vite.config.ts
     restart: on-failure
 
 volumes:
