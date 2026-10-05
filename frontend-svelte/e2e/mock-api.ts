@@ -87,6 +87,7 @@ let SLOW = new Set<string>();
 const late = (name: string, ms: number) =>
 	SLOW.has(name) ? new Promise((resolve) => setTimeout(resolve, ms)) : undefined;
 let LIFECYCLE_ENABLED = true;
+let EMAIL_ENABLED = true;
 /** Lets a test see what an untouched archive looks like on the dashboard. */
 let EMPTY_ARCHIVE = false;
 
@@ -118,6 +119,7 @@ const server = Bun.serve({
 			DISCONNECTED = new Set();
 			SLOW = new Set();
 			LIFECYCLE_ENABLED = true;
+			EMAIL_ENABLED = true;
 			EMPTY_ARCHIVE = false;
 			resetWorkouts();
 			resetSleep();
@@ -141,11 +143,16 @@ const server = Bun.serve({
 			return new Response(null, { status: 204 });
 		}
 
+		if (pathname === '/__email-off') {
+			EMAIL_ENABLED = false;
+			return new Response(null, { status: 204 });
+		}
+
 		if (pathname === '/api/v1/config') {
 			return json({
 				outgoing_webhooks_enabled: true,
 				data_lifecycle_enabled: LIFECYCLE_ENABLED,
-				email_enabled: false
+				email_enabled: EMAIL_ENABLED
 			});
 		}
 

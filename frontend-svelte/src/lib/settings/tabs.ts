@@ -17,7 +17,7 @@ export type SettingsTab = {
 };
 
 /** What this instance has switched on, from `/config`. */
-export type Features = { lifecycle: boolean };
+export type Features = { lifecycle: boolean; email: boolean };
 
 /**
  * Each tab is a route of its own, so a tab loads only what it shows - the old

@@ -23,6 +23,7 @@
 	// The layout already knows who is signed in, so the row can say so.
 	const me = $derived(page.data.developer?.id);
 	const pending = $derived(outstanding(data.invitations));
+	const emailEnabled = $derived(data.features.email);
 
 	let inviteOpen = $state(false);
 	let passwordOpen = $state(false);
@@ -37,12 +38,15 @@
 		<Card
 			icon={Clock}
 			title="Pending invitations"
-			description="Sent but not yet accepted. Each one expires on its own."
+			description={emailEnabled
+				? 'Sent but not yet accepted. Each one expires on its own.'
+				: 'Not yet accepted. Each one expires on its own. Email delivery is not configured, so share the invite link yourself.'}
 		>
 			<div class="divide-y divide-border">
 				{#each pending as invitation (invitation.id)}
 					<PendingInvite
 						{invitation}
+						{emailEnabled}
 						onrevoke={() => {
 							revoking = invitation;
 							revokeOpen = true;
@@ -81,7 +85,7 @@
 	</Card>
 </div>
 
-<InviteDialog bind:open={inviteOpen} message={messageFor('invite')} />
+<InviteDialog bind:open={inviteOpen} message={messageFor('invite')} {emailEnabled} />
 
 <PasswordDialog
 	bind:open={passwordOpen}

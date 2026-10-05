@@ -29,7 +29,12 @@ export const actions: Actions = {
 		const accessToken = await requireToken(locals);
 		const email = field(await request.formData(), 'email');
 
-		return attempt('invite', { email }, () => createInvitation(email, accessToken));
+		return attempt(
+			'invite',
+			{ email },
+			() => createInvitation(email, accessToken),
+			({ token }) => ({ token })
+		);
 	},
 
 	resendInvite: async ({ request, locals }) => {

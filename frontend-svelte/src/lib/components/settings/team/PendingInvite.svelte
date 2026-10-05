@@ -12,7 +12,11 @@
 	import SettingRow from '../SettingRow.svelte';
 	import type { Invitation } from '$lib/settings/types';
 
-	let { invitation, onrevoke }: { invitation: Invitation; onrevoke: () => void } = $props();
+	let {
+		invitation,
+		emailEnabled,
+		onrevoke
+	}: { invitation: Invitation; emailEnabled: boolean; onrevoke: () => void } = $props();
 
 	// Empty while this renders on the server; the browser re-runs it before a
 	// click can reach the button.
@@ -28,7 +32,8 @@
 
 	{#snippet meta()}
 		<span>
-			Sent {formatDate(invitation.created_at)} · expires {formatDate(invitation.expires_at)}
+			{emailEnabled ? 'Sent' : 'Created'}
+			{formatDate(invitation.created_at)} · expires {formatDate(invitation.expires_at)}
 		</span>
 	{/snippet}
 
@@ -46,7 +51,9 @@
 			<IconButton
 				type="submit"
 				icon={RotateCw}
-				label="Resend invitation to {invitation.email}"
+				label={emailEnabled
+					? `Resend invitation to ${invitation.email}`
+					: `Regenerate invite link for ${invitation.email}`}
 				disabled={resend.submitting}
 			/>
 		</form>

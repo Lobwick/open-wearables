@@ -218,6 +218,31 @@ test('invites someone, and says so when they are already on the team', async ({ 
 	await expect(page.getByText('fresh@example.com')).toBeVisible();
 });
 
+test('hands over the link itself where the instance sends no email', async ({ page, request }) => {
+	await request.post('http://localhost:8787/__email-off');
+	await page.goto('/settings/team');
+
+	await expect(page.getByText(/share the invite link yourself/)).toBeVisible();
+	await expect(page.getByText(/Created\s+\d/)).toBeVisible();
+	await expect(
+		page.getByRole('button', { name: 'Regenerate invite link for new.hire@example.com' })
+	).toBeVisible();
+
+	await page.getByRole('button', { name: 'Invite', exact: true }).click();
+	const invite = page.getByRole('dialog');
+	await expect(invite.getByText(/Email delivery is not configured/)).toBeVisible();
+	await invite.getByLabel('Email address', { exact: true }).fill('fresh@example.com');
+	await invite.getByRole('button', { name: 'Create invite link' }).click();
+
+	await expect(invite.getByRole('heading', { name: 'Invitation created' })).toBeVisible();
+	await expect(invite.getByLabel('Invite link', { exact: true })).toHaveValue(
+		/\/accept-invite\?token=/
+	);
+	await invite.getByRole('button', { name: 'Done' }).click();
+	await expect(page.getByRole('dialog')).toHaveCount(0);
+	await expect(page.getByText('fresh@example.com', { exact: true })).toBeVisible();
+});
+
 test('revokes an invitation after confirming', async ({ page }) => {
 	await page.goto('/settings/team');
 

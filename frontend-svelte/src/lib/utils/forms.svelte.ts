@@ -5,14 +5,17 @@ import type { SubmitFunction } from '@sveltejs/kit';
  * fields are bound to local state, and a failed submit must keep what was
  * typed. `reset` is for the one form where keeping it would be wrong.
  */
-export function createSubmitFlag(onSuccess?: () => void, { reset = false } = {}) {
+export function createSubmitFlag(
+	onSuccess?: (data?: Record<string, unknown>) => void,
+	{ reset = false } = {}
+) {
 	let submitting = $state(false);
 
 	const enhance: SubmitFunction = () => {
 		submitting = true;
 		return async ({ result, update }) => {
 			submitting = false;
-			if (result.type === 'success') onSuccess?.();
+			if (result.type === 'success') onSuccess?.(result.data);
 			await update({ reset });
 		};
 	};
