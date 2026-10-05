@@ -1,6 +1,7 @@
 import { readFileSync, readdirSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
+import { openapi } from '$lib/testing/openapi';
 
 /**
  * Every API path the server layer calls, as written in the source. The mock in
@@ -28,11 +29,7 @@ function calledPaths(): { file: string; path: string }[] {
 }
 
 function specPaths(): Set<string> {
-	const spec = JSON.parse(readFileSync(resolve(process.cwd(), '../docs/openapi.json'), 'utf8')) as {
-		paths: Record<string, unknown>;
-	};
-
-	return new Set(Object.keys(spec.paths).map((path) => placeholders(path).replace(/\/$/, '')));
+	return new Set(Object.keys(openapi().paths).map((path) => placeholders(path).replace(/\/$/, '')));
 }
 
 describe('the endpoints this frontend calls', () => {

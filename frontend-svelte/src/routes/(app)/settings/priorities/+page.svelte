@@ -6,10 +6,9 @@
 	import ProviderLogo from '$lib/components/providers/ProviderLogo.svelte';
 	import Alert from '$lib/components/ui/Alert.svelte';
 	import Card from '$lib/components/ui/Card.svelte';
-	import { deviceIcon } from '$lib/providers/devices';
+	import { deviceIcon, deviceLabel } from '$lib/providers/devices';
 	import { providerLabel } from '$lib/providers/labels';
 	import { ranked, reordered } from '$lib/settings/priorities';
-	import { humanise } from '$lib/utils/text';
 	import type { ActionData, PageData } from './$types';
 
 	let { data, form }: { data: PageData; form: ActionData } = $props();
@@ -76,7 +75,7 @@
 					{@const Icon = deviceIcon(entry.device_type)}
 					<Icon size={16} aria-hidden="true" class="shrink-0 text-muted-foreground" />
 					<span class="truncate text-sm font-medium text-foreground">
-						{humanise(entry.device_type)}
+						{deviceLabel(entry.device_type)}
 					</span>
 				{/snippet}
 			</PriorityList>

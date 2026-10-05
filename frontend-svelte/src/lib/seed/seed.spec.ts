@@ -1,6 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
+import { openapiEnum } from '$lib/testing/openapi';
 import type { Coverage } from '$lib/coverage/types';
 import { humanise } from '$lib/utils/text';
 import { countsOf } from './summary';
@@ -97,8 +98,7 @@ describe('what the catalogue claims about the backend', () => {
 	});
 
 	it('names only workout types the API still has', () => {
-		const spec = JSON.parse(repo('docs/openapi.json'));
-		const known = new Set<string>(spec.components.schemas.WorkoutType.enum);
+		const known = new Set(openapiEnum('WorkoutType'));
 		const unknown = WORKOUT_TYPE_GROUPS.flatMap((group) => group.types).filter(
 			(type) => !known.has(type)
 		);

@@ -18,7 +18,8 @@ import {
 import { workoutIcon } from './kinds';
 import { zoneKinds } from './zones';
 import type { Workout } from './types';
-import { deviceIcon } from '$lib/providers/devices';
+import { DEVICE_TYPES, deviceIcon, deviceLabel } from '$lib/providers/devices';
+import { openapiEnum } from '$lib/testing/openapi';
 
 describe('formatDuration', () => {
 	it('carries hours only once there are some', () => {
@@ -86,7 +87,17 @@ describe('formatLocalTime', () => {
 	});
 });
 
-describe('deviceIcon', () => {
+describe('device types', () => {
+	it('knows every device type the API has, and no others', () => {
+		expect([...DEVICE_TYPES].sort()).toEqual(openapiEnum('DeviceType').sort());
+	});
+
+	it('names the types a humanised slug would mangle', () => {
+		expect(deviceLabel('hr_sensor')).toBe('HR sensor');
+		expect(deviceLabel('bp_monitor')).toBe('BP monitor');
+		expect(deviceLabel('head_mounted')).toBe('Headset');
+	});
+
 	it('tells the kinds of device apart', () => {
 		expect(deviceIcon('watch')).toBe(Watch);
 		expect(deviceIcon('ring')).toBe(CircleDot);

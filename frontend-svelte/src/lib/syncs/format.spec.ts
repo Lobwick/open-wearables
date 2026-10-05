@@ -1,6 +1,5 @@
-import { readFileSync } from 'node:fs';
-import { resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
+import { openapiEnum } from '$lib/testing/openapi';
 import { formatDuration, formatWindow, itemsLabel, statusTone } from './format';
 import { overview, pageOf, runFilters, SYNC_STATUSES } from './runs';
 import { SYNC_SOURCES, sourceLabel } from './source';
@@ -59,16 +58,10 @@ describe('sourceLabel', () => {
 });
 
 describe('the filters match the API', () => {
-	const schemas = (
-		JSON.parse(readFileSync(resolve(process.cwd(), '../docs/openapi.json'), 'utf8')) as {
-			components: { schemas: Record<string, { enum?: string[] }> };
-		}
-	).components.schemas;
-
 	// A status or source the backend adds would otherwise be one nobody can filter by.
 	it('offers every status and every source the backend has, and no others', () => {
-		expect([...SYNC_STATUSES].sort()).toEqual([...(schemas.SyncStatus.enum ?? [])].sort());
-		expect([...SYNC_SOURCES].sort()).toEqual([...(schemas.SyncSource.enum ?? [])].sort());
+		expect([...SYNC_STATUSES].sort()).toEqual(openapiEnum('SyncStatus').sort());
+		expect([...SYNC_SOURCES].sort()).toEqual(openapiEnum('SyncSource').sort());
 	});
 });
 
