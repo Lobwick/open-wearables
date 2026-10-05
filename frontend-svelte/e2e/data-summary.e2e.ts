@@ -4,6 +4,7 @@ import { signIn } from './support';
 const USER = '00000000-0000-4000-8000-000000000007';
 const DATA = `/users/${USER}/data`;
 const QUARTER = `${DATA}?from=2026-06-13&to=2026-09-10`;
+const isoDay = (date: Date) => date.toISOString().slice(0, 10);
 
 test.beforeEach(async ({ page, request }) => {
 	await request.post('http://localhost:8787/__reset');
@@ -111,14 +112,14 @@ test('drops a provider the user is not connected to rather than failing', async 
 	);
 });
 
-// "All time" scans every row a heavy user has, so a tab opens on the last year.
-test('opens on the last year, not the whole history', async ({ page }) => {
+test('opens on the last 30 days, counted from today', async ({ page }) => {
 	await page.goto(DATA);
 	const period = page.getByRole('group', { name: 'Period' });
 	await expect(period.getByRole('link', { name: 'Range' })).toHaveAttribute('aria-current', 'true');
-	await expect(page.getByRole('textbox', { name: 'To' })).toHaveValue(
-		new Date().toISOString().slice(0, 10)
-	);
+	const today = new Date();
+	await expect(page.getByRole('textbox', { name: 'To' })).toHaveValue(isoDay(today));
+	today.setUTCDate(today.getUTCDate() - 29);
+	await expect(page.getByRole('textbox', { name: 'From' })).toHaveValue(isoDay(today));
 });
 
 test('offers all time, a single day, and a range', async ({ page }) => {
@@ -128,7 +129,7 @@ test('offers all time, a single day, and a range', async ({ page }) => {
 	await page.getByRole('link', { name: 'Day' }).click();
 	await expect(page.getByRole('textbox', { name: 'Day' })).toBeVisible();
 
-	// Asked for by name: no bounds at all now means the last year.
+	// Asked for by name: no bounds at all means the default range.
 	await page.getByRole('link', { name: 'All time' }).click();
 	await expect(page).toHaveURL(`${DATA}?period=all`);
 });

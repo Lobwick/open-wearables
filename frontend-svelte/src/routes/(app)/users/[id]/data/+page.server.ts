@@ -2,7 +2,7 @@ import { fetchConnections } from '$lib/server/connections';
 import { requireToken } from '$lib/server/guard';
 import { fetchProviders } from '$lib/server/providers';
 import { fetchDataSummary, fetchDataTimeline } from '$lib/server/summary';
-import { parsePeriod } from '$lib/filters/period';
+import { lastDays, parsePeriod } from '$lib/filters/period';
 import type { TimelineGroupBy } from '$lib/summary/types';
 import { userActions } from '$lib/server/user-actions';
 import type { Actions, PageServerLoad } from './$types';
@@ -14,7 +14,8 @@ import type { Actions, PageServerLoad } from './$types';
  */
 export const load: PageServerLoad = async ({ params, url, locals }) => {
 	const accessToken = await requireToken(locals);
-	const period = parsePeriod(url.searchParams);
+	// The heaviest tab, so it opens on a month rather than the year the others use.
+	const period = parsePeriod(url.searchParams, lastDays(30));
 
 	const asked = url.searchParams.get('provider') ?? '';
 	const timelines = (provider: string) => {
