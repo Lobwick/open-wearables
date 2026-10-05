@@ -3,6 +3,7 @@ import { calendarTicks, ticksClear } from '$lib/charts/ticks';
 import {
 	ALL_TIME,
 	lastDays,
+	matchingPreset,
 	parsePeriod,
 	periodParams,
 	periodBucket,
@@ -15,6 +16,18 @@ import { toRows, totalsFromTimeline } from './timeline';
 import type { DataTimeline } from './types';
 
 const params = (query: string) => new URLSearchParams(query);
+
+describe('matchingPreset', () => {
+	const now = new Date('2026-10-02T12:00:00Z');
+
+	it('names a range that is exactly a preset, and nothing else', () => {
+		expect(matchingPreset(lastDays(30, now), now)).toBe('1M');
+		expect(matchingPreset(lastDays(365, now), now)).toBe('1Y');
+		expect(matchingPreset(lastDays(31, now), now)).toBe('');
+		// Yesterday's month is not this month.
+		expect(matchingPreset(lastDays(30, new Date('2026-10-01T12:00:00Z')), now)).toBe('');
+	});
+});
 
 describe('parsePeriod', () => {
 	it('reads no bounds as the fallback, and the whole history also by name', () => {

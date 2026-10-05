@@ -24,6 +24,21 @@ export function lastDays(days: number, now = new Date()): Period {
 	return { mode: 'range', from: todayIso(from), to: todayIso(now) };
 }
 
+export const RANGE_PRESETS = [
+	{ label: '1W', days: 7 },
+	{ label: '1M', days: 30 },
+	{ label: '3M', days: 90 },
+	{ label: '6M', days: 180 },
+	{ label: '1Y', days: 365 }
+] as const;
+
+/** The preset a period is, or '' for dates picked by hand. */
+export const matchingPreset = (period: Period, now = new Date()): string =>
+	RANGE_PRESETS.find(({ days }) => {
+		const preset = lastDays(days, now);
+		return preset.from === period.from && preset.to === period.to;
+	})?.label ?? '';
+
 /** Paginated tabs show everything by default; the aggregate-only ones pass a narrower window. */
 export function parsePeriod(params: URLSearchParams, fallback: Period = ALL_TIME): Period {
 	const first = clean(params.get('from'));

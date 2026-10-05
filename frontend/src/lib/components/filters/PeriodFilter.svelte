@@ -3,7 +3,10 @@
 	import Segmented from '$lib/components/ui/Segmented.svelte';
 	import {
 		ALL_TIME,
+		RANGE_PRESETS,
 		defaultRange,
+		lastDays,
+		matchingPreset,
 		periodChanges,
 		todayIso,
 		type Period
@@ -28,6 +31,14 @@
 		},
 		{ value: 'range', label: 'Range', href: hrefFor(periodChanges(preset)) }
 	]);
+
+	const presets = $derived(
+		RANGE_PRESETS.map(({ label, days }) => ({
+			value: label,
+			label,
+			href: hrefFor(periodChanges(lastDays(days)))
+		}))
+	);
 
 	// Borderless inputs inside one bordered box, so the pair reads as one field.
 	const field = 'h-7 bg-transparent px-2 text-xs tabular-nums text-foreground focus:outline-none';
@@ -73,5 +84,9 @@
 				/>
 			{/if}
 		</div>
+	{/if}
+
+	{#if period.mode === 'range'}
+		<Segmented label="Range preset" items={presets} selected={matchingPreset(period)} />
 	{/if}
 </div>

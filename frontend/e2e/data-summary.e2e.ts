@@ -120,6 +120,25 @@ test('opens on the last 30 days, counted from today', async ({ page }) => {
 	await expect(page.getByRole('textbox', { name: 'To' })).toHaveValue(isoDay(today));
 	today.setUTCDate(today.getUTCDate() - 29);
 	await expect(page.getByRole('textbox', { name: 'From' })).toHaveValue(isoDay(today));
+	await expect(
+		page.getByRole('group', { name: 'Range preset' }).getByRole('link', { name: '1M' })
+	).toHaveAttribute('aria-current', 'true');
+});
+
+test('sets a range from a preset, and drops the mark once the dates are edited', async ({
+	page
+}) => {
+	await page.goto(DATA);
+	const presets = page.getByRole('group', { name: 'Range preset' });
+
+	await presets.getByRole('link', { name: '1W' }).click();
+	const from = new Date();
+	from.setUTCDate(from.getUTCDate() - 6);
+	await expect(page.getByRole('textbox', { name: 'From' })).toHaveValue(isoDay(from));
+	await expect(presets.getByRole('link', { name: '1W' })).toHaveAttribute('aria-current', 'true');
+
+	await page.goto(QUARTER);
+	await expect(presets.locator('[aria-current]')).toHaveCount(0);
 });
 
 test('offers all time, a single day, and a range', async ({ page }) => {
