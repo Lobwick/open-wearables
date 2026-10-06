@@ -16,6 +16,7 @@ from app.models import (
     EventRecord,
     EventRecordDetail,
     HealthScore,
+    MealDetails,
     MenstrualCycleDetails,
     SleepDetails,
     WorkoutDetails,
@@ -27,13 +28,14 @@ from app.repositories import (
     EventRecordRepository,
     HealthScoreRepository,
 )
-from app.schemas.enums import HealthScoreCategory
+from app.schemas.enums import HealthScoreCategory, SeriesType, get_series_type_unit
 from app.schemas.model_crud.activities import (
     EventRecordCreate,
     EventRecordDetailCreate,
     EventRecordQueryParams,
     EventRecordResponse,
     EventRecordUpdate,
+    MealDetailCreate,
     MenstrualCycleDetailCreate,
     SleepInclude,
     WorkoutInclude,
@@ -41,7 +43,10 @@ from app.schemas.model_crud.activities import (
 from app.schemas.model_crud.activities.sleep import SleepStage
 from app.schemas.model_crud.activities.zones import HRZones, PowerZones
 from app.schemas.responses.activity import (
+    Macros,
+    Meal,
     MenstrualCycleRecord,
+    NutrientValue,
     SleepSession,
     SleepStagesSummary,
     SleepTotals,
@@ -243,6 +248,27 @@ class EventRecordService(
         return self.crud.find_adjacent_sleep_record(
             db_session, user_id, start_time, end_time, threshold_minutes, source=source, provider=provider
         )
+
+    def upsert_meals(
+        self,
+        db_session: DbSession,
+        meals: list[tuple[EventRecordCreate, MealDetailCreate]],
+    ) -> int:
+        """Insert or refresh meals with their details; webhooks only for new ones. Returns the number inserted."""
+        stored = self.crud.bulk_upsert_meals(db_session, [record for record, _ in meals])
+        inserted: list[EventRecordDetailCreate] = []
+        refreshed: list[EventRecordDetailCreate] = []
+        for record, detail in meals:
+            if record.id not in stored:
+                continue
+            record_id, is_inserted = stored[record.id]
+            (inserted if is_inserted else refreshed).append(detail.model_copy(update={"record_id": record_id}))
+
+        if inserted:
+            self.bulk_create_details(db_session, inserted, detail_type="meal")
+        if refreshed:
+            self.event_record_detail_repo.bulk_create(db_session, refreshed, detail_type="meal")
+        return len(inserted)
 
     def create_or_merge_sleep(
         self,
@@ -1054,6 +1080,84 @@ class EventRecordService(
                     has_specified_cycle_length=details.has_specified_cycle_length if details else None,
                     has_specified_period_length=details.has_specified_period_length if details else None,
                     pregnancy_snapshot=details.pregnancy_snapshot if details else None,
+                )
+            )
+
+        return PaginatedResponse(
+            data=data,
+            pagination=Pagination(
+                has_more=has_more,
+                next_cursor=next_cursor,
+                previous_cursor=previous_cursor,
+                total_count=total_count,
+            ),
+            metadata=TimeseriesMetadata(
+                sample_count=len(data),
+                start_time=params.start_datetime,
+                end_time=params.end_datetime,
+            ),
+        )
+
+    @handle_exceptions
+    def get_meals(
+        self,
+        db_session: DbSession,
+        user_id: UUID,
+        params: EventRecordQueryParams,
+    ) -> PaginatedResponse[Meal]:
+        params.category = "meal"
+        records, total_count = self._get_records_with_filters(db_session, params, str(user_id))
+
+        limit = params.limit or 20
+        has_more = len(records) > limit
+        is_backward = params.cursor and params.cursor.startswith("prev_")
+
+        if has_more:
+            records = records[-limit:] if is_backward else records[:limit]
+
+        next_cursor = None
+        previous_cursor = None
+
+        if records:
+            if has_more:
+                last_record, _ = records[-1]
+                next_cursor = encode_cursor(last_record.start_datetime, last_record.id, "next")
+            if params.cursor:
+                if is_backward:
+                    if has_more:
+                        first_record, _ = records[0]
+                        previous_cursor = encode_cursor(first_record.start_datetime, first_record.id, "prev")
+                else:
+                    first_record, _ = records[0]
+                    previous_cursor = encode_cursor(first_record.start_datetime, first_record.id, "prev")
+
+        data = []
+        for record, data_source in records:
+            details: MealDetails | None = record.meal_detail
+            nutrients = {
+                SeriesType(code): value
+                for code, value in (details.nutrients if details else {}).items()
+                if code in SeriesType.__members__
+            }
+            macros = Macros(
+                protein_g=as_float(nutrients.get(SeriesType.dietary_protein)),
+                carbohydrates_g=as_float(nutrients.get(SeriesType.dietary_carbohydrates)),
+                fat_g=as_float(nutrients.get(SeriesType.dietary_fat_total)),
+                fiber_g=as_float(nutrients.get(SeriesType.dietary_fiber)),
+            )
+            data.append(
+                Meal(
+                    id=record.id,
+                    timestamp=record.start_datetime,
+                    meal_type=details.meal_type if details else None,
+                    name=details.title if details else None,
+                    source=self._map_source(data_source),
+                    calories_kcal=as_float(nutrients.get(SeriesType.dietary_energy_consumed)),
+                    macros=macros if any(v is not None for v in macros.model_dump().values()) else None,
+                    water_ml=as_float(nutrients.get(SeriesType.hydration)),
+                    nutrients={
+                        t.value: NutrientValue(value=v, unit=get_series_type_unit(t)) for t, v in nutrients.items()
+                    },
                 )
             )
 
