@@ -13652,6 +13652,65 @@
         ],
         "title": "Meal"
       },
+      "MealConfig": {
+        "properties": {
+          "meal_count": {
+            "type": "integer",
+            "maximum": 10000.0,
+            "minimum": 0.0,
+            "title": "Meal Count",
+            "description": "Total number of meals to generate.",
+            "default": 50
+          },
+          "calories_range": {
+            "prefixItems": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "integer"
+              }
+            ],
+            "type": "array",
+            "maxItems": 2,
+            "minItems": 2,
+            "title": "Calories Range",
+            "default": [
+              150,
+              900
+            ]
+          },
+          "date_from": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Date From",
+            "description": "Explicit start date. Defaults to a 6-month lookback."
+          },
+          "date_to": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Date To",
+            "description": "Explicit end date. Defaults to the last synced date."
+          }
+        },
+        "type": "object",
+        "title": "MealConfig",
+        "description": "Parameters controlling meal generation."
+      },
       "MealField": {
         "properties": {
           "code": {
@@ -15313,6 +15372,7 @@
               "generate_workouts": true,
               "generate_sleep": true,
               "generate_time_series": true,
+              "generate_meals": false,
               "num_connections": 2,
               "workout_config": {
                 "count": 80,
@@ -15358,6 +15418,13 @@
                 "date_range_months": 6,
                 "enabled_types": [],
                 "include_blood_pressure": false
+              },
+              "meal_config": {
+                "calories_range": [
+                  150,
+                  900
+                ],
+                "meal_count": 50
               }
             }
           },
@@ -15464,6 +15531,12 @@
             "title": "Generate Time Series",
             "default": true
           },
+          "generate_meals": {
+            "type": "boolean",
+            "title": "Generate Meals",
+            "description": "Opt-in: existing presets and defaults stay meal-free unless explicitly enabled.",
+            "default": false
+          },
           "providers": {
             "anyOf": [
               {
@@ -15538,6 +15611,16 @@
               "enabled_types": [],
               "include_blood_pressure": false,
               "date_range_months": 6
+            }
+          },
+          "meal_config": {
+            "$ref": "#/components/schemas/MealConfig",
+            "default": {
+              "meal_count": 50,
+              "calories_range": [
+                150,
+                900
+              ]
             }
           }
         },
