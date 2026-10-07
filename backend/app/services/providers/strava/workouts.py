@@ -343,9 +343,16 @@ class StravaWorkouts(BaseWorkoutsTemplate):
         try:
             timeseries_service.bulk_create_samples(db, samples)
             nested.commit()
+            # A savepoint release is not durable: the next workout's `create` rolls the whole
+            # session back when that workout is already known, and the sync task closes its
+            # session without a final commit. Commit here so the samples outlive both.
+            db.commit()
             return len(samples)
         except Exception as exc:
-            nested.rollback()
+            if nested.is_active:
+                nested.rollback()
+            else:
+                db.rollback()
             log_and_capture_error(
                 exc,
                 self.logger,
