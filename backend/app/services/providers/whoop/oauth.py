@@ -43,6 +43,17 @@ class WhoopOAuth(BaseOAuthTemplate):
     use_pkce: bool = False  # Whoop doesn't require PKCE
     auth_method: AuthenticationMethod = AuthenticationMethod.BODY  # Based on Whoop API docs, credentials in body
 
+    def _prepare_refresh_request(self, refresh_token: str) -> tuple[dict, dict]:
+        """Whoop wants `scope=offline` on the refresh itself, not only on authorization.
+
+        Without it the token endpoint rejects the request, which `refresh_access_token`
+        reads as a dead refresh token: the connection is revoked within the hour of
+        the access token expiring and the user has to reconnect.
+        """
+        data, headers = super()._prepare_refresh_request(refresh_token)
+        data["scope"] = "offline"
+        return data, headers
+
     def _get_provider_user_info(self, token_response: OAuthTokenResponse, user_id: str) -> dict[str, str | None]:
         """Fetches Whoop user ID via API."""
         try:
